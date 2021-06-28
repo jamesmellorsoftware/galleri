@@ -1,0 +1,10 @@
+.is-invalid {
+    border-color: red;
+}
+
+#moderate_photos_table tr.pagination-block,
+#moderate_comments_table tr.pagination-block,
+#moderate_users_table tr.pagination-block,
+.select_all_checkboxes {
+    cursor: pointer;
+}

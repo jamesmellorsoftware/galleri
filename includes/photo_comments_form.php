@@ -1,0 +1,27 @@
+<div class="comments row">
+    <div class="col-md-12">
+        <?php if (!$session->is_signed_in()) { ?>
+            <h4><a href="login.php">Log in to comment.</a></h4>
+        <?php } else { ?>
+            <?php if ($comment_successful) { ?>
+                <h4 class="bg-success">Comment added.</h4>
+            <?php } else { ?>
+                <?php foreach ($comment_errors as $comment_error) { ?>
+                    <h4 class="bg-danger"><?php echo $comment_error; ?></h4>
+                <?php } ?>
+                <h4>Leave a Comment:</h4>
+                <form action="" method="post" role="form">
+                    <?php
+                        // display errors or success message
+                    ?>
+                    <div class="form-group">
+                        <textarea class="form-control <?php // if (!empty($comment_errors['comment_content'])) echo "is-invalid"; ?>"
+                        rows="3"name="comment_content"
+                        placeholder="Your Comment"><?php // if (isset($comment_content)) echo $comment_content; ?></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" name="submit">Create Comment</button>
+                </form>
+            <?php } ?>
+        <?php } ?>
+    </div>
+</div>
