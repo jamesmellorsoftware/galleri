@@ -88,6 +88,7 @@ CREATE TABLE `users` (
   `user_password` varchar(255) NOT NULL,
   `user_firstname` varchar(255) NOT NULL,
   `user_lastname` varchar(255) NOT NULL,
+  `user_email` varchar(255) NOT NULL,
   `user_banned` int(1) NOT NULL,
   `user_role` varchar(255) NOT NULL,
   `user_image` varchar(255) NOT NULL

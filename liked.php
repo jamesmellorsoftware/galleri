@@ -11,7 +11,7 @@ $show_pagination = false;
 // Retrieve user's liked photos, new method with joins
 $liked_photos = Photo::find_user_likes($session->user_id, $pagination_limit+1);
 
-if (count($liked_photos) > $pagination_limit) {
+if ($liked_photos && !empty($liked_photos) && count($liked_photos) > $pagination_limit) {
     array_pop($liked_photos);
     $show_pagination = true;
 }

@@ -8,7 +8,7 @@ if (!isset($_GET['id']) || empty($_GET['id'])) header("Location: index.php");
 // Retrieve photo
 $photo_id = $_GET['id'];
 $photo = Photo::find_by_id($photo_id);
-if (!$photo) header("Location: index.php");
+if (!$photo || empty($photo)) header("Location: index.php");
 
 // Retrieve comments
 $comments = Comment::retrieve($photo->photo_id);

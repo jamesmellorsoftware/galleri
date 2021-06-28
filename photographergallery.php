@@ -8,12 +8,13 @@ if (!isset($_GET['id']) || empty($_GET['id'])) header("Location: index.php");
 // Retrieve photographer's details
 $photographer_user_id = $_GET['id'];
 $photographer_details = User::find_by_id($photographer_user_id);
+if (!$photographer_details || empty($photographer_details)) header("Location: index.php");
 
 // Retrieve photographer's gallery, adjust for pagination
 $pagination_limit = 2;
 $show_pagination = false;
 $photographer_gallery_photos = Photo::find_photographer_gallery($photographer_user_id, $pagination_limit+1);
-if (count($photographer_gallery_photos) > $pagination_limit) {
+if ($photographer_gallery_photos && !empty($photographer_gallery_photos) && count($photographer_gallery_photos) > $pagination_limit) {
     array_pop($photographer_gallery_photos);
     $show_pagination = true;
 }
