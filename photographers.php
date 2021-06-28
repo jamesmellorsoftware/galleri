@@ -8,7 +8,7 @@ $show_pagination = false;
 // Find photographers
 $photographers = User::find_photographers($pagination_limit+1);
 
-if (count($photographers) > $pagination_limit) {
+if ($photographers && !empty($photographers) && count($photographers) > $pagination_limit) {
     array_pop($photographers);
     $show_pagination = true;
 }
