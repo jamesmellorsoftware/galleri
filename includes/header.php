@@ -19,6 +19,7 @@ require_once("admin/includes/config.php");
         <link rel="stylesheet" href="css/bootstrap.min.css">
         <link rel="stylesheet" href="css/bootstrap-theme.min.css">
         <link rel="stylesheet" href="css/fontAwesome.css">
+        <!-- Highway Template https://templatemo.com/tm-520-highway -->
         <link rel="stylesheet" href="css/templatemo-style.css">
         <link rel="stylesheet" href="css/useradded.css">
 
