@@ -1,9 +1,7 @@
-# exclude all images
-img/*
+# exclude all images so custom images aren't pushed
 img/photos/*
 img/users/*
 
 # exception to keep essential folders
-!img/.gitkeep
 !img/photos/.gitkeep
 !img/users/.gitkeep
