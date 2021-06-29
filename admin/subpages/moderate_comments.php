@@ -42,7 +42,7 @@ $bulk_options = Comment::get_bulk_options();
                                 </div>
                                 <div class="row">
                                     by <span class="comment_author_id"><?php echo User::get_name_from_id($comment->comment_author_id); ?></span>
-                                    on <span class="comment_date"><?php echo $comment->comment_date; ?></span>
+                                    on <span class="comment_date"><?php echo date('jS M Y', strtotime($comment->comment_date)); ?></span>
                                 </div>
                                 <div class="row">
                                     <span class="comment_approved">
