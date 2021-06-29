@@ -15,7 +15,7 @@
                     <ul class="dropdown-menu">
                         <li><a href="../index.php"><i class="lnr lnr-home"></i> <span>Back to Blog</span></a></li>
                         <li><a href='edit.php?action=edit_user&id=<?php echo $session->user_id; ?>'><i class="lnr lnr-user"></i> <span>Edit Profile</span></a></li>
-                        <li><a href="../includes/logout.php"><i class="lnr lnr-exit"></i> <span>Logout</span></a></li>
+                        <li><a href="../logout.php"><i class="lnr lnr-exit"></i> <span>Logout</span></a></li>
                     </ul>
                 </li>
             </ul>

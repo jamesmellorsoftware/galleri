@@ -23,9 +23,10 @@ if (isset($_POST['register'])) {
     $user_values['user_firstname'] = trim($_POST['user_firstname']);
     $user_values['user_lastname']  = trim($_POST['user_lastname']);
     $user_values['user_email']     = trim($_POST['user_email']);
+    $user_image                    = $_FILES['user_image'];
 
     // Check if inputs empty & if username or email are already in use
-    $registration_errors = User::verify_registration($user_values);
+    $registration_errors = User::verify_registration($user_values, $user_image);
 
     if (!User::errors_in_form($registration_errors)) {
         // Create user and set properties to user_values
@@ -33,11 +34,15 @@ if (isset($_POST['register'])) {
         $new_user->user_password = password_hash($new_user->user_password, PASSWORD_BCRYPT, array('cost' => 12) );
         $new_user->user_role = "User";
 
-        // Create user
-        if ($new_user->create($user_values)) {
-            $registration_successful = true;
-        } else {
-            $registration_errors['username'] = "Error registering user.";
+        if (!$new_user->set_file($user_image)) $registration_errors["file_upload"] = join("<br>", $new_user->errors);
+
+        if (!User::errors_in_form($registration_errors)) {
+            // Create user
+            if ($new_user->save()) {
+                $registration_successful = true;
+            } else {
+                $registration_errors["file_upload"] = join("<br>", $new_user->errors);
+            }
         }
     }
 }
@@ -59,7 +64,7 @@ if (isset($_POST['register'])) {
                 <?php foreach ($registration_errors as $registration_error) { ?>
                     <h4 class="bg-danger"><?php echo $registration_error; ?></h4>
                 <?php } ?>
-                <form method="post" action="register.php">
+                <form method="post" action="register.php"  enctype="multipart/form-data">
                     <div class="form-group">
                         <input type="text" class="form-control"
                         name="user_username" placeholder="Username"
@@ -87,8 +92,7 @@ if (isset($_POST['register'])) {
                     </div>
                     <div class="form-group">
                         <label for="user_image">User Photo</label>
-                        <input type="file" class="form-control"
-                        name="user_image">
+                        <input type="file" class="form-control" name="user_image">
                     </div>
                     <div class="form-group">
                         <input type="submit" name="register" class="btn btn-primary" value="Register">

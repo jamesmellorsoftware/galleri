@@ -50,22 +50,25 @@ class User extends db_objects {
             return false;
         }
 
-        $target_path = ".." . DS . $this->upload_dir . DS . $this->user_image;
+        $target_path = SITE_ROOT . DS . $this->upload_dir . DS . $this->user_image;
 
         if (file_exists($target_path)) {
             $this->errors[] = "File {$this->user_image} already exists.";
             return false;
         }
 
-        if (move_uploaded_file($this->tmp_path, $target_path)) {
-            if ($this->create()) {
-                unset($this->tmp_path);
-                return true;
-            }
-        } else {
-            $this->errors[] = "Error moving file. Folder probably lacks permissions.";
+        if (!move_uploaded_file($this->tmp_path, $target_path)) {
+            $this->errors[] = "Error moving file. Folder probably lacks permissions. Contact administrator.";
             return false;
         }
+
+        if (!$this->create()) {
+            $this->errors[] = "Error creating user. Image uploaded but user not created.";
+            return false;
+        }
+
+        unset($this->tmp_path);
+        return true;
     }
 
     public function get_user_image(){
@@ -154,23 +157,28 @@ class User extends db_objects {
         return !empty($result_set) ? array_shift($result_set) : false;
     }
 
-    public static function verify_registration($user_values) {
+    public static function verify_registration($user_values, $user_image) {
         // Checks if registration data user values are valid
         // Checks:
         // - Email in use?
         // - Username in use?
         // - Mandatory field left empty?
+        // - No image uploaded?
 
         $registration_errors = [
-            "username"  => "",
-            "password"  => "",
-            "firstname" => "",
-            "email"     => ""
+            "username"   => "",
+            "password"   => "",
+            "firstname"  => "",
+            "email"      => "",
+            "user_image" => ""
         ];
 
         $registration_errors = User::check_empty_form($user_values);
-        if (User::exists($user_values['user_username']))    $registration_errors['username'] = "Username already in use.";
-        if (User::email_in_use($user_values['user_email'])) $registration_errors['email']    = "Email already in use.";
+        if (User::exists($user_values['user_username']))                  $registration_errors['username']   = "Username already in use.";
+        if (User::email_in_use($user_values['user_email']))               $registration_errors['email']      = "Email already in use.";
+        if (!$user_image || !is_array($user_image) || empty($user_image) || !is_uploaded_file($user_image['tmp_name'])) {
+            $registration_errors['user_image'] = "Please select an image.";
+        }
 
         return $registration_errors;
 
