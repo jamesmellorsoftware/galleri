@@ -9,7 +9,8 @@ $user_values = [
     "user_password"  => "",
     "user_firstname" => "",
     "user_lastname"  => "",
-    "user_email"     => ""
+    "user_email"     => "",
+    "user_role"      => ""
 ];
 
 if (isset($_POST['add_user'])) {
@@ -94,9 +95,12 @@ if (isset($_POST['add_user'])) {
                     <div class="form-group">
                         <select class="form-control" name="user_role">
                             <option value="">Select User Role</option>
-                            <option value="User">User</option>
-                            <option value="Photographer">Photographer</option>
-                            <option value="Admin">Administrator</option>
+                            <option value="User"
+                            <?php if ($user_values['user_role'] == "User") echo "selected"; ?>>User</option>
+                            <option value="Photographer"
+                            <?php if ($user_values['user_role'] == "Photographer") echo "selected"; ?>>Photographer</option>
+                            <option value="Admin"
+                            <?php if ($user_values['user_role'] == "Admin") echo "selected"; ?>>Administrator</option>
                         </select>
                     </div>
                 </div>
