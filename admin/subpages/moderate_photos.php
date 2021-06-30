@@ -3,8 +3,14 @@
 $pagination_limit = 2;
 $show_pagination = false;
 
-$photos = (isset($_POST['search'])) ? Photo::search($_POST) : Photo::find_all($pagination_limit+1);
-if (count($photos) > $pagination_limit) {
+if ($session->user_is_photographer()) {
+    $photos = (isset($_POST['search'])) ? Photo::search_photographer($session->user_id, $_POST) : Photo::find_photographer_gallery($session->user_id, $pagination_limit+1);
+}
+if ($session->user_is_admin()) {
+    $photos = (isset($_POST['search'])) ? Photo::search($_POST) : Photo::find_all($pagination_limit+1);
+}
+
+if ($photos && count($photos) > $pagination_limit) {
     array_pop($photos);
     $show_pagination = true;
 }
@@ -19,7 +25,7 @@ $bulk_options = Photo::get_bulk_options();
     class="fa fa-search pull-right <?php if (isset($_GET['search'])) echo "text-info"; ?>"></i>
 </h1>
 
-<?php if (count($photos) == 0 || empty($photos)) { ?>
+<?php if (!$photos || count($photos) == 0 || empty($photos)) { ?>
     <h3>No posts. Clear search or add a post.</h3>
 <?php } else { ?>
     <form method="post" action="">

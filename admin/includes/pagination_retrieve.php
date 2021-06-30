@@ -20,9 +20,12 @@ if (isset($_POST['load_more'])) {
         case "moderate.php":
             switch ($action) {
                 case "moderate_photos":
-                    // This is giving false every time even when search filters aren't returned.
-                    // $search_filters is a string, either an empty one from JS or an assoc array
-                    $new_set = (is_array($search_filters)) ? Photo::search($search_filters, $pagination_limit+1, $offset) : Photo::find_all($pagination_limit+1, $offset);
+                    if ($session->user_is_admin()) {
+                        $new_set = (is_array($search_filters)) ? Photo::search($search_filters, $pagination_limit+1, $offset) : Photo::find_all($pagination_limit+1, $offset);
+                    }
+                    if ($session->user_is_photographer()) {
+                        $new_set = (is_array($search_filters)) ? Photo::search_photographer($session->user_id, $search_filters, $pagination_limit+1, $offset) : Photo::find_photographer_gallery($session->user_id, $pagination_limit+1, $offset);
+                    }
                     foreach ($new_set as $new_photo) {
                         $new_photo->photo_like_count = Like::count($new_photo->photo_id);
                         $new_photo->photo_comment_count = Comment::count($new_photo->photo_id);

@@ -163,12 +163,21 @@ class Photo extends db_objects {
         return $upload_errors;
     }
 
+    public static function search_photographer($photographer_id, $search_filters, $limit = "", $offset = "") {
+        $search_filters['photo_author_id'] = $photographer_id;
+        return Photo::search($search_filters, $limit, $offset);
+    }
+
     public static function search($search_filters, $limit = "", $offset = "") {
         // Accepts $_POST from search.php form and converts into conditions
 
         $conditions = [];
         $order_by = "";
         $joins = "";
+
+        if (isset($search_filters['photo_author_id']) && !empty($search_filters['photo_author_id'])) {
+            $conditions[Photo::get_table_prefix()."author_id"] = $search_filters['photo_author_id'];
+        }
 
         if (isset($search_filters['results_per_page'])) $limit = $search_filters['results_per_page'] + 1;
 
