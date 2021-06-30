@@ -131,17 +131,17 @@ class Database {
                 if (is_array($value)) {
                     // i.e. if we're expecting an in, between, like, or <><=>= operator
                     if (array_key_exists('between', $value)) {
-                        $sql.= $col . " BETWEEN " . $value['between'][0] . " AND " . $value['between'][1] . " ";
+                        $sql.= $col . " BETWEEN '" . $value['between'][0] . "' AND '" . $value['between'][1] . "' ";
                     } elseif (array_key_exists('like', $value)) {
                         $sql.= $col . " LIKE '%" . $value['like'][0] . "%' ";
                     } elseif (array_key_exists('<', $value)) {
-                        $sql.= $col . " < " . $value['<'][0] . " ";
+                        $sql.= $col . " < '" . $value['<'][0] . "' ";
                     } elseif (array_key_exists('>', $value)) {
-                        $sql.= $col . " > " . $value['>'][0] . " ";
+                        $sql.= $col . " > '" . $value['>'][0] . "' ";
                     } elseif (array_key_exists('<=', $value)) {
-                        $sql.= $col . " <= " . $value['<='][0] . " ";
+                        $sql.= $col . " <= '" . $value['<='][0] . "' ";
                     } elseif (array_key_exists('>=', $value)) {
-                        $sql.= $col . " >= " . $value['>='][0] . " ";
+                        $sql.= $col . " >= '" . $value['>='][0] . "' ";
                     } elseif (array_key_exists('empty', $value)) {
                         $sql.= $col . " IS";
                         if ($value['empty'] == 0) $sql.= " NOT";
