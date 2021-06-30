@@ -170,7 +170,7 @@ class Photo extends db_objects {
         $order_by = "";
         $joins = "";
 
-        if (isset($search_filters['results_per_page'])) $limit = $search_filters['results_per_page'];
+        if (isset($search_filters['results_per_page'])) $limit = $search_filters['results_per_page'] + 1;
 
         if (isset($search_filters['photo_id']) && !empty($search_filters['photo_id'])) {
             $conditions[Photo::get_table_prefix()."id"] = $search_filters['photo_id'];

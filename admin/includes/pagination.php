@@ -34,15 +34,16 @@
 
     $(".load-more-button").on("click", function(){
 
-        var load_amount = $("#load_amount").val();
-        load_amount++;
-        var pagination_limit = <?php echo $pagination_limit; ?>;
-        var offset = load_amount * pagination_limit;
         var source_page = "<?php echo basename($_SERVER['PHP_SELF']); ?>";
         var id = "<?php echo (isset($_GET['id'])) ? $_GET['id'] : ""; ?>";
         var action = "<?php echo (isset($_GET['action'])) ? $_GET['action'] : ""; ?>";
+
         var search_filters = get_search_filters();
-        console.log(search_filters);
+
+        var load_amount = $("#load_amount").val();
+        load_amount++;
+        var pagination_limit = <?php echo isset($_POST['results_per_page']) ? $_POST['results_per_page'] : $pagination_limit; ?>;
+        var offset = load_amount * pagination_limit;
 
         $.ajax({
             type: 'post',
