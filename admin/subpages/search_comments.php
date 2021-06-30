@@ -31,10 +31,10 @@
     </div>
     <div class="form-group col-md-6 col-xs-12">
         <input type="checkbox" name="comment_approved[1]"
-        <?php if (isset($_POST['comment_approved'])) echo "checked"; ?>>
+        <?php if (isset($_POST['comment_approved'][1])) echo "checked"; ?>>
         <label>Approved</label>
         <input type="checkbox" name="comment_approved[0]"
-        <?php if (isset($_POST['comment_unapproved'])) echo "checked"; ?>>
+        <?php if (isset($_POST['comment_approved'][0])) echo "checked"; ?>>
         <label>Unapproved</label>
     </div>
     <div class="form-group col-md-6 col-xs-12">
