@@ -341,12 +341,24 @@ class User extends db_objects {
             if (isset($search_filters['user_role']['user']))         array_push($user_roles, "User");
             $conditions[User::get_table_prefix()."role"]    = $user_roles;
         }
-        if (isset($search_filters['user_banned']))      $conditions[User::get_table_prefix()."banned"]    = 1;
-        if (isset($search_filters['user_id']))          $conditions[User::get_table_prefix()."id"]        = $search_filters['user_id'];
-        if (isset($search_filters['user_username']))    $conditions[User::get_table_prefix()."username"]  = ['like' => [$search_filters['user_username']]];
-        if (isset($search_filters['user_firstname']))   $conditions[User::get_table_prefix()."firstname"] = ['like' => [$search_filters['user_firstname']]];
-        if (isset($search_filters['user_lastname']))    $conditions[User::get_table_prefix()."lastname"]  = ['like' => [$search_filters['user_lastname']]];
-        if (isset($search_filters['user_hasphoto']))    $conditions[User::get_table_prefix()."image"]     = ['empty' => 0];
+        if (isset($search_filters['user_banned']) && !empty($search_filters['user_banned'])) {
+            $conditions[User::get_table_prefix()."banned"] = 1;
+        }
+        if (isset($search_filters['user_id']) && !empty($search_filters['user_id'])) {
+            $conditions[User::get_table_prefix()."id"]        = $search_filters['user_id'];
+        }
+        if (isset($search_filters['user_username']) && !empty($search_filters['user_username'])) {
+            $conditions[User::get_table_prefix()."username"]  = ['like' => [$search_filters['user_username']]];
+        }
+        if (isset($search_filters['user_firstname']) && !empty($search_filters['user_firstname'])) {
+            $conditions[User::get_table_prefix()."firstname"] = ['like' => [$search_filters['user_firstname']]];
+        }
+        if (isset($search_filters['user_lastname']) && !empty($search_filters['user_lastname'])) {
+            $conditions[User::get_table_prefix()."lastname"]  = ['like' => [$search_filters['user_lastname']]];
+        }
+        if (isset($search_filters['user_hasphoto']) && !empty($search_filters['user_hasphoto'])) {
+            $conditions[User::get_table_prefix()."image"]     = ['empty' => 0];
+        }
         
         return User::find("*", $conditions, $order_by, $limit, $offset, $joins);
     }
