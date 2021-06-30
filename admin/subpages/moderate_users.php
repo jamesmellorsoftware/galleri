@@ -57,7 +57,12 @@ $bulk_options = User::get_bulk_options();
                             <div class="col-md-5 pull-right">
                                 <img class="user_image" width="200" height="auto"
                                 src="<?php echo "../" . $user->get_user_image(); ?>">
-                                <p><a href="edit.php?action=edit_user&id=<?php echo $user->user_id ?>">Edit User</a></p>
+                                <p>
+                                    <a class="edit_user_link"
+                                    href="edit.php?action=edit_user&id=<?php echo $user->user_id ?>">
+                                        Edit User
+                                    </a>
+                                </p>
                             </div>
                         </td>
                     </tr>

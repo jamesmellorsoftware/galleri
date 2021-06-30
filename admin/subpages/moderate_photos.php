@@ -68,8 +68,14 @@ $bulk_options = Photo::get_bulk_options();
                                     <span class="photo_filename"><?php echo $photo->photo_filename; ?></span>
                                 </div>
                                 <div class="row">
-                                    <a href="edit.php?action=edit_photo&id=<?php echo $photo->photo_id ?>">Edit</a>
-                                    <a href="../photo.php?id=<?php echo $photo->photo_id ?>">View</a>
+                                    <a class="photo_edit_link"
+                                    href="edit.php?action=edit_photo&id=<?php echo $photo->photo_id ?>">
+                                        Edit
+                                    </a>
+                                    <a class="photo_view_link"
+                                    href="../photo.php?id=<?php echo $photo->photo_id ?>">
+                                        View
+                                    </a>
                                 </div>
                             </div>
                         </td>

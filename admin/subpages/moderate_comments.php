@@ -49,6 +49,10 @@ $bulk_options = Comment::get_bulk_options();
                                         <?php echo ($comment->comment_approved) ? "Approved" : "Unapproved"; ?>
                                     </span>
                                 </div>
+                                <div class="row">
+                                    <span class="glyphicon glyphicon-thumbs-up"></span>
+                                    <span class="comment_like_count"><?php echo Comment_Like::count($comment->comment_id); ?></span>
+                                </div>
                             </div>
                             <div class="col-md-7">
                                 <span class="comment_content"><?php echo $comment->comment_content; ?></span>

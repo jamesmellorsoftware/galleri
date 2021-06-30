@@ -24,8 +24,8 @@ if (isset($_POST['load_more'])) {
                     // $search_filters is a string, either an empty one from JS or an assoc array
                     $new_set = (is_array($search_filters)) ? Photo::search($search_filters, $pagination_limit+1, $offset) : Photo::find_all($pagination_limit+1, $offset);
                     foreach ($new_set as $new_photo) {
-                        $new_photo->like_count = Like::count($new_photo->photo_id);
-                        $new_photo->comment_count = Comment::count($new_photo->photo_id);
+                        $new_photo->photo_like_count = Like::count($new_photo->photo_id);
+                        $new_photo->photo_comment_count = Comment::count($new_photo->photo_id);
                         $new_photo->photo_filepath = $new_photo->photo_path();
                         $new_photo->photo_author = User::get_name_from_id($new_photo->photo_author_id);
                         $new_photo->photo_date = date('jS M Y', strtotime($new_photo->photo_date));
@@ -36,6 +36,7 @@ if (isset($_POST['load_more'])) {
                     foreach ($new_set as $new_comment) {
                         $new_comment->comment_author = User::get_name_from_id($new_comment->comment_author_id);
                         $new_comment->comment_date = date('jS M Y', strtotime($new_comment->comment_date));
+                        $new_comment->comment_like_count = Comment_Like::count($new_comment->comment_id);
                     }
                     break;
                 case "moderate_users":

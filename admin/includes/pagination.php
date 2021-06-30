@@ -77,7 +77,8 @@
                             case "moderate_photos":
                                 for (let i=0; i<new_set.length; i++) {
                                     // Change new cloned block's properties to i properties
-                                    // new_block.find(".photo_link").attr("href", "photo.php?id=" + new_set[i].photo_id);
+                                    new_block.find(".photo_view_link").attr("href", "../photo.php?id=" + new_set[i].photo_id);
+                                    new_block.find(".photo_edit_link").attr("href", "edit.php?action=edit_photo&id=" + new_set[i].photo_id);
                                     new_block.find(".photo_id").html(new_set[i].photo_id);
                                     new_block.find(".photo_author").html(new_set[i].photo_author);
                                     new_block.find(".photo_date").html(new_set[i].photo_date);
@@ -98,7 +99,6 @@
                             case "moderate_comments":
                                 for (let i=0; i<new_set.length; i++) {
                                     // Change new cloned block's properties to i properties
-                                    // new_block.find(".photo_link").attr("href", "photo.php?id=" + new_set[i].photo_id);
                                     new_block.find(".comment_id").html(new_set[i].comment_id);
                                     new_block.find(".comment_photo_id").html(new_set[i].comment_photo_id);
                                     new_block.find(".comment_author_id").html(new_set[i].comment_author);
@@ -106,6 +106,7 @@
                                     let comment_approved = (new_set[i].comment_approved == 1) ? "Approved" : "Unapproved";
                                     new_block.find(".comment_approved").html(comment_approved);
                                     new_block.find(".comment_content").html(new_set[i].comment_content);
+                                    new_block.find(".comment_like_count").html(new_set[i].comment_like_count);
                                     new_block.find(".selectCheckbox").val(new_set[i].comment_id);
                                     
                                     // Add new cloned and altered block to new_blocks collective element
@@ -115,7 +116,7 @@
                             case "moderate_users":
                                 for (let i=0; i<new_set.length; i++) {
                                     // Change new cloned block's properties to i properties
-                                    // new_block.find(".photo_link").attr("href", "photo.php?id=" + new_set[i].photo_id);
+                                    new_block.find(".edit_user_link").attr("href", "edit.php?action=edit_user&id=" + new_set[i].user_id);
                                     new_block.find(".user_id").html(new_set[i].user_id);
                                     new_block.find(".user_username").html(new_set[i].user_username);
                                     new_block.find(".user_firstname").html(new_set[i].user_firstname);
