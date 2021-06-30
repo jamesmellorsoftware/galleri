@@ -9,7 +9,9 @@
                         <li><a href="login.php">Login</a></li>
                         <li><a href="register.php">Register</a></li>
                     <?php } else { ?>
-                        <li><a href="admin/index.php">Admin</a></li>
+                        <?php if ($session->admin_access()) { ?>
+                            <li><a href="admin/index.php">Admin</a></li>
+                        <?php } ?>
                         <li><a href="liked.php">My Liked Photos</a></li>
                         <li><a href="logout.php">Logout <?php echo $session->user_username; ?></a></li>
                     <?php } ?>

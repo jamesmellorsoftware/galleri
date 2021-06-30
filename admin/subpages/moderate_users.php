@@ -1,4 +1,7 @@
 <?php
+
+if (!$session->user_is_admin()) header("Location: ../index.php");
+
 $pagination_limit = 2;
 $show_pagination = false;
 

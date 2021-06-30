@@ -1,5 +1,7 @@
 <?php
 
+if (!$session->user_is_admin()) header("Location: ../index.php");
+
 $add_user_successful = false;
 
 $add_user_errors = [];

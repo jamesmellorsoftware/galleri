@@ -2,6 +2,7 @@
 ob_start();
 // Include objects and configuration
 require_once("config.php");
+if (!$session->admin_access()) header("Location: ../index.php");
 ?>
 
 <!doctype html>
