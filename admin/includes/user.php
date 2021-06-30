@@ -332,7 +332,7 @@ class User extends db_objects {
         $order_by = "";
         $joins = "";
 
-        if (isset($search_filters['results_per_page'])) $limit = $search_filters['results_per_page'];
+        if (isset($search_filters['results_per_page'])) $limit = $search_filters['results_per_page'] + 1;
 
         if (isset($search_filters['user_role'])) {
             $user_roles = [];

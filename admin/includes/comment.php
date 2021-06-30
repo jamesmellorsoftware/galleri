@@ -218,7 +218,7 @@ class Comment extends db_objects {
         if (!empty($search_filters['comment_date_from']) && !empty($search_filters['comment_date_to'])) {
             $conditions[Comment::get_table_prefix()."date"] = ['between' => [$search_filters['comment_date_from'], $search_filters['comment_date_to']]];
         }
-        if (isset($search_filters['results_per_page'])) $limit = $search_filters['results_per_page'];
+        if (isset($search_filters['results_per_page'])) $limit = $search_filters['results_per_page'] + 1;
         if (isset($search_filters['comment_author']) && !empty($search_filters['comment_author'])) {
             $joins = [
                 ['type'       => 'full',
