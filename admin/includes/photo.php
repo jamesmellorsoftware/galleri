@@ -109,9 +109,14 @@ class Photo extends db_objects {
 
         $conditions = [Photo::get_table_prefix()."id" => $photo_ids];
 
-        $sql = $db->build_delete(Photo::$db_table, $conditions);
+        $photos = Photo::find_all("", "", "", $conditions);
+    
+        foreach ($photos as $photo) {
+            $photo_filename = $photo->photo_filename;
+            if (file_exists("../img/photos/" . $photo_filename)) unlink("../img/photos/" . $photo_filename);
+        }
 
-        echo $sql;
+        $sql = $db->build_delete(Photo::$db_table, $conditions);
 
         $db->query($sql);
     }

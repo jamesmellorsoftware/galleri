@@ -56,7 +56,7 @@ class Comment extends db_objects {
     public static function retrieve_user_comments($user_id = 0) {
         global $db;
 
-        $sql = $db->build_select(self::$db_table, "*", ['comment_user_id' => $user_id]);
+        $sql = $db->build_select(self::$db_table, "*", ['comment_author_id' => $user_id]);
 
         return self::execute_query($sql);
     }
@@ -173,7 +173,7 @@ class Comment extends db_objects {
         $sql = $db->build_update(
             self::$db_table,
             [Comment::get_table_prefix()."approved" => 1],
-            [Comment::get_table_prefix()."comment_id" => $comment_ids]
+            [Comment::get_table_prefix()."id" => $comment_ids]
         );
 
         $db->query($sql);
@@ -185,7 +185,7 @@ class Comment extends db_objects {
         $sql = $db->build_update(
             self::$db_table,
             [Comment::get_table_prefix()."approved" => 0],
-            [Comment::get_table_prefix()."comment_id" => $comment_ids]
+            [Comment::get_table_prefix()."id" => $comment_ids]
         );
 
         $db->query($sql);

@@ -255,14 +255,27 @@ class User extends db_objects {
 
         $users_uploaded_photos = Photo::find_photographer_gallery($user_ids);
 
-        User::purge_via_user_id($user_ids); // (1)
-        Photo::purge($users_uploaded_photos); // (2)
+        if (!empty($users_uploaded_photos)) {
+            foreach ($users_uploaded_photos as $users_uploaded_photo) {
+                $users_uploaded_photos_ids[] = $users_uploaded_photo->photo_id;
+            }
+            Photo::purge($users_uploaded_photos_ids); // (2)
+        }
+        
         Comment::purge_via_author_id($user_ids); // (3)
         Comment_Like::purge_via_author_id($user_ids); // (4)
         Like::purge_via_author_id($user_ids); // (5)
 
-        // Check if user image exists and is writable, and if so, delete it with unlink
-        unlink('test.html'); // (6)
+        // Delete user images (6)
+        $users = User::find_all("", "", "", [User::get_table_prefix()."id" => $user_ids]);
+
+        foreach ($users as $user) {
+            $user_filename = $user->user_image;
+            if (file_exists("../img/users/" . $user_filename)) echo "exists"; // unlink("../img/users/" . $user_filename);
+        }
+
+        User::purge_via_user_id($user_ids); // (1)
+
     }
 
     public static function purge_via_user_id($user_ids) {
