@@ -25,7 +25,10 @@ if (isset($_POST['edit_user'])) {
     $user_values['user_lastname']  = trim($_POST['user_lastname']);
     $user_values['user_email']     = trim($_POST['user_email']);
     $user_values['user_role']      = trim($_POST['user_role']);
-    $user_values['user_image']     = empty($_FILES['user_image']['name']) ? $user->user_image : trim($_FILES['user_image']['name']);
+
+    // if (isset($_FILES['user_image']) && !empty($_FILES['user_image'])) {
+    //     if (!$new_user->set_file($_FILES['user_image'])) $edit_user_errors["file_upload"] = join("<br>", $new_user->errors);
+    // }
 
     // Check if inputs empty & if username or email are already in use
     $edit_user_errors = User::verify_user_edit($user, $user_values);
@@ -35,15 +38,11 @@ if (isset($_POST['edit_user'])) {
         $new_user = User::retrieved_row_to_object_instance($user_values);
         $new_user->user_id = $user->user_id;
 
-        if (isset($_FILES['user_image']) && !empty($_FILES['user_image']) && !$new_user->set_file($_FILES['user_image'])) {
-            $edit_user_errors["file_upload"] = join("<br>", $new_user->errors);
+        if ($new_user->update()) {
+            $edit_user_successful = true;
         } else {
-            if ($new_user->update()) {
-                $edit_user_successful = true;
-            } else {
-                $edit_user_errors['username'] = "Error editing user.";
-            }
-        } 
+            $edit_user_errors['username'] = "Error editing user.";
+        }
     }
 }
 
