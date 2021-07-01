@@ -43,6 +43,8 @@ if (isset($_POST['bulk_option_checkboxes']) && isset($_POST['apply_bulk_option']
         default:
             break;
     }
+
+    header("Location: " . basename($_SERVER['PHP_SELF']) . "?action=" . $page);
 }
 
 ?>
