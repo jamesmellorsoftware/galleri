@@ -59,7 +59,6 @@
                 "search_filters": search_filters
             },
             success: function(response){
-                // Need to change this based off where it's being called from
 
                 var new_set = response;
 
