@@ -10,38 +10,39 @@ $edit_user_successful = false;
 
 $edit_user_errors = [];
 
-$user_values = [
-    "user_username"  => "",
-    "user_password"  => "",
-    "user_firstname" => "",
-    "user_lastname"  => "",
-    "user_email"     => ""
-];
-
 if (isset($_POST['edit_user'])) {
-    $user_values['user_username']  = trim($_POST['user_username']);
-    $user_values['user_password']  = empty($_POST['user_password']) ? "" : password_hash($_POST['user_password'], PASSWORD_BCRYPT, array('cost' => 12) );
-    $user_values['user_firstname'] = trim($_POST['user_firstname']);
-    $user_values['user_lastname']  = trim($_POST['user_lastname']);
-    $user_values['user_email']     = trim($_POST['user_email']);
-    $user_values['user_role']      = trim($_POST['user_role']);
+    $old_user_values = $user;
 
-    // if (isset($_FILES['user_image']) && !empty($_FILES['user_image'])) {
-    //     if (!$new_user->set_file($_FILES['user_image'])) $edit_user_errors["file_upload"] = join("<br>", $new_user->errors);
-    // }
+    $user = new User;
+    $user->user_id        = $old_user_values->user_id;
+    $user->user_username  = $_POST['user_username'];
+    $user->user_firstname = $_POST['user_firstname'];
+    $user->user_lastname  = $_POST['user_lastname'];
+    $user->user_email     = $_POST['user_email'];
+    $user->user_role      = $_POST['user_role'];
+    $user->user_password  = empty($_POST['user_password']) ? "" : password_hash($_POST['user_password'], PASSWORD_BCRYPT, array('cost' => 12) );
+    $user->user_image = $old_user_values->user_image;
+    $uploaded_image = $_FILES['user_image'];
+    
+    // If user has uploaded a new image, check it, verify it, upload it, then update db, then delete prev image
+    // otherwise just keep it the same as $old_user_values->user_image
+    if (is_uploaded_file($uploaded_image['tmp_name'])) {
+        if ($user->delete_photo()) {
+            if ($user->set_file($uploaded_image)){
+                $user->save_photo();
+            } else {
+                $edit_user_errors["file_upload"] = join("<br>", $user->errors);
+            }
+        }
+    }
 
-    // Check if inputs empty & if username or email are already in use
-    $edit_user_errors = User::verify_user_edit($user, $user_values);
+    $edit_user_errors = User::verify_user_edit($old_user_values, $user);
 
     if (!User::errors_in_form($edit_user_errors)) {
-        // Create user and set properties to user_values
-        $new_user = User::retrieved_row_to_object_instance($user_values);
-        $new_user->user_id = $user->user_id;
-
-        if ($new_user->update()) {
+        if ($user->save()) {
             $edit_user_successful = true;
         } else {
-            $edit_user_errors['username'] = "Error editing user.";
+            $edit_user_errors["file_upload"] = join("<br>", $user->errors);
         }
     }
 }

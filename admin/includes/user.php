@@ -41,7 +41,7 @@ class User extends db_objects {
     public $img_placeholder = "https://via.placeholder.com/500/000000/FFFFFF/?text=No Photo";
 
     public function save(){
-        if ($this->user_id) return $this->update();
+        if ($this->user_id) return $this->update_user();
 
         if (!empty($this->errors)) return false;
 
@@ -71,6 +71,25 @@ class User extends db_objects {
         return true;
     }
 
+    public function update_user(){
+        // Update ONE record of corresponding class in database (condition: ID)
+        // NOTE: class MUST be instantiated and properties set first before calling!
+
+        if (!$this) return false;
+
+        global $db;
+
+        // Retrieve class properties and place into array to build SQL statement
+        $properties_to_set = $this->set_properties();
+
+        // Set WHERE condition to id = $this->id so only 1 record affected
+        $conditions = [User::get_table_prefix() . "id" => $this->user_id];
+
+        if (!$sql = $db->build_update(User::get_table_name(), $properties_to_set, $conditions, 1)) return false;
+        
+        return $db->query($sql);
+    }
+
     public function get_user_image(){
         // Getter function, retrieve $user_image or placeholder if it's not there
         return empty($this->user_image) ? $this->img_placeholder : $this->upload_dir . DS . $this->user_image;
@@ -96,6 +115,20 @@ class User extends db_objects {
         return true;
     }
 
+    public function delete_photo() {
+        if (empty($this)) return false;
+
+        if (!empty($this->errors)) return false;
+
+        $target_path = SITE_ROOT . DS . $this->upload_dir . DS . $this->user_image;
+
+        if (file_exists($target_path)) {
+            if (!unlink($target_path)) return false;
+        }
+
+        return true;
+    }
+
     public function save_photo(){
         // Uploads photo to correct directory if set_file() went through correctly
 
@@ -106,7 +139,7 @@ class User extends db_objects {
             return false;
         }
 
-        $target_path = ADMIN_ROOT . DS . $this->upload_dir . DS . $this->user_image;
+        $target_path = SITE_ROOT . DS . $this->upload_dir . DS . $this->user_image;
 
         if (file_exists($target_path)) {
             $this->errors[] = "File {$this->user_image} already exists.";
@@ -195,16 +228,18 @@ class User extends db_objects {
             "username"  => "",
             "password"  => "",
             "firstname" => "",
-            "email"     => ""
+            "email"     => "",
+            "role"      => "",
+            "image"     => ""
         ];
 
-        $edit_user_errors = User::check_empty_form($new_user_values);
+        $edit_user_errors = User::check_empty_inputs($new_user_values, $edit_user_errors);
 
-        if ($old_user_values->user_username != $new_user_values['user_username'] && User::exists($new_user_values['user_username'])) {
+        if ($old_user_values->user_username != $new_user_values->user_username && User::exists($new_user_values->user_username)) {
             $edit_user_errors['username'] = "This username is already in use.";
         }
 
-        if ($old_user_values->user_email != $new_user_values['user_email'] && User::email_in_use($new_user_values['user_email'])) {
+        if ($old_user_values->user_email != $new_user_values->user_email && User::email_in_use($new_user_values->user_email)) {
             $edit_user_errors['email'] = "This email address is already in use.";
         }
 
@@ -271,7 +306,7 @@ class User extends db_objects {
 
         foreach ($users as $user) {
             $user_filename = $user->user_image;
-            if (file_exists("../img/users/" . $user_filename)) echo "exists"; // unlink("../img/users/" . $user_filename);
+            if (file_exists("../img/users/" . $user_filename)) unlink("../img/users/" . $user_filename);
         }
 
         User::purge_via_user_id($user_ids); // (1)

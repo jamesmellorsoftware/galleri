@@ -172,7 +172,7 @@ class db_objects {
         $properties_to_set = $this->set_properties();
 
         // Set WHERE condition to id = $this->id so only 1 record affected
-        $conditions = [static::$db_prefix . "id" => $this->user_id];
+        $conditions = [static::$db_prefix . "id" => $this->static::$db_prefix."id"];
 
         if (!$sql = $db->build_update(static::$db_table, $properties_to_set, $conditions, 1)) return false;
         
@@ -223,6 +223,20 @@ class db_objects {
 
         foreach ($array_to_check as $key => $value) {
             if (empty($value)) $errors[$key] = "Please fill in all fields marked with *.";
+        }
+
+        return $errors;
+    }
+
+    public static function check_empty_inputs($object_to_check, $expected_inputs) {
+        // (Helper function, accepts an object)
+        // Loops through object to check if it's correct
+        // $expected_inputs accepts an array for the inputs expected to NOT be blank
+        $errors = [];
+
+        foreach ($expected_inputs as $expected_input => $value) {
+            $expected_property = static::$db_prefix . $expected_input;
+            if (empty($object_to_check->$expected_property)) $errors[$expected_input] = "Please fill in all fields marked with *.";
         }
 
         return $errors;

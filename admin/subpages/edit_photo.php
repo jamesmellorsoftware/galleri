@@ -10,13 +10,6 @@ $edit_photo_successful = false;
 
 $edit_photo_errors = [];
 
-$edit_photo_values = [
-    "photo_title"    => "",
-    "photo_subtitle" => "",
-    "photo_content"  => "",
-    "photo_filename" => ""
-];
-
 if (isset($_POST['submit'])) {
     // Retrieve old photo properties for correct display later
     $photo_id = $photo->photo_id;
