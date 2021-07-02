@@ -128,7 +128,9 @@ class db_objects {
         $properties = array();
 
         foreach (static::$db_table_fields as $db_table_field) {
-            if (property_exists($this, $db_table_field)) $properties[$db_table_field] = $this->$db_table_field;
+            if (property_exists($this, $db_table_field)) {
+                if (!empty($this->$db_table_field)) $properties[$db_table_field] = $this->$db_table_field;
+            }
         }
 
         return $properties;

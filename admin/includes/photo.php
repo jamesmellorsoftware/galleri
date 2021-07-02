@@ -59,7 +59,7 @@ class Photo extends db_objects {
     }
 
     public function save(){
-        if ($this->photo_id) return $this->update();
+        if ($this->photo_id) return $this->update_photo();
 
         if (!empty($this->errors)) return false;
 
@@ -84,6 +84,25 @@ class Photo extends db_objects {
             $this->errors[] = "Error moving file. Folder probably lacks permissions.";
             return false;
         }
+    }
+
+    public function update_photo(){
+        // Update ONE record of corresponding class in database (condition: ID)
+        // NOTE: class MUST be instantiated and properties set first before calling!
+
+        if (!$this) return false;
+
+        global $db;
+
+        // Retrieve class properties and place into array to build SQL statement
+        $properties_to_set = $this->set_properties();
+
+        // Set WHERE condition to id = $this->id so only 1 record affected
+        $conditions = [Photo::get_table_prefix() . "id" => $this->photo_id];
+
+        if (!$sql = $db->build_update(Photo::get_table_name(), $properties_to_set, $conditions, 1)) return false;
+
+        return $db->query($sql);
     }
 
     public function delete_photo(){
