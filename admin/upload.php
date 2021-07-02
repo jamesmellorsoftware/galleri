@@ -5,21 +5,14 @@ $upload_successful = false;
 
 $upload_errors = [];
 
-$upload_values = [
-    "photo_title"    => "",
-    "photo_subtitle" => "",
-    "photo_content"  => "",
-    "photo_filename" => ""
-];
-
 if (isset($_POST['submit'])) {
     // Add upload image to correct folder and add entry to DB
 
     $photo = new Photo;
-    $photo->photo_title = $_POST['photo_title'];
-    $photo->photo_subtitle = $_POST['photo_subtitle'];
-    $photo->photo_text = $_POST['photo_text'];
-    $photo->photo_date = date("Y-m-d");
+    $photo->photo_title     = $_POST['photo_title'];
+    $photo->photo_subtitle  = $_POST['photo_subtitle'];
+    $photo->photo_text      = $_POST['photo_text'];
+    $photo->photo_date      = date("Y-m-d");
     $photo->photo_author_id = $session->user_id;
 
     $upload_errors = Photo::verify_upload($photo);
