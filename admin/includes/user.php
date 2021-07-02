@@ -190,7 +190,7 @@ class User extends db_objects {
         return !empty($result_set) ? array_shift($result_set) : false;
     }
 
-    public static function verify_registration($user_values, $user_image) {
+    public static function verify_registration($user, $user_image) {
         // Checks if registration data user values are valid
         // Checks:
         // - Email in use?
@@ -202,13 +202,14 @@ class User extends db_objects {
             "username"   => "",
             "password"   => "",
             "firstname"  => "",
-            "email"      => "",
-            "user_image" => ""
+            "email"      => ""
         ];
 
-        $registration_errors = User::check_empty_form($user_values);
-        if (User::exists($user_values['user_username']))                  $registration_errors['username']   = "Username already in use.";
-        if (User::email_in_use($user_values['user_email']))               $registration_errors['email']      = "Email already in use.";
+        $registration_errors = User::check_empty_inputs($user, $registration_errors);
+        if (User::exists($user->user_username))    $registration_errors['username']   = "Username already in use.";
+        if (User::email_in_use($user->user_email)) $registration_errors['email']      = "Email already in use.";
+
+        $registration_errors["user_image"] = "";
         if (!$user_image || !is_array($user_image) || empty($user_image) || !is_uploaded_file($user_image['tmp_name'])) {
             $registration_errors['user_image'] = "Please select an image.";
         }
