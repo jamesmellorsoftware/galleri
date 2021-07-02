@@ -11,36 +11,34 @@ $photo = Photo::find_by_id($photo_id);
 if (!$photo || empty($photo)) header("Location: index.php");
 
 // Retrieve comments
-$comments = Comment::retrieve($photo->photo_id);
+$comments = $photo->retrieve_comments();
 
 // ----------------- COMMENT SUBMIT -----------------
 $comment_successful = false;
 
 $comment_errors = [];
 
-$comment_values = [
-    "comment_content"
-];
-
-
 if (isset($_POST['submit'])) {
     if ($session->is_signed_in()) {
-        $comment_values['comment_content'] = trim($_POST['comment_content']);
-        $comment_author = $session->user_id;
-        $comment_date = date("Y-m-d");
+        $new_comment = new Comment;
 
-        $comment_errors = Comment::verify_comment($comment_values);
+        $new_comment->comment_photo_id  = $photo->photo_id;
+        $new_comment->comment_author_id = $session->user_id;
+        $new_comment->comment_date      = date("Y-m-d");
+        $new_comment->comment_approved  = 0;
+        $new_comment->comment_content   = trim($_POST['comment_content']);
+
+        $comment_errors = $new_comment->verify();
 
         if (!Comment::errors_in_form($comment_errors)) {
-            $new_comment = Comment::create_comment($photo_id, $comment_author, $comment_values['comment_content'], $comment_date);
             if ($new_comment && $new_comment->create()) {
                 header("Location: photo.php?id={$photo_id}");
             } else {
-                $comment_errors['comment_content'] = "Problem saving comment.";
+                $comment_errors['content'] = "Problem saving comment.";
             }
         }
     } else {
-        $comment_errors['comment_content'] = "You must be signed in to comment!";
+        $comment_errors['content'] = "You must be signed in to comment!";
     }
 }
 // --------------------------------------------------

@@ -22,7 +22,7 @@ if (isset($_POST['submit'])) {
     $photo->photo_subtitle  = $_POST['photo_subtitle'];
     $photo->photo_text      = $_POST['photo_text'];
 
-    $edit_photo_errors = Photo::verify_upload($photo);
+    $edit_photo_errors = $photo->verify();
 
     if (!Photo::errors_in_form($edit_photo_errors)) {
         if ($photo->save()) {

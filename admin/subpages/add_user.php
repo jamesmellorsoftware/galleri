@@ -17,7 +17,7 @@ if (isset($_POST['add_user'])) {
     $new_user->user_role      = trim($_POST['user_role']);
     $new_user_image           = $_FILES['user_image'];
 
-    $add_user_errors = User::verify_registration($new_user, $new_user_image);
+    $add_user_errors = $new_user->verify_registration($new_user_image);
 
     if (!$new_user->set_file($new_user_image)) $add_user_errors["file_upload"] = join("<br>", $new_user->errors);
 

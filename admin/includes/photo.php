@@ -111,6 +111,10 @@ class Photo extends db_objects {
         }
     }
 
+    public function retrieve_comments() {
+        return Comment::retrieve($this->photo_id);
+    }
+
     public static function purge($photo_ids) {
         // Deletes the photo and all of its comments, comment likes, and likes
         // i.e. all trace of photo removed from database entirely
@@ -169,20 +173,13 @@ class Photo extends db_objects {
         return Photo::find_all($limit, $offset, $joins, $conditions);
     }
 
-    public static function verify_upload($photo_values) {
-        // Accepts object instance as argument
+    public function verify() {
         // Checks:
         // - fields empty?
 
-        $photo_values = [
-            "photo_title" => $photo_values->photo_title,
-            "photo_subtitle" => $photo_values->photo_subtitle,
-            "photo_text" => $photo_values->photo_text
-        ];
-
         $upload_errors = ["title"  => "", "subtitle"  => "", "text" => ""];
 
-        $upload_errors = User::check_empty_form($photo_values);
+        $upload_errors = Photo::check_empty_inputs($this, $upload_errors);
 
         return $upload_errors;
     }

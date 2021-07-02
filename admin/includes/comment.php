@@ -61,13 +61,11 @@ class Comment extends db_objects {
         return self::execute_query($sql);
     }
 
-    public static function verify_comment($comment_values) {
+    public function verify() {
 
-        $comment_errors = [
-            "comment_content" => ""
-        ];
+        $comment_errors = ["content" => ""];
 
-        $comment_errors = Comment::check_empty_form($comment_values);
+        $comment_errors = Comment::check_empty_inputs($this, $comment_errors);
 
         return $comment_errors;
 

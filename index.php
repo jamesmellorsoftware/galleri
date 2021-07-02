@@ -3,17 +3,10 @@ require_once("includes/header.php");
 require_once("includes/nav_top.php");
 require_once("includes/index_video.php");
 
-// PAGINATION:
-// If no. loaded pics less than pagination limit (i.e. there are less DB entries than the
-// actual pagination limit) then don't display button
-// If no more posts waiting in DB, don't display button
-// How do we check that?
-// Retrieve pagination_limit+1 results. If count(those results) > pagination_limit, show button
-// Pop the end object off to not display it
 $pagination_limit = 2;
 $show_pagination = false;
 $gallery_photos = Photo::find_all($pagination_limit+1);
-if (count($gallery_photos) > $pagination_limit) {
+if ($gallery_photos && !empty($gallery_photos) && count($gallery_photos) > $pagination_limit) {
     array_pop($gallery_photos);
     $show_pagination = true;
 }

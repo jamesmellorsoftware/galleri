@@ -2,13 +2,11 @@
 require_once("includes/header.php");
 require_once("includes/nav_top.php");
 
-// If not signed in, send back to homepage
 if (!$session->is_signed_in()) header("Location: index.php");
 
 $pagination_limit = 2;
 $show_pagination = false;
 
-// Retrieve user's liked photos, new method with joins
 $liked_photos = Photo::find_user_likes($session->user_id, $pagination_limit+1);
 
 if ($liked_photos && !empty($liked_photos) && count($liked_photos) > $pagination_limit) {

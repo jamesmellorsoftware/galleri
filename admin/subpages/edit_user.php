@@ -36,7 +36,7 @@ if (isset($_POST['edit_user'])) {
         }
     }
 
-    $edit_user_errors = User::verify_user_edit($old_user_values, $user);
+    $edit_user_errors = $user->verify_edit($old_user_values);
 
     if (!User::errors_in_form($edit_user_errors)) {
         if ($user->save()) {

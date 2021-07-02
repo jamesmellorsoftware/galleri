@@ -190,7 +190,7 @@ class User extends db_objects {
         return !empty($result_set) ? array_shift($result_set) : false;
     }
 
-    public static function verify_registration($user, $user_image) {
+    public function verify_registration($user_image) {
         // Checks if registration data user values are valid
         // Checks:
         // - Email in use?
@@ -205,9 +205,9 @@ class User extends db_objects {
             "email"      => ""
         ];
 
-        $registration_errors = User::check_empty_inputs($user, $registration_errors);
-        if (User::exists($user->user_username))    $registration_errors['username']   = "Username already in use.";
-        if (User::email_in_use($user->user_email)) $registration_errors['email']      = "Email already in use.";
+        $registration_errors = User::check_empty_inputs($this, $registration_errors);
+        if (User::exists($this->user_username))    $registration_errors['username']   = "Username already in use.";
+        if (User::email_in_use($this->user_email)) $registration_errors['email']      = "Email already in use.";
 
         $registration_errors["user_image"] = "";
         if (!$user_image || !is_array($user_image) || empty($user_image) || !is_uploaded_file($user_image['tmp_name'])) {
@@ -218,7 +218,7 @@ class User extends db_objects {
 
     }
 
-    public static function verify_user_edit($old_user_values, $new_user_values) {
+    public function verify_edit($old_user_values) {
         // Checks if registration data user values are valid
         // Checks:
         // - Email changed and new email already in use?
@@ -229,18 +229,19 @@ class User extends db_objects {
             "username"  => "",
             "password"  => "",
             "firstname" => "",
+            "lastname" => "",
             "email"     => "",
             "role"      => "",
             "image"     => ""
         ];
 
-        $edit_user_errors = User::check_empty_inputs($new_user_values, $edit_user_errors);
+        $edit_user_errors = User::check_empty_inputs($this, $edit_user_errors);
 
-        if ($old_user_values->user_username != $new_user_values->user_username && User::exists($new_user_values->user_username)) {
+        if ($old_user_values->user_username != $this->user_username && User::exists($this->user_username)) {
             $edit_user_errors['username'] = "This username is already in use.";
         }
 
-        if ($old_user_values->user_email != $new_user_values->user_email && User::email_in_use($new_user_values->user_email)) {
+        if ($old_user_values->user_email != $this->user_email && User::email_in_use($this->user_email)) {
             $edit_user_errors['email'] = "This email address is already in use.";
         }
 
@@ -248,7 +249,7 @@ class User extends db_objects {
 
     }
 
-    public static function verify_login($login_values) {
+    public function verify_login() {
         // Checks if login data user values are valid
         // Checks:
         // - Username exists?
@@ -257,17 +258,17 @@ class User extends db_objects {
 
         $login_errors = ["username"  => "", "password"  => ""];
 
-        $login_errors = User::check_empty_form($login_values);
+        $login_errors = User::check_empty_inputs($this, $login_errors);
         
         if (!empty($login_errors)) return $login_errors;
 
-        $user_retrieved = User::retrieve($login_values['user_username']);
+        $user_retrieved = User::retrieve($this->user_username);
 
         if (!$user_retrieved || empty($user_retrieved)) $login_errors['username'] = "Username does not exist.";
 
         if (!empty($login_errors)) return $login_errors;
 
-        if (!password_verify($login_values['user_password'], $user_retrieved->user_password)) $login_errors['password'] = "Incorrect password.";
+        if (!password_verify($this->user_password, $user_retrieved->user_password)) $login_errors['password'] = "Incorrect password.";
 
         return $login_errors;
 

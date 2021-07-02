@@ -15,7 +15,7 @@ if (isset($_POST['submit'])) {
     $photo->photo_date      = date("Y-m-d");
     $photo->photo_author_id = $session->user_id;
 
-    $upload_errors = Photo::verify_upload($photo);
+    $upload_errors = $photo->verify();
 
     if ($photo->set_file($_FILES['file_upload'])) {
         if ($photo->save()) {
