@@ -73,30 +73,30 @@ if (isset($_POST['edit_user'])) {
                 <div class="col-md-4 col-sm-12">
                     <div class="form-group">
                         <input type="text" class="form-control"
-                        name="user_username" placeholder="Username"
+                        name="user_username" placeholder="<?php echo EDIT_USER_PLACEHOLDER_USERNAME; ?>"
                         value="<?php echo !empty($user_values['user_username']) ? $user_values['user_username'] : $user->user_username; ?>">
                     </div>
                     <div class="form-group">
                         <input type="password" class="form-control"
-                        name="user_password" placeholder="Password">
+                        name="user_password" placeholder="<?php echo EDIT_USER_PLACEHOLDER_PASSWORD; ?>">
                     </div>
                 </div>
                 <div class="col-md-4 col-sm-12">
                     <div class="form-group">
                         <input type="text" class="form-control"
-                        name="user_firstname" placeholder="First name"
+                        name="user_firstname" placeholder="<?php echo EDIT_USER_PLACEHOLDER_FIRSTNAME; ?>"
                         value="<?php echo !empty($user_values['user_firstname']) ? $user_values['user_firstname'] : $user->user_firstname; ?>">
                     </div>
                     <div class="form-group">
                         <input type="text" class="form-control"
-                        name="user_lastname" placeholder="Last name"
+                        name="user_lastname" placeholder="<?php echo EDIT_USER_PLACEHOLDER_LASTNAME; ?>"
                         value="<?php echo !empty($user_values['user_lastname']) ? $user_values['user_lastname'] : $user->user_lastname; ?>">
                     </div>
                 </div>
                 <div class="col-md-4 col-sm-12">
                     <div class="form-group">
                         <input type="text" class="form-control"
-                        name="user_email" placeholder="Email"
+                        name="user_email" placeholder="<?php echo EDIT_USER_PLACEHOLDER_EMAIL; ?>"
                         value="<?php echo !empty($user_values['user_email']) ? $user_values['user_email'] : $user->user_email; ?>">
                     </div>
                     <div class="form-group">

@@ -9,17 +9,34 @@ define("SITE_TITLE", "Galleri | Admin Dashboard");
 // Add user
 define("ADD_USER_BUTTON", "Add User");
 define("ADD_USER_LABEL", "User image");
+define("ADD_USER_PLACEHOLDER_EMAIL", "Email");
+define("ADD_USER_PLACEHOLDER_FIRSTNAME", "First Name");
+define("ADD_USER_PLACEHOLDER_LASTNAME", "Last Name");
+define("ADD_USER_PLACEHOLDER_PASSWORD", "Password");
+define("ADD_USER_PLACEHOLDER_USERNAME", "Username");
+define("ADD_USER_ROLE_ADMIN", "Admin");
+define("ADD_USER_ROLE_PHOTOGRAPHER", "Photographer");
+define("ADD_USER_ROLE_SELECT", "Select user role");
+define("ADD_USER_ROLE_USER", "User");
 define("ADD_USER_SUCCESS", "User added successfully.");
 define("ADD_USER_TITLE", "Add User");
 
 // Edit photo
 define("EDIT_PHOTO_BUTTON", "Submit Changes");
 define("EDIT_PHOTO_HEADER", "Edit Photo:");
+define("EDIT_PHOTO_PLACEHOLDER_POST", "Post");
+define("EDIT_PHOTO_PLACEHOLDER_SUBTITLE", "Subtitle");
+define("EDIT_PHOTO_PLACEHOLDER_TITLE", "Title");
 define("EDIT_PHOTO_SUCCESS", "Photo edited successfully.");
 
 // Edit user
 define("EDIT_USER_BUTTON", "Edit User");
 define("EDIT_USER_HEADER", "Edit User:");
+define("EDIT_USER_PLACEHOLDER_EMAIL", "Email");
+define("EDIT_USER_PLACEHOLDER_FIRSTNAME", "First Name");
+define("EDIT_USER_PLACEHOLDER_LASTNAME", "Last Name");
+define("EDIT_USER_PLACEHOLDER_PASSWORD", "Password");
+define("EDIT_USER_PLACEHOLDER_USERNAME", "Username");
 define("EDIT_USER_ROLE_ADMIN", "Admin");
 define("EDIT_USER_ROLE_PHOTOGRAPHER", "Photographer");
 define("EDIT_USER_ROLE_SELECT", "Select User Role");
@@ -37,6 +54,10 @@ define("SIDEBAR_MODERATE_USERS", "Users");
 
 // Moderate comments
 define("MODERATE_COMMENTS_APPROVED", "Approved");
+define("MODERATE_COMMENTS_BULKOPTION_APPROVE_COMMENTS", "Approve comments");
+define("MODERATE_COMMENTS_BULKOPTION_DELETE", "Delete");
+define("MODERATE_COMMENTS_BULKOPTION_RESET_LIKES", "Reset likes");
+define("MODERATE_COMMENTS_BULKOPTION_UNAPPROVE_COMMENTS", "Unapprove comments");
 define("MODERATE_COMMENTS_BY", "by");
 define("MODERATE_COMMENTS_COMMENT", "Comment");
 define("MODERATE_COMMENTS_HEADER", "Moderate: Comments");
@@ -46,6 +67,9 @@ define("MODERATE_COMMENTS_ON_PHOTO", "on photo");
 define("MODERATE_COMMENTS_UNAPPROVED", "Unapproved");
 
 // Moderate photos
+define("MODERATE_PHOTOS_BULKOPTION_DELETE", "Delete");
+define("MODERATE_PHOTOS_BULKOPTION_PURGE_COMMENTS", "Purge comments");
+define("MODERATE_PHOTOS_BULKOPTION_RESET_LIKES", "Reset likes");
 define("MODERATE_PHOTOS_BY", "by");
 define("MODERATE_PHOTOS_EDIT", "Edit");
 define("MODERATE_PHOTOS_HEADER", "Moderate: Photos");
@@ -56,6 +80,12 @@ define("MODERATE_PHOTOS_VIEW", "View");
 
 // Moderate users
 define("MODERATE_USERS_BANNED", "BANNED");
+define("MODERATE_USERS_BULKOPTION_BAN", "Ban");
+define("MODERATE_USERS_BULKOPTION_CHANGE_ADMIN", "Change to Admin");
+define("MODERATE_USERS_BULKOPTION_CHANGE_PHOTOGRAPHER", "Change to Photographer");
+define("MODERATE_USERS_BULKOPTION_CHANGE_USER", "Change to User");
+define("MODERATE_USERS_BULKOPTION_DELETE", "Delete");
+define("MODERATE_USERS_BULKOPTION_UNBAN", "Unban");
 define("MODERATE_USERS_EDIT", "Edit User");
 define("MODERATE_USERS_HEADER", "Moderate: Users");
 define("MODERATE_USERS_NO_RESULTS", "No comments. Clear search.");

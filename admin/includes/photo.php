@@ -6,9 +6,9 @@ class Photo extends db_objects {
     protected static $db_prefix = "photo_";
     protected static $db_table_fields = array("photo_id", "photo_author_id", "photo_title", "photo_subtitle", "photo_text", "photo_date", "photo_filename");
     protected static $bulk_options = [
-        ["value" => "delete",         "name"  => "Delete"],
-        ["value" => "reset_likes",    "name"  => "Reset Likes"],
-        ["value" => "purge_comments", "name"  => "Purge Comments"]
+        ["value" => "delete",         "name"  => MODERATE_PHOTOS_BULKOPTION_DELETE],
+        ["value" => "reset_likes",    "name"  => MODERATE_PHOTOS_BULKOPTION_RESET_LIKES],
+        ["value" => "purge_comments", "name"  => MODERATE_PHOTOS_BULKOPTION_PURGE_COMMENTS]
     ];
     protected static $search_filters = [
         "photo_id",

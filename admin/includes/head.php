@@ -1,8 +1,8 @@
 <?php
 ob_start();
 // Include objects and configuration
-require_once("config.php");
 require_once("variables.php");
+require_once("config.php");
 if (!$session->is_signed_in()) header("Location: ../index.php");
 if (!$session->admin_access()) header("Location: ../index.php");
 ?>

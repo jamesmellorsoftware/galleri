@@ -5,10 +5,10 @@ class Comment extends db_objects {
     protected static $db_prefix = "comment_";
     protected static $db_table_fields = array("comment_id", "comment_photo_id", "comment_author_id", "comment_content", "comment_date", "comment_approved");
     protected static $bulk_options = [
-        ["value" => "delete",         "name"  => "Delete"],
-        ["value" => "reset_likes",    "name"  => "Reset Likes"],
-        ["value" => "approve",        "name"  => "Approve Comments"],
-        ["value" => "unapprove",      "name"  => "Unaprove Comments"]
+        ["value" => "delete",         "name"  => MODERATE_COMMENTS_BULKOPTION_DELETE],
+        ["value" => "reset_likes",    "name"  => MODERATE_COMMENTS_BULKOPTION_RESET_LIKES],
+        ["value" => "approve",        "name"  => MODERATE_COMMENTS_BULKOPTION_APPROVE_COMMENTS],
+        ["value" => "unapprove",      "name"  => MODERATE_COMMENTS_BULKOPTION_UNAPPROVE_COMMENTS]
     ];
     protected static $search_filters = [
         "comment_id",

@@ -54,47 +54,53 @@ if (isset($_POST['add_user'])) {
                 <div class="col-md-4 col-sm-12">
                     <div class="form-group">
                         <input type="text" class="form-control"
-                        name="user_username" placeholder="Username"
+                        name="user_username" placeholder="<?php echo ADD_USER_PLACEHOLDER_USERNAME; ?>"
                         value="<?php if (isset($new_user->user_username)) echo $new_user->user_username; ?>">
                     </div>
                     <div class="form-group">
                         <input type="password" class="form-control"
-                        name="user_password" placeholder="Password"
+                        name="user_password" placeholder="<?php echo ADD_USER_PLACEHOLDER_PASSWORD; ?>"
                         value="<?php if (isset($new_user->user_password)) echo $new_user->user_password; ?>">
                     </div>
                 </div>
                 <div class="col-md-4 col-sm-12">
                     <div class="form-group">
                         <input type="text" class="form-control"
-                        name="user_firstname" placeholder="First name"
+                        name="user_firstname" placeholder="<?php echo ADD_USER_PLACEHOLDER_FIRSTNAME; ?>"
                         value="<?php  if (isset($new_user->user_firstname)) echo $new_user->user_firstname; ?>">
                     </div>
                     <div class="form-group">
                         <input type="text" class="form-control"
-                        name="user_lastname" placeholder="Last name"
+                        name="user_lastname" placeholder="<?php echo ADD_USER_PLACEHOLDER_LASTNAME; ?>"
                         value="<?php if (isset($new_user->user_lastname)) echo $new_user->user_lastname; ?>">
                     </div>
                 </div>
                 <div class="col-md-4 col-sm-12">
                     <div class="form-group">
                         <input type="text" class="form-control"
-                        name="user_email" placeholder="Email"
+                        name="user_email" placeholder="<?php echo ADD_USER_PLACEHOLDER_EMAIL; ?>"
                         value="<?php if (isset($new_user->user_email)) echo $new_user->user_email; ?>">
                     </div>
                     <div class="form-group">
                         <select class="form-control" name="user_role">
-                            <option value="">Select User Role</option>
+                            <option value=""><?php echo ADD_USER_ROLE_SELECT; ?></option>
                             <option value="User"
-                            <?php if (isset($new_user->user_role) && $new_user->user_role == "User") echo "selected"; ?>>User</option>
+                            <?php if (isset($new_user->user_role) && $new_user->user_role == "User") echo "selected"; ?>>
+                                <?php echo ADD_USER_ROLE_USER; ?>
+                            </option>
                             <option value="Photographer"
-                            <?php if (isset($new_user->user_role) && $new_user->user_role == "Photographer") echo "selected"; ?>>Photographer</option>
+                            <?php if (isset($new_user->user_role) && $new_user->user_role == "Photographer") echo "selected"; ?>>
+                                <?php echo ADD_USER_ROLE_PHOTOGRAPHER; ?>
+                            </option>
                             <option value="Admin"
-                            <?php if (isset($new_user->user_role) && $new_user->user_role == "Admin") echo "selected"; ?>>Administrator</option>
+                            <?php if (isset($new_user->user_role) && $new_user->user_role == "Admin") echo "selected"; ?>>
+                                <?php echo ADD_USER_ROLE_ADMIN; ?>
+                            </option>
                         </select>
                     </div>
                 </div>
                 <div class="form-group">
-                    <input type="submit" class="btn btn-primary" name="add_user" value="Add User">
+                    <input type="submit" class="btn btn-primary" name="add_user" value="<?php echo ADD_USER_BUTTON; ?>">
                 </div>
             </form>
         <?php } ?>

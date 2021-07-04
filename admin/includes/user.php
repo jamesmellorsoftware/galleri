@@ -6,12 +6,12 @@ class User extends db_objects {
     protected static $db_prefix = "user_";
     protected static $db_table_fields = array("user_id", "user_username", "user_password", "user_firstname", "user_lastname", "user_email", "user_banned", "user_role", "user_image");
     protected static $bulk_options = [
-        ["value" => "delete",         "name"  => "Delete"],
-        ["value" => "ban",            "name"  => "Ban"],
-        ["value" => "unban",          "name"  => "Unban"],
-        ["value" => "admin",          "name"  => "Change to Admin"],
-        ["value" => "photographer",   "name"  => "Change to Photographer"],
-        ["value" => "user",           "name"  => "Change to User"]
+        ["value" => "delete",         "name"  => MODERATE_USERS_BULKOPTION_DELETE],
+        ["value" => "ban",            "name"  => MODERATE_USERS_BULKOPTION_BAN],
+        ["value" => "unban",          "name"  => MODERATE_USERS_BULKOPTION_UNBAN],
+        ["value" => "admin",          "name"  => MODERATE_USERS_BULKOPTION_CHANGE_ADMIN],
+        ["value" => "photographer",   "name"  => MODERATE_USERS_BULKOPTION_CHANGE_PHOTOGRAPHER],
+        ["value" => "user",           "name"  => MODERATE_USERS_BULKOPTION_CHANGE_USER]
     ];
     protected static $search_filters = [
         "user_username",
