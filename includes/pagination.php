@@ -1,6 +1,6 @@
 <div class="row" id="pagination">
     <div class="col-md-12">
-        <div class="load-more-button"><a href="#">Load More</a></div>
+        <div class="load-more-button"><a href="#"><?php echo PAGINATION_LOAD_MORE; ?></a></div>
         <input type="hidden" id="load_amount" value="0">
     </div>
 </div>

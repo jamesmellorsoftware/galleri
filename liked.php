@@ -19,13 +19,13 @@ if ($liked_photos && !empty($liked_photos) && count($liked_photos) > $pagination
 <div class="grid-portfolio noHeaderVideo" id="portfolio">
     <div class="container">
         <div class="col-md-12 text-center">
-            <h1>My Liked Photos</h1>
+            <h1><?php echo LIKED_HEADER; ?></h1>
         </div>
     </div>
     <div class="container">
         <div class="row">
             <?php if (!$liked_photos || empty($liked_photos)) { ?>
-                <div class="col-sm-12 text-center"><h2>No photos yet. Like some!</h2></div>
+                <div class="col-sm-12 text-center"><h2><?php echo LIKED_NO_PHOTOS; ?></h2></div>
             <?php } else { ?>
                 <?php foreach ($liked_photos as $liked_photo) : ?>
                     <div class="pagination-block">

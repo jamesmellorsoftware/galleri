@@ -19,7 +19,7 @@ if ($photographers && !empty($photographers) && count($photographers) > $paginat
     <div class="container">
         <div class="row">
             <?php if (!$photographers || empty($photographers)) { ?>
-                <div class="col-sm-12 text-center"><h2>No photographers yet.</h2></div>
+                <div class="col-sm-12 text-center"><h2><?php echo PHOTOGRAPHERS_NO_PHOTOGRAPHERS; ?></h2></div>
             <?php } else { ?>
                 <?php foreach ($photographers as $photographer) : ?>
                     <div class="pagination-block">

@@ -19,7 +19,7 @@ if (isset($_POST['register'])) {
     $new_user->user_role      = "User";
     $new_user_image           = $_FILES['user_image'];
 
-    $registration_errors = User::verify_registration($new_user, $new_user_image);
+    $registration_errors = $new_user->verify_registration($new_user_image);
 
     if (!$new_user->set_file($new_user_image)) $registration_errors["file_upload"] = join("<br>", $new_user->errors);
 
@@ -40,12 +40,8 @@ if (isset($_POST['register'])) {
         <div class="col-md-4"></div>
         <div class="col-md-4">
             <?php if ($registration_successful) { ?>
-                <h4 class="bg-success">
-                    Registration successful.<br />
-                    Your account is awaiting approval.<br />
-                    You will receive an email when your account has been processed.
-                </h4>
-                <a href="index.php">Back to Galleri</a>
+                <h4 class="bg-success"><?php echo REGISTRATION_SUCCESS_MESSAGE; ?></h4>
+                <a href="index.php"><?php echo REGISTRATION_BACK_TO_INDEX; ?></a>
             <?php } else { ?>
                 <?php foreach ($registration_errors as $registration_error) { ?>
                     <h4 class="bg-danger"><?php echo $registration_error; ?></h4>
@@ -84,7 +80,7 @@ if (isset($_POST['register'])) {
                         <input type="submit" name="register" class="btn btn-primary" value="Register">
                     </div>
                 </form>
-                <p><a href="login.php">Already have an account? Log in here.</a></p>
+                <p><a href="login.php"><?php echo REGISTRATION_ALREADY_HAVE_ACCOUNT; ?></a></p>
             <?php } ?>
         </div>
         <div class="col-md-4"></div>

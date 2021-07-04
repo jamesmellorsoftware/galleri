@@ -93,7 +93,7 @@ if ($session->is_signed_in() && isset($_POST['action']) && isset($_POST['liked_c
                         <em><?php echo $photo->photo_subtitle; ?></em>
                     </h2>
                     <h3>
-                        by <a href="photographergallery.php?id=<?php echo $photo->photo_author_id; ?>">
+                        <?php echo PHOTO_BY; ?> <a href="photographergallery.php?id=<?php echo $photo->photo_author_id; ?>">
                             <?php echo User::get_name_from_id($photo->photo_author_id); ?>
                         </a>
                     </h3>

@@ -31,9 +31,9 @@ if (isset($_POST['login'])) {
         <div class="col-md-4">
             <?php if ($session->is_signed_in()) { ?>
                 <h4 class="bg-success">
-                    Login successful.<br />
-                    Logged in as <?php if (isset($user->user_username)) echo $user->user_username; ?>.<br />
-                    <a href="index.php">Go to Galleri</a><br />
+                    <?php echo LOGIN_SUCCESS_1; ?>
+                    <?php echo LOGIN_SUCCESS_2; if (isset($user->user_username)) echo $user->user_username; ?>.<br />
+                    <?php echo LOGIN_SUCCESS_3; ?>
                 </h4>
             <?php } else { ?>
                 <?php foreach ($login_errors as $login_error) { ?>
@@ -56,7 +56,7 @@ if (isset($_POST['login'])) {
                         <input type="submit" name="login" class="btn btn-primary" value="Log in">
                     </div>
                 </form>
-                <p><a href="register.php">Don't have an account? Register here.</a></p>
+                <p><a href="register.php"><?php echo LOGIN_ALREADY_HAVE_ACCOUNT; ?></a></p>
             <?php } ?>
         </div>
         <div class="col-md-4"></div>

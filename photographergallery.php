@@ -33,7 +33,7 @@ if ($photographer_gallery_photos && !empty($photographer_gallery_photos) && coun
     <div class="container">
         <div class="row">
             <?php if (!$photographer_gallery_photos || empty($photographer_gallery_photos)) { ?>
-                <div class="col-sm-12 text-center"><h2>No photos yet.</h2></div>
+                <div class="col-sm-12 text-center"><h2><?php echo PHOTOGRAPHER_NO_PHOTOS; ?></h2></div>
             <?php } else { ?>
                 <?php foreach ($photographer_gallery_photos as $photographer_gallery_photo) : ?>
                     <div class="pagination-block">
