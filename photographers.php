@@ -2,7 +2,7 @@
 require_once("includes/header.php");
 require_once("includes/nav_top.php");
 
-$pagination_limit = 2;
+$pagination_limit = PAGINATION_LIMIT_PHOTOGRAPHERS;
 $show_pagination = false;
 
 // Find photographers

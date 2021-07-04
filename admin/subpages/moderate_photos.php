@@ -1,6 +1,6 @@
 <?php
 
-$pagination_limit = (isset($_POST['results_per_page'])) ? $_POST['results_per_page'] : 2;
+$pagination_limit = (isset($_POST['results_per_page'])) ? $_POST['results_per_page'] : PAGINATION_LIMIT_MODERATE_PHOTOS;
 $show_pagination = false;
 
 if ($session->user_is_photographer()) {

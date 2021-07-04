@@ -20,4 +20,14 @@ require_once('photo.php');
 require_once('like.php');
 require_once('comment_like.php');
 require_once('comment.php');
+
+// Define pagination limits
+define("PAGINATION_LIMIT_INDEX", 5);
+define("PAGINATION_LIMIT_LIKED_PHOTOS", 5);
+define("PAGINATION_LIMIT_MODERATE_COMMENTS", 5);
+define("PAGINATION_LIMIT_MODERATE_PHOTOS", 5);
+define("PAGINATION_LIMIT_MODERATE_USERS", 5);
+define("PAGINATION_LIMIT_PHOTOGRAPHER_GALLERY", 5);
+define("PAGINATION_LIMIT_PHOTOGRAPHERS", 5);
+
 ?>

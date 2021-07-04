@@ -11,7 +11,7 @@ $photographer_details = User::find_by_id($photographer_user_id);
 if (!$photographer_details || empty($photographer_details)) header("Location: index.php");
 
 // Retrieve photographer's gallery, adjust for pagination
-$pagination_limit = 2;
+$pagination_limit = PAGINATION_LIMIT_PHOTOGRAPHER_GALLERY;
 $show_pagination = false;
 $photographer_gallery_photos = Photo::find_photographer_gallery($photographer_user_id, $pagination_limit+1);
 if ($photographer_gallery_photos && !empty($photographer_gallery_photos) && count($photographer_gallery_photos) > $pagination_limit) {

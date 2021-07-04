@@ -3,7 +3,7 @@ require_once("includes/header.php");
 require_once("includes/nav_top.php");
 require_once("includes/index_video.php");
 
-$pagination_limit = 2;
+$pagination_limit = PAGINATION_LIMIT_INDEX;
 $show_pagination = false;
 $gallery_photos = Photo::find_all($pagination_limit+1);
 if ($gallery_photos && !empty($gallery_photos) && count($gallery_photos) > $pagination_limit) {

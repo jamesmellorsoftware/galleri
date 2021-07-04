@@ -4,7 +4,7 @@ require_once("includes/nav_top.php");
 
 if (!$session->is_signed_in()) header("Location: index.php");
 
-$pagination_limit = 2;
+$pagination_limit = PAGINATION_LIMIT_LIKED_PHOTOS;
 $show_pagination = false;
 
 $liked_photos = Photo::find_user_likes($session->user_id, $pagination_limit+1);

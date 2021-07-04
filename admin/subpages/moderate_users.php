@@ -2,7 +2,7 @@
 
 if (!$session->user_is_admin()) header("Location: ../index.php");
 
-$pagination_limit = (isset($_POST['results_per_page'])) ? $_POST['results_per_page'] : 2;
+$pagination_limit = (isset($_POST['results_per_page'])) ? $_POST['results_per_page'] : PAGINATION_LIMIT_MODERATE_USERS;
 $show_pagination = false;
 
 $users = (isset($_POST['search'])) ? User::search($_POST) : User::find_all($pagination_limit+1);
