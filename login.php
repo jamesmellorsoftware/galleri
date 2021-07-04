@@ -43,17 +43,17 @@ if (isset($_POST['login'])) {
                     <div class="form-group">
                         <input type="text"
                         class="form-control <?php if (!empty($login_errors['username'])) echo "is-invalid "; ?>"
-                        name="user_username" placeholder="Username"
+                        name="user_username" placeholder="<?php echo LOGIN_PLACEHOLDER_USERNAME; ?>"
                         value="<?php if (isset($user->user_username)) echo $user->user_username; ?>">
                     </div>
                     <div class="form-group">
                         <input type="password"
                         class="form-control <?php if (!empty($login_errors['username'])) echo "is-invalid "; ?>"
-                        name="user_password" placeholder="Password"
+                        name="user_password" placeholder="<?php echo LOGIN_PLACEHOLDER_PASSWORD; ?>"
                         value="<?php if (isset($user->user_password)) echo $user->user_password; ?>">
                     </div>
                     <div class="form-group">
-                        <input type="submit" name="login" class="btn btn-primary" value="Log in">
+                        <input type="submit" name="login" class="btn btn-primary" value="<?php echo LOGIN_SUBMIT_BUTTON; ?>">
                     </div>
                 </form>
                 <p><a href="register.php"><?php echo LOGIN_ALREADY_HAVE_ACCOUNT; ?></a></p>

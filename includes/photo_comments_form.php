@@ -17,7 +17,7 @@
                     <div class="form-group">
                         <textarea class="form-control <?php // if (!empty($comment_errors['comment_content'])) echo "is-invalid"; ?>"
                         rows="3"name="comment_content"
-                        placeholder="Your Comment"><?php // if (isset($comment_content)) echo $comment_content; ?></textarea>
+                        placeholder="<?php echo PHOTO_COMMENT_PLACEHOLDER; ?>"><?php // if (isset($comment_content)) echo $comment_content; ?></textarea>
                     </div>
                     <button type="submit" class="btn btn-primary" name="submit"><?php echo PHOTO_COMMENT_BUTTON; ?></button>
                 </form>

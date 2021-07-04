@@ -17,7 +17,7 @@ if ($gallery_photos && !empty($gallery_photos) && count($gallery_photos) > $pagi
     <div class="container">
         <div class="row">
             <?php if (!$gallery_photos || empty($gallery_photos)) { ?>
-                <div class="col-sm-12 text-center"><h2>No photos yet.</h2></div>
+                <div class="col-sm-12 text-center"><h2><?php echo INDEX_NO_PHOTOS; ?></h2></div>
             <?php } else { ?>
                 <?php foreach ($gallery_photos as $gallery_photo) : ?>
                     <div class="pagination-block">

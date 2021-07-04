@@ -49,35 +49,35 @@ if (isset($_POST['register'])) {
                 <form method="post" action="register.php"  enctype="multipart/form-data">
                     <div class="form-group">
                         <input type="text" class="form-control"
-                        name="user_username" placeholder="Username"
+                        name="user_username" placeholder="<?php echo REGISTRATION_PLACEHOLDER_USERNAME; ?>"
                         value="<?php if (isset($new_user->user_username)) echo htmlentities($new_user->user_username); ?>">
                     </div>
                     <div class="form-group">
                         <input type="password" class="form-control"
-                        name="user_password" placeholder="Password"
+                        name="user_password" placeholder="<?php echo REGISTRATION_PLACEHOLDER_PASSWORD; ?>"
                         value="<?php if (isset($new_user->user_password)) echo htmlentities($new_user->user_password); ?>">
                     </div>
                     <div class="form-group">
                         <input type="text" class="form-control"
-                        name="user_firstname" placeholder="First Name"
+                        name="user_firstname" placeholder="<?php echo REGISTRATION_PLACEHOLDER_FIRSTNAME; ?>"
                         value="<?php if (isset($new_user->user_firstname)) echo htmlentities($new_user->user_firstname); ?>">
                     </div>
                     <div class="form-group">
                         <input type="text" class="form-control"
-                        name="user_lastname" placeholder="Last Name"
+                        name="user_lastname" placeholder="<?php echo REGISTRATION_PLACEHOLDER_LASTNAME; ?>"
                         value="<?php if (isset($new_user->user_lastname)) echo htmlentities($new_user->user_lastname); ?>">
                     </div>
                     <div class="form-group">
                         <input type="email" class="form-control"
-                        name="user_email" placeholder="Email"
+                        name="user_email" placeholder="<?php echo REGISTRATION_PLACEHOLDER_EMAIL; ?>"
                         value="<?php if (isset($new_user->user_email)) echo htmlentities($new_user->user_email); ?>">
                     </div>
                     <div class="form-group">
-                        <label for="user_image">User Photo</label>
+                        <label for="user_image"><?php echo REGISTRATION_LABEL_USERIMAGE; ?></label>
                         <input type="file" class="form-control" name="user_image">
                     </div>
                     <div class="form-group">
-                        <input type="submit" name="register" class="btn btn-primary" value="Register">
+                        <input type="submit" name="register" class="btn btn-primary" value="<?php echo REGISTRATION_REGISTER; ?>">
                     </div>
                 </form>
                 <p><a href="login.php"><?php echo REGISTRATION_ALREADY_HAVE_ACCOUNT; ?></a></p>
