@@ -17,8 +17,8 @@
                     }
                 ?>
                 <div class="modal-footer">
-                    <a class="btn btn-danger" href="javascript:location=window.location">Clear</a>
-                    <input type="submit" name="search" class="btn btn-primary" value="Search">
+                    <a class="btn btn-danger" href="javascript:location=window.location"><?php echo CLEAR_SEARCH; ?></a>
+                    <input type="submit" name="search" class="btn btn-primary" value="<?php echo SEARCH_SEARCH; ?>">
                 </div>
             </form>
         </div>

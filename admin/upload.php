@@ -31,11 +31,11 @@ if (isset($_POST['submit'])) {
 ?>
 
 <div class="">
-    <h1 class="page-title">Upload to your Gallery</h1>
+    <h1 class="page-title"><?php echo UPLOAD_HEADER; ?></h1>
     <div class="row">
 
         <?php if ($upload_successful) { ?>
-            <h4 class="bg-success">Post added to gallery.</h4>
+            <h4 class="bg-success"><?php echo UPLOAD_SUCCESS; ?></h4>
         <?php } else { ?>
             <?php foreach ($upload_errors as $upload_error) { ?>
                 <h4 class="bg-danger"><?php echo $upload_error; ?></h4>
@@ -43,7 +43,7 @@ if (isset($_POST['submit'])) {
 
             <form method="post" action="upload.php" enctype="multipart/form-data">
                 <div class="form-group">
-                    <label for="file_upload">Upload file</label>
+                    <label for="file_upload"><?php echo UPLOAD_FILE_LABEL; ?></label>
                     <input class="" type="file" name="file_upload">
                 </div>
                 <div class="form-group">

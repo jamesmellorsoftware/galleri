@@ -37,7 +37,7 @@
     <div class="form-group col-md-4 col-xs-12">
         <select class="form-control" name="results_per_page">
             <option value="5" <?php if (isset($_POST['results_per_page']) && $_POST['results_per_page'] == 5) ?>>
-                Results per Page
+                <?php echo RESULTS_PER_PAGE_DEFAULT; ?>
             </option>
             <option value="5">5</option>
             <option value="10" <?php if (isset($_POST['results_per_page']) && $_POST['results_per_page'] == 10) ?>>

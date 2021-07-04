@@ -27,26 +27,26 @@
     <div class="form-group col-md-6 col-xs-12">
         <input type="checkbox" name="user_role[admin]"
         <?php if (isset($_POST['user_role']['admin'])) echo "checked"; ?>>
-        <label>Admin</label>
+        <label><?php echo SEARCH_USERS_ADMIN; ?></label>
         <input type="checkbox" name="user_role[photographer]"
         <?php if (isset($_POST['user_role']['photographer'])) echo "checked"; ?>>
-        <label>Photographer</label>
+        <label><?php echo SEARCH_USERS_PHOTOGRAPHER; ?></label>
         <input type="checkbox" name="user_role[user]"
         <?php if (isset($_POST['user_role']['user'])) echo "checked"; ?>>
-        <label>User</label>
+        <label><?php echo SEARCH_USERS_USER; ?></label>
     </div>
     <div class="form-group col-md-6 col-xs-12">
         <input type="checkbox" name="user_banned"
         <?php if (isset($_POST['user_banned'])) echo "checked"; ?>>
-        <label for="user_banned">Banned</label>
+        <label for="user_banned"><?php echo SEARCH_USERS_BANNED; ?></label>
         <input type="checkbox" name="user_hasphoto"
         <?php if (isset($_POST['user_banned'])) echo "checked"; ?>>
-        <label for="user_hasphoto">Has Photo?</label>
+        <label for="user_hasphoto"><?php echo SEARCH_USERS_HAS_PHOTO; ?></label>
     </div>
     <div class="form-group col-md-6 col-xs-12">
         <select class="form-control" name="results_per_page">
             <option value="5" <?php if (isset($_POST['results_per_page']) && $_POST['results_per_page'] == 5) ?>>
-                Results per Page
+                <?php echo RESULTS_PER_PAGE_DEFAULT; ?>
             </option>
             <option value="5">5</option>
             <option value="10" <?php if (isset($_POST['results_per_page']) && $_POST['results_per_page'] == 10) ?>>

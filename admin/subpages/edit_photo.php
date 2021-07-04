@@ -36,10 +36,10 @@ if (isset($_POST['submit'])) {
 ?>
 
 <div class="">
-    <h1 class="page-title">Edit Photo: <?php echo $photo->photo_id; ?></h1>
+    <h1 class="page-title"><?php echo EDIT_PHOTO_HEADER . " " . $photo->photo_id; ?></h1>
     <div class="row">
         <?php if ($edit_photo_successful) { ?>
-            <h4 class="bg-success">Photo edited successfully.</h4>
+            <h4 class="bg-success"><?php echo EDIT_PHOTO_SUCCESS; ?></h4>
         <?php } else { ?>
             <?php foreach ($edit_photo_errors as $edit_photo_error) { ?>
                 <h4 class="bg-danger"><?php echo $edit_photo_error; ?></h4>
@@ -65,7 +65,7 @@ if (isset($_POST['submit'])) {
                 name="photo_text" placeholder="Post"><?php if (!empty($photo->photo_text)) echo $photo->photo_text; ?></textarea>
             </div>
             <div class="form-group">
-                <input type="submit" class="btn btn-primary" name="submit" value="Submit Changes">
+                <input type="submit" class="btn btn-primary" name="submit" value="<?php echo EDIT_PHOTO_BUTTON; ?>">
             </div>
         </form>
     <div>

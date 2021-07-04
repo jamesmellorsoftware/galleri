@@ -2,6 +2,7 @@
 ob_start();
 // Include objects and configuration
 require_once("config.php");
+require_once("variables.php");
 if (!$session->is_signed_in()) header("Location: ../index.php");
 if (!$session->admin_access()) header("Location: ../index.php");
 ?>
@@ -10,7 +11,7 @@ if (!$session->admin_access()) header("Location: ../index.php");
 <html lang="en">
 
 <head>
-	<title>Galleri | Admin Dashboard</title>
+	<title><?php echo SITE_TITLE; ?></title>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">

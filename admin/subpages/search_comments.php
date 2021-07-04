@@ -32,15 +32,15 @@
     <div class="form-group col-md-6 col-xs-12">
         <input type="checkbox" name="comment_approved[1]"
         <?php if (isset($_POST['comment_approved'][1])) echo "checked"; ?>>
-        <label>Approved</label>
+        <label><?php echo SEARCH_COMMENTS_APPROVED; ?></label>
         <input type="checkbox" name="comment_approved[0]"
         <?php if (isset($_POST['comment_approved'][0])) echo "checked"; ?>>
-        <label>Unapproved</label>
+        <label><?php echo SEARCH_COMMENTS_UNAPPROVED; ?></label>
     </div>
     <div class="form-group col-md-6 col-xs-12">
         <select class="form-control" name="results_per_page">
             <option value="5" <?php if (isset($_POST['results_per_page']) && $_POST['results_per_page'] == 5) ?>>
-                Results per Page
+                <?php echo RESULTS_PER_PAGE_DEFAULT; ?>
             </option>
             <option value="5">5</option>
             <option value="10" <?php if (isset($_POST['results_per_page']) && $_POST['results_per_page'] == 10) ?>>

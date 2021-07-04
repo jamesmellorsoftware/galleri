@@ -53,7 +53,7 @@ if (isset($_POST['bulk_option_checkboxes']) && isset($_POST['apply_bulk_option']
     <div class="col-md-12">
         <div class="input-group" id="bulk_options">
             <select class='form-control' name='bulk_option'>
-                <option value=''>Select Option</option>
+                <option value=''><?php echo BULK_OPTIONS_SELECT_OPTION; ?></option>
                 <?php foreach ($bulk_options as $bulk_option) {
                     $bulk_option_value = $bulk_option['value'];
                     $bulk_option_name  = $bulk_option['name'];

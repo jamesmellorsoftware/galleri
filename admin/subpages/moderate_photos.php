@@ -20,13 +20,13 @@ $bulk_options = Photo::get_bulk_options();
 ?>
 
 <h1 class="page-title">
-    Moderate: Photos
+    <?php echo MODERATE_PHOTOS_HEADER; ?>
     <i aria-hidden="true" id="" data-toggle="modal" data-target="#searchModal"
     class="fa fa-search pull-right <?php if (isset($_GET['search'])) echo "text-info"; ?>"></i>
 </h1>
 
 <?php if (!$photos || count($photos) == 0 || empty($photos)) { ?>
-    <h3>No posts. Clear search or add a post.</h3>
+    <h3><?php echo MODERATE_PHOTOS_NO_RESULTS; ?></h3>
 <?php } else { ?>
     <form method="post" action="">
         <?php require_once("includes/bulk_options.php"); ?>
@@ -34,7 +34,7 @@ $bulk_options = Photo::get_bulk_options();
         <table class="table table-bordered table-hover" id="moderate_photos_table">
             <thead></thead>    
             <tbody>
-                <tr><td class="clickable_td select_all_checkboxes select">Select / Deselect All</td></tr>
+                <tr><td class="clickable_td select_all_checkboxes select"><?php echo SELECT_DESELECT_ALL; ?></td></tr>
                 <?php foreach ($photos as $photo) { ?>
                     <tr class="pagination-block">
                         <td class="clickable_td">
@@ -44,8 +44,8 @@ $bulk_options = Photo::get_bulk_options();
                             </div>
                             <div class="col-md-3">
                                 <div class="row ">
-                                    Photo <span class="photo_id"><?php echo $photo->photo_id; ?></span>
-                                    by <span class="photo_author"><?php echo User::get_name_from_id($photo->photo_author_id); ?></span>
+                                    <?php echo MODERATE_PHOTOS_PHOTO; ?> <span class="photo_id"><?php echo $photo->photo_id; ?></span>
+                                    <?php echo MODERATE_PHOTOS_BY; ?> <span class="photo_author"><?php echo User::get_name_from_id($photo->photo_author_id); ?></span>
                                 </div>
                                 <div class="row">
                                     <span class="photo_date"><?php echo date('jS M Y', strtotime($photo->photo_date)); ?></span>
@@ -76,11 +76,11 @@ $bulk_options = Photo::get_bulk_options();
                                 <div class="row">
                                     <a class="photo_edit_link"
                                     href="edit.php?action=edit_photo&id=<?php echo $photo->photo_id ?>">
-                                        Edit
+                                        <?php echo MODERATE_PHOTOS_EDIT; ?>
                                     </a>
                                     <a class="photo_view_link"
                                     href="../photo.php?id=<?php echo $photo->photo_id ?>">
-                                        View
+                                        <?php echo MODERATE_PHOTOS_VIEW; ?>
                                     </a>
                                 </div>
                             </div>

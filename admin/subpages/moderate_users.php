@@ -16,20 +16,20 @@ $bulk_options = User::get_bulk_options();
 ?>
 
 <h1 class="page-title">
-    Moderate: Users
+    <?php echo MODERATE_USERS_HEADER; ?>
     <i aria-hidden="true" id="" data-toggle="modal" data-target="#searchModal"
     class="fa fa-search pull-right <?php if (isset($_GET['search'])) echo "text-info"; ?>"></i>
 </h1>
 
 <?php if (count($users) == 0 || empty($users)) { ?>
-    <h3>No users. Clear search or add a new user.</h3>
+    <h3><?php echo MODERATE_USERS_NO_RESULTS; ?></h3>
 <?php } else { ?>
     <form method="post" action="">
         <?php require_once("includes/bulk_options.php"); ?>
         <table id="moderate_users_table" class="table table-bordered table-hover">
         <thead></thead>
             <tbody>
-                <tr><td class="clickable_td select_all_checkboxes select">Select / Deselect All</td></tr>
+                <tr><td class="clickable_td select_all_checkboxes select"><?php echo SELECT_DESELECT_ALL; ?></td></tr>
                 <?php foreach ($users as $user) { ?>
                     <tr class="pagination-block">
                         <td class="clickable_td">
@@ -54,7 +54,7 @@ $bulk_options = User::get_bulk_options();
                                     <span class="user_role"><?php echo $user->user_role; ?></span>
                                 </div>
                                 <div class="row">
-                                    <span class="user_banned"><?php if ($user->user_banned) echo "BANNED"; ?></span>
+                                    <span class="user_banned"><?php if ($user->user_banned) echo MODERATE_USERS_BANNED; ?></span>
                                 </div>
                             </div>
                             <div class="col-md-5 pull-right">
@@ -63,7 +63,7 @@ $bulk_options = User::get_bulk_options();
                                 <p>
                                     <a class="edit_user_link"
                                     href="edit.php?action=edit_user&id=<?php echo $user->user_id ?>">
-                                        Edit User
+                                        <?php echo MODERATE_USERS_EDIT; ?>
                                     </a>
                                 </p>
                             </div>

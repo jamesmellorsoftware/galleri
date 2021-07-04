@@ -34,11 +34,11 @@ if (isset($_POST['add_user'])) {
 ?>
 
 <div class="">
-    <h1 class="page-title">Add User</h1>
+    <h1 class="page-title"><?php echo ADD_USER_TITLE; ?></h1>
     <div class="row">
 
         <?php if ($add_user_successful) { ?>
-            <h4 class="bg-success">User added successfully.</h4>
+            <h4 class="bg-success"><?php echo ADD_USER_SUCCESS; ?></h4>
         <?php } else { ?>
             <?php foreach ($add_user_errors as $add_user_error) { ?>
                 <h4 class="bg-danger"><?php echo $add_user_error; ?></h4>
@@ -47,7 +47,7 @@ if (isset($_POST['add_user'])) {
             <form method="post" enctype="multipart/form-data">
                 <div class="col-md-12">
                     <div class="form-group">
-                        <label for="user_image">User image</label>
+                        <label for="user_image"><?php echo ADD_USER_LABEL; ?></label>
                         <input class="" type="file" name="user_image">
                     </div>
                 </div>

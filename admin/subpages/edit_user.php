@@ -50,10 +50,10 @@ if (isset($_POST['edit_user'])) {
 ?>
 
 <div class="">
-    <h1 class="page-title">Edit User: <?php echo $user->user_username; ?></h1>
+    <h1 class="page-title"><?php echo EDIT_USER_HEADER . " " . $user->user_username; ?></h1>
     <div class="row">
         <?php if ($edit_user_successful) { ?>
-            <h4 class="bg-success">User edited successfully.</h4>
+            <h4 class="bg-success"><?php echo EDIT_PHOTO_SUCCESS; ?></h4>
         <?php } else { ?>
             <?php foreach ($edit_user_errors as $edit_user_error) { ?>
                 <h4 class="bg-danger"><?php echo $edit_user_error; ?></h4>
@@ -101,15 +101,15 @@ if (isset($_POST['edit_user'])) {
                     </div>
                     <div class="form-group">
                         <select class="form-control" name="user_role">
-                            <option value="">Select User Role</option>
-                            <option value="User" <?php if ($user->user_role == "User") echo "selected"; ?>>User</option>
-                            <option value="Photographer" <?php if ($user->user_role == "Photographer") echo "selected"; ?>>Photographer</option>
-                            <option value="Admin" <?php if ($user->user_role == "Admin") echo "selected"; ?>>Administrator</option>
+                            <option value=""><?php echo EDIT_USER_ROLE_SELECT; ?></option>
+                            <option value="User" <?php if ($user->user_role == "User") echo "selected"; ?>><?php echo EDIT_USER_ROLE_USER; ?></option>
+                            <option value="Photographer" <?php if ($user->user_role == "Photographer") echo "selected"; ?>><?php echo EDIT_USER_ROLE_PHOTOGRAPHER; ?></option>
+                            <option value="Admin" <?php if ($user->user_role == "Admin") echo "selected"; ?>><?php echo EDIT_USER_ROLE_ADMIN; ?></option>
                         </select>
                     </div>
                 </div>
                 <div class="form-group">
-                    <input type="submit" class="btn btn-primary" name="edit_user" value="Edit User">
+                    <input type="submit" class="btn btn-primary" name="edit_user" value="<?php echo EDIT_USER_BUTTON; ?>">
                 </div>
             </form>
         <?php } ?>
