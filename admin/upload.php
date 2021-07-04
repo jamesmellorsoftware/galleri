@@ -48,20 +48,20 @@ if (isset($_POST['submit'])) {
                 </div>
                 <div class="form-group">
                     <input type="text" class="form-control"
-                    name="photo_title" placeholder="Title"
+                    name="photo_title" placeholder="<?php echo UPLOAD_PLACEHOLDER_TITLE; ?>"
                     value="<?php if (!empty($photo->photo_title)) echo $photo->photo_title; ?>">
                 </div>
                 <div class="form-group">
                     <input type="text" class="form-control"
-                    name="photo_subtitle" placeholder="Subtitle"
+                    name="photo_subtitle" placeholder="<?php echo UPLOAD_PLACEHOLDER_SUBTITLE; ?>"
                     value="<?php if (!empty($photo->photo_subtitle)) echo $photo->photo_subtitle; ?>">
                 </div>
                 <div class="form-group">
                     <textarea class="form-control"
-                    name="photo_text" placeholder="Post"><?php if (!empty($photo->photo_text)) echo $photo->photo_text; ?></textarea>
+                    name="photo_text" placeholder="<?php echo UPLOAD_PLACEHOLDER_POST; ?>"><?php if (!empty($photo->photo_text)) echo $photo->photo_text; ?></textarea>
                 </div>
                 <div class="form-group">
-                    <input type="submit" class="btn btn-primary" name="submit" value="Upload to Galleri">
+                    <input type="submit" class="btn btn-primary" name="submit" value="<?php echo UPLOAD_UPLOAD; ?>">
                 </div>
             </form>
 

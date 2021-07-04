@@ -67,18 +67,42 @@ define("SEARCH_SEARCH", "Search");
 
 // Search comments
 define("SEARCH_COMMENTS_APPROVED", "Approved");
+define("SEARCH_COMMENTS_PLACEHOLDER_AUTHOR", "Author");
+define("SEARCH_COMMENTS_PLACEHOLDER_CONTENT", "Content contains");
+define("SEARCH_COMMENTS_PLACEHOLDER_DATE_FROM", "From dd/mm/yyyy");
+define("SEARCH_COMMENTS_PLACEHOLDER_DATE_TO", "To dd/mm/yyyy");
+define("SEARCH_COMMENTS_PLACEHOLDER_ID", "ID");
+define("SEARCH_COMMENTS_PLACEHOLDER_PHOTO_ID", "Photo ID");
 define("SEARCH_COMMENTS_UNAPPROVED", "Unapproved");
+
+// Search photos
+define("SEARCH_PHOTOS_PLACEHOLDER_AUTHOR", "Posted by (username)");
+define("SEARCH_PHOTOS_PLACEHOLDER_ID", "Photo ID");
+define("SEARCH_PHOTOS_PLACEHOLDER_CONTENT", "Content contains");
+define("SEARCH_PHOTOS_PLACEHOLDER_DATE_FROM", "From dd/mm/yyyy");
+define("SEARCH_PHOTOS_PLACEHOLDER_DATE_TO", "To dd/mm/yyyy");
+define("SEARCH_PHOTOS_PLACEHOLDER_SUBTITLE", "Subtitle");
+define("SEARCH_PHOTOS_PLACEHOLDER_TITLE", "Title");
 
 // Search users
 define("SEARCH_USERS_ADMIN", "Admin");
 define("SEARCH_USERS_BANNED", "Banned");
 define("SEARCH_USERS_HAS_PHOTO", "Has photo?");
 define("SEARCH_USERS_PHOTOGRAPHER", "Photographer");
+define("SEARCH_USERS_PLACEHOLDER_EMAIL", "Email");
+define("SEARCH_USERS_PLACEHOLDER_FIRSTNAME", "First Name");
+define("SEARCH_USERS_PLACEHOLDER_ID", "User ID");
+define("SEARCH_USERS_PLACEHOLDER_LASTNAME", "Last Name");
+define("SEARCH_USERS_PLACEHOLDER_USERNAME", "Username");
 define("SEARCH_USERS_USER", "User");
 
 // Upload
 define("UPLOAD_HEADER", "Upload to your Gallery");
 define("UPLOAD_FILE_LABEL", "Upload file");
+define("UPLOAD_PLACEHOLDER_POST", "Post");
+define("UPLOAD_PLACEHOLDER_SUBTITLE", "Subtitle");
+define("UPLOAD_PLACEHOLDER_TITLE", "Title");
 define("UPLOAD_SUCCESS", "Post added to gallery.");
+define("UPLOAD_UPLOAD", "Upload to Galleri");
 
 ?>
