@@ -30,11 +30,10 @@ class Comment_Like extends db_objects {
         if (!empty($comment_id) && !empty($user_id)) {
             global $db;
 
-            $sql = "DELETE FROM " . Comment_Like::$db_table . " ";
-            $sql.= "WHERE ";
-            $sql.= Comment_Like::$db_prefix . "comment_id = " . $comment_id . " ";
-            $sql.= "AND ";
-            $sql.= Comment_Like::$db_prefix . "user_id = " . $user_id . " ";
+            $sql = $db->build_delete(
+                Comment_Like::$db_table,
+                [Comment_Like::$db_prefix."comment_id" => $comment_id, Comment_Like::$db_prefix."user_id" => $user_id],
+                1);
 
             $db->query($sql);
 
@@ -49,9 +48,13 @@ class Comment_Like extends db_objects {
 
         global $db;
 
-        $sql = "SELECT COUNT(*) FROM " . Comment_Like::$db_table . " ";
-        $sql.= "WHERE ";
-        $sql.= Comment_Like::$db_prefix . "comment_id = '{$comment_id}' ";
+        $sql = $db->build_select(
+            Comment_Like::$db_table,
+            [["col" => "*", "operation" => "count"]],
+            [Comment_Like::$db_prefix."comment_id" => $comment_id],
+            "",
+            1
+        );
 
         $result_set = $db->query($sql);
 
@@ -65,12 +68,13 @@ class Comment_Like extends db_objects {
 
         global $db;
 
-        $sql = "SELECT * FROM " . Comment_Like::$db_table . " ";
-        $sql.= "WHERE ";
-        $sql.= Comment_Like::$db_prefix . "comment_id = " . $comment_id . " ";
-        $sql.= "AND ";
-        $sql.= Comment_Like::$db_prefix . "user_id = " . $user_id . " ";
-        $sql.= "LIMIT 1";
+        $sql = $db->build_select(
+            Comment_Like::$db_table,
+            "*",
+            [Comment_Like::$db_prefix."comment_id" => $comment_id, Comment_Like::$db_prefix."user_id" => $user_id],
+            "",
+            1
+        );
 
         $result_set = $db->query($sql);
 

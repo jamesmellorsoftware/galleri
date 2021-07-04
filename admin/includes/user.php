@@ -85,7 +85,11 @@ class User extends db_objects {
         // Set WHERE condition to id = $this->id so only 1 record affected
         $conditions = [User::get_table_prefix() . "id" => $this->user_id];
 
-        if (!$sql = $db->build_update(User::get_table_name(), $properties_to_set, $conditions, 1)) return false;
+        if (!$sql = $db->build_update(
+            User::get_table_name(),
+            $properties_to_set,
+            $conditions,
+            1)) return false;
         
         return $db->query($sql);
     }
@@ -162,9 +166,11 @@ class User extends db_objects {
         global $db;
 
         $sql = $db->build_select(
-            self::$db_table, "*",
+            self::$db_table,
+            "*",
             ["user_username" => $username],
-            "" , 1
+            "" ,
+            1
         );
 
         $result_set = self::execute_query($sql);
@@ -178,7 +184,12 @@ class User extends db_objects {
 
     public static function exists($username) {
         global $db;
-        $sql = $db->build_select(self::$db_table, [['col' => 'user_username']], ["user_username" => $username], "" , 1);
+        $sql = $db->build_select(
+            self::$db_table,
+            [['col' => 'user_username']],
+            ["user_username" => $username],
+            "" ,
+            1);
         $result_set = self::execute_query($sql);
         return !empty($result_set) ? true : false;
     }
@@ -206,8 +217,8 @@ class User extends db_objects {
         ];
 
         $registration_errors = User::check_empty_inputs($this, $registration_errors);
-        if (User::exists($this->user_username))    $registration_errors['username']   = "Username already in use.";
-        if (User::email_in_use($this->user_email)) $registration_errors['email']      = "Email already in use.";
+        if (User::exists($this->user_username))    $registration_errors['username'] = "Username already in use.";
+        if (User::email_in_use($this->user_email)) $registration_errors['email']    = "Email already in use.";
 
         $registration_errors["user_image"] = "";
         if (!$user_image || !is_array($user_image) || empty($user_image) || !is_uploaded_file($user_image['tmp_name'])) {
@@ -275,7 +286,12 @@ class User extends db_objects {
     }
 
     public static function get_name_from_id($id) {
-        $result = User::find([["col" => User::get_table_prefix()."firstname"], ["col" => User::get_table_prefix()."lastname"]], [User::get_table_prefix()."id" => $id], "", 1);
+        $result = User::find(
+            [["col" => User::get_table_prefix()."firstname"],
+            ["col" => User::get_table_prefix()."lastname"]],
+            [User::get_table_prefix()."id" => $id],
+            "",
+            1);
         $result = array_shift($result);
         if (empty($result) || empty($result->user_firstname) || empty($result->user_lastname)) return $id;
         return $result->user_firstname . " " . $result->user_lastname;
@@ -395,19 +411,19 @@ class User extends db_objects {
             $conditions[User::get_table_prefix()."banned"] = 1;
         }
         if (isset($search_filters['user_id']) && !empty($search_filters['user_id'])) {
-            $conditions[User::get_table_prefix()."id"]        = $search_filters['user_id'];
+            $conditions[User::get_table_prefix()."id"] = $search_filters['user_id'];
         }
         if (isset($search_filters['user_username']) && !empty($search_filters['user_username'])) {
-            $conditions[User::get_table_prefix()."username"]  = ['like' => [$search_filters['user_username']]];
+            $conditions[User::get_table_prefix()."username"] = ['like' => [$search_filters['user_username']]];
         }
         if (isset($search_filters['user_firstname']) && !empty($search_filters['user_firstname'])) {
             $conditions[User::get_table_prefix()."firstname"] = ['like' => [$search_filters['user_firstname']]];
         }
         if (isset($search_filters['user_lastname']) && !empty($search_filters['user_lastname'])) {
-            $conditions[User::get_table_prefix()."lastname"]  = ['like' => [$search_filters['user_lastname']]];
+            $conditions[User::get_table_prefix()."lastname"] = ['like' => [$search_filters['user_lastname']]];
         }
         if (isset($search_filters['user_hasphoto']) && !empty($search_filters['user_hasphoto'])) {
-            $conditions[User::get_table_prefix()."image"]     = ['empty' => 0];
+            $conditions[User::get_table_prefix()."image"] = ['empty' => 0];
         }
         
         return User::find("*", $conditions, $order_by, $limit, $offset, $joins);

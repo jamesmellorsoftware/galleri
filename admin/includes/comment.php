@@ -48,7 +48,11 @@ class Comment extends db_objects {
     public static function retrieve($photo_id = 0) {
         global $db;
 
-        $sql = $db->build_select(self::$db_table, "*", ['comment_photo_id' => $photo_id], ["comment_photo_id" => "ASC"]);
+        $sql = $db->build_select(
+            self::$db_table,
+            "*",
+            ['comment_photo_id' => $photo_id],
+            ["comment_photo_id" => "ASC"]);
 
         return self::execute_query($sql);
     }
@@ -76,9 +80,11 @@ class Comment extends db_objects {
 
         global $db;
 
-        $sql = "SELECT COUNT(*) FROM " . Comment::$db_table . " ";
-        $sql.= "WHERE ";
-        $sql.= Comment::$db_prefix . "photo_id = '{$photo_id}' ";
+        $sql = $db->build_select(
+            Comment::$db_table,
+            [["col" => "*", "operation" => "count"]],
+            [Comment::$db_prefix."photo_id" => $photo_id]
+        );
 
         $result_set = $db->query($sql);
 

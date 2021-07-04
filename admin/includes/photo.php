@@ -100,7 +100,11 @@ class Photo extends db_objects {
         // Set WHERE condition to id = $this->id so only 1 record affected
         $conditions = [Photo::get_table_prefix() . "id" => $this->photo_id];
 
-        if (!$sql = $db->build_update(Photo::get_table_name(), $properties_to_set, $conditions, 1)) return false;
+        if (!$sql = $db->build_update(
+            Photo::get_table_name(),
+            $properties_to_set,
+            $conditions,
+            1)) return false;
 
         return $db->query($sql);
     }
@@ -169,7 +173,10 @@ class Photo extends db_objects {
 
     public static function find_user_likes($user_id, $limit = "", $offset = "") {
         $conditions = [Like::get_table_prefix()."user_id" => $user_id];
-        $joins = [['join_table' => Like::get_table_name(), 'on' => [Photo::$db_prefix.'id' => Like::get_table_prefix().'photo_id']]];
+        $joins = [
+            ['join_table' => Like::get_table_name(),
+             'on' => [Photo::$db_prefix.'id' => Like::get_table_prefix().'photo_id']]
+        ];
         return Photo::find_all($limit, $offset, $joins, $conditions);
     }
 

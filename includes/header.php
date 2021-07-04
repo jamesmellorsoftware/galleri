@@ -1,7 +1,7 @@
 <?php
 // Page titles and outputted branding text customisable
 // Go to variables.php to edit them
-require_once("variables.php");
+require_once("admin/includes/variables.php");
 
 // Include objects and configuration
 require_once("admin/includes/config.php");

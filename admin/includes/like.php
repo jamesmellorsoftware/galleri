@@ -29,11 +29,15 @@ class Like extends db_objects {
         if (!empty($photo_id) && !empty($user_id)) {
             global $db;
 
-            $sql = "DELETE FROM " . Like::$db_table . " ";
-            $sql.= "WHERE ";
-            $sql.= Like::$db_prefix . "photo_id = " . $photo_id . " ";
-            $sql.= "AND ";
-            $sql.= Like::$db_prefix . "user_id = " . $user_id . " ";
+            // $sql = "DELETE FROM " . Like::$db_table . " ";
+            // $sql.= "WHERE ";
+            // $sql.= Like::$db_prefix . "photo_id = " . $photo_id . " ";
+            // $sql.= "AND ";
+            // $sql.= Like::$db_prefix . "user_id = " . $user_id . " ";
+
+            $conditions = [Like::$db_prefix."photo_id" => $photo_id, Like::$db_prefix . "user_id" => $user_id ];
+
+            $sql = $db->build_delete(Like::$db_table, $conditions, 1);
 
             $db->query($sql);
 
@@ -48,9 +52,12 @@ class Like extends db_objects {
 
         global $db;
 
-        $sql = "SELECT COUNT(*) FROM " . Like::$db_table . " ";
-        $sql.= "WHERE ";
-        $sql.= Like::$db_prefix . "photo_id = '{$photo_id}' ";
+        $sql = $db->build_select(
+            Like::$db_table,
+            [['col' => '*', 'operation' => 'count']],
+            [Like::$db_prefix."photo_id" => $photo_id],
+            "",
+            1);
 
         $result_set = $db->query($sql);
 
@@ -64,12 +71,12 @@ class Like extends db_objects {
 
         global $db;
 
-        $sql = "SELECT * FROM " . Like::$db_table . " ";
-        $sql.= "WHERE ";
-        $sql.= Like::$db_prefix . "photo_id = " . $photo_id . " ";
-        $sql.= "AND ";
-        $sql.= Like::$db_prefix . "user_id = " . $user_id . " ";
-        $sql.= "LIMIT 1";
+        $sql = $db->build_select(
+            Like::$db_table,
+            "*",
+            [Like::$db_prefix."photo_id" => $photo_id, Like::$db_prefix."user_id" => $user_id],
+            "",
+            1);
 
         $result_set = $db->query($sql);
 
@@ -83,9 +90,10 @@ class Like extends db_objects {
 
         global $db;
 
-        $sql = "SELECT like_photo_id FROM " . Like::$db_table . " ";
-        $sql.= "WHERE ";
-        $sql.= Like::$db_prefix . "user_id = " . $user_id . " ";
+        $sql = $db->build_select(
+            Like::$db_table,
+            [[Like::$db_prefix."photo_id"]],
+            [Like::$db_prefix."user_id" => $user_id]);
 
         $result_set = $db->query($sql);
 
