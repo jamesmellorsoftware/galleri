@@ -17,6 +17,9 @@ if ($photographers && !empty($photographers) && count($photographers) > $paginat
 
 <div class="grid-portfolio noHeaderVideo" id="portfolio">
     <div class="container">
+        <div class="col-md-12 text-center">
+            <h1><?php echo PHOTOGRAPHERS_TITLE; ?></h1>
+        </div>
         <div class="row">
             <?php if (!$photographers || empty($photographers)) { ?>
                 <div class="col-sm-12 text-center"><h2><?php echo PHOTOGRAPHERS_NO_PHOTOGRAPHERS; ?></h2></div>
@@ -35,10 +38,10 @@ if ($photographers && !empty($photographers) && count($photographers) > $paginat
                                             <p>&nbsp;</p>
                                         </div>
                                     </div>
+                                    <div class="image">
+                                        <img class="photographer_image" src="<?php echo $photographer->get_user_image(); ?>">
+                                    </div>
                                 </a>
-                                <div class="image">
-                                    <img class="photographer_image" src="<?php echo $photographer->get_user_image(); ?>">
-                                </div>
                             </div>
                         </div>
                     </div>

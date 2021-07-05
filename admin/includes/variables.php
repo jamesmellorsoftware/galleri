@@ -192,6 +192,7 @@ define("PHOTOGRAPHER_NO_PHOTOS", "This photographer has not uploaded any photos 
 
 // Photographers
 define("PHOTOGRAPHERS_NO_PHOTOGRAPHERS", "No photographers yet.");
+define("PHOTOGRAPHERS_TITLE", "Photographers");
 
 // Register
 define("REGISTRATION_ALREADY_HAVE_ACCOUNT", "Already have an account? Log in here.");

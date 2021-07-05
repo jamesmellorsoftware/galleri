@@ -51,10 +51,10 @@ if ($photographer_gallery_photos && !empty($photographer_gallery_photos) && coun
                                         </p>
                                     </div>
                                 </div>
+                                <div class="image">
+                                    <img class="photo_image" src="<?php echo $photographer_gallery_photo->photo_path(); ?>">
+                                </div>
                             </a>
-                            <div class="image">
-                                <img class="photo_image" src="<?php echo $photographer_gallery_photo->photo_path(); ?>">
-                            </div>
                         </div>
                     </div>
                 <?php endforeach; ?>

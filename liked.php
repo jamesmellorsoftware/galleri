@@ -43,10 +43,10 @@ if ($liked_photos && !empty($liked_photos) && count($liked_photos) > $pagination
                                             <br><?php echo User::get_name_from_id($liked_photo->photo_author_id); ?>
                                         </p>
                                     </div>
-                                </div></a>
-                                <div class="image">
-                                    <img class="photo_image" src="<?php echo $liked_photo->photo_path(); ?>">
-                                </div>
+                                    <div class="image">
+                                        <img class="photo_image" src="<?php echo $liked_photo->photo_path(); ?>">
+                                    </div>
+                                </a>
                             </div>
                         </div>
                     </div>

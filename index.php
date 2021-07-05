@@ -37,10 +37,10 @@ if ($gallery_photos && !empty($gallery_photos) && count($gallery_photos) > $pagi
                                         </p>
                                     </div>
                                 </div>
+                                <div class="image">
+                                    <img class="photo_image" src="<?php echo $gallery_photo->photo_path(); ?>">
+                                </div>
                             </a>
-                            <div class="image">
-                                <img class="photo_image" src="<?php echo $gallery_photo->photo_path(); ?>">
-                            </div>
                         </div>
                     </div>
                 <?php endforeach; ?>
