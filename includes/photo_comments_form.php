@@ -9,7 +9,6 @@
                 <?php foreach ($comment_errors as $comment_error) { ?>
                     <h4 class="bg-danger"><?php echo $comment_error; ?></h4>
                 <?php } ?>
-                <h4><?php echo PHOTO_COMMENT_HEADER; ?></h4>
                 <form action="" method="post" role="form">
                     <?php
                         // display errors or success message

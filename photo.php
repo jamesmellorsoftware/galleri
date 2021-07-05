@@ -88,10 +88,18 @@ if ($session->is_signed_in() && isset($_POST['action']) && isset($_POST['liked_c
             <div class="col-md-12 single-blog-post">
                 <img src="img/photos/<?php echo $photo->photo_filename; ?>" alt="">
                 <div class="text-content">
-                    <h2>
-                        <?php echo $photo->photo_title; ?>
-                        <em><?php echo $photo->photo_subtitle; ?></em>
-                    </h2>
+                    <div class="headercontainer">
+                        <h2>
+                            <?php echo $photo->photo_title; ?>
+                            <em><?php echo $photo->photo_subtitle; ?></em>
+                        </h2>
+                        <i style="width: 15px;" id="like_thumb"
+                        class="like_thumb glyphicon glyphicon-thumbs-up
+                        <?php if ($user_liked) echo "liked text-success"; ?>"></i>
+                        <i id="photo_likes" class="<?php if ($user_liked) echo "text-success"; ?>">
+                            <?php echo Like::count($photo_id); ?>
+                        </i>
+                    </div>
                     <h3>
                         <?php echo PHOTO_BY; ?> <a href="photographergallery.php?id=<?php echo $photo->photo_author_id; ?>">
                             <?php echo User::get_name_from_id($photo->photo_author_id); ?>
@@ -99,12 +107,6 @@ if ($session->is_signed_in() && isset($_POST['action']) && isset($_POST['liked_c
                     </h3>
                     <span><?php echo date('jS M Y', strtotime($photo->photo_date)); ?></span>
                     <p><?php echo $photo->photo_text; ?></p>
-
-                    <div class="row">
-                        <span style="width: 15px;" id="like_thumb"
-                        class="like_thumb glyphicon glyphicon-thumbs-up <?php if ($user_liked) echo "liked"; ?>"></span>
-                        <span id="photo_likes"><?php echo Like::count($photo_id); ?></span>
-                    </div>
 
                     <?php require_once("includes/photo_comments_form.php"); ?>
                     <?php require_once("includes/photo_comments.php"); ?>
@@ -147,6 +149,8 @@ if ($session->is_signed_in() && isset($_POST['action']) && isset($_POST['liked_c
                 data: { "action": action }
             }).done(function(){
                 $("#like_thumb").toggleClass("liked");
+                $("#like_thumb").toggleClass("text-success");
+                $("#photo_likes").toggleClass("text-success");
                 $("#photo_likes").html(num_likes);
             });
 

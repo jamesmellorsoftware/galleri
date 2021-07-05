@@ -182,9 +182,8 @@ define("PAGINATION_LOAD_MORE", "Load More");
 // Photo
 define("PHOTO_BY", "by");
 define("PHOTO_COMMENT_BUTTON", "Create Comment");
-define("PHOTO_COMMENT_HEADER", "Leave a Comment:");
 define("PHOTO_COMMENT_LOGIN", "Log in to comment.");
-define("PHOTO_COMMENT_PLACEHOLDER", "Your comment");
+define("PHOTO_COMMENT_PLACEHOLDER", "Leave a comment on this post");
 define("PHOTO_COMMENT_SUCCESS", "Comment added.");
 
 // Photographer gallery
