@@ -41,24 +41,34 @@ $bulk_options = Comment::get_bulk_options();
                             <div class="col-md-4 col-xs-12">
                                 <div class="row">
                                     <div class="col-xs-12">
-                                    <?php echo MODERATE_COMMENTS_COMMENT; ?> <span class="comment_id"><?php echo $comment->comment_id; ?></span>
-                                    <?php echo MODERATE_COMMENTS_ON_PHOTO; ?> <span class="comment_photo_id"><?php echo $comment->comment_photo_id; ?></span>
+                                        <?php echo MODERATE_COMMENTS_COMMENT; ?>
+                                        <span class="comment_id"><?php echo $comment->comment_id; ?></span>
+                                        <?php echo MODERATE_COMMENTS_ON_PHOTO; ?>
+                                        <span class="comment_photo_id"><?php echo $comment->comment_photo_id; ?></span>
                                     </div>
                                     <div class="col-xs-12">
-                                    <?php echo MODERATE_COMMENTS_BY; ?> <span class="comment_author_id"><?php echo User::get_name_from_id($comment->comment_author_id); ?></span>
-                                    <?php echo MODERATE_COMMENTS_ON; ?> <span class="comment_date"><?php echo date('jS M Y', strtotime($comment->comment_date)); ?></span>
+                                        <?php echo MODERATE_COMMENTS_BY; ?>
+                                        <span class="comment_author_id"><?php echo User::get_name_from_id($comment->comment_author_id); ?></span>
+                                        <?php echo MODERATE_COMMENTS_ON; ?>
+                                        <span class="comment_date"><?php echo date('jS M Y', strtotime($comment->comment_date)); ?></span>
                                     </div>
                                     <div class="col-xs-12">
-                                    <span class="comment_approved">
-                                        <?php echo ($comment->comment_approved) ? MODERATE_COMMENTS_APPROVED : MODERATE_COMMENTS_UNAPPROVED; ?>
-                                    </span>
+                                        <span class="comment_approved">
+                                            <?php echo ($comment->comment_approved) ? MODERATE_COMMENTS_APPROVED : MODERATE_COMMENTS_UNAPPROVED; ?>
+                                        </span>
                                     </div>
                                     <div class="col-xs-12">
-                                    <span class="glyphicon glyphicon-thumbs-up"></span>
-                                    <span class="comment_like_count"><?php echo Comment_Like::count($comment->comment_id); ?></span>
+                                        <span class="glyphicon glyphicon-thumbs-up"></span>
+                                        <span class="comment_like_count"><?php echo Comment_Like::count($comment->comment_id); ?></span>
                                     </div>
                                     <div class="col-md-7 col-xs-12">
-                                        <span class="comment_content"><?php echo $comment->comment_content; ?></span>
+                                        <span class="comment_content">
+                                            <?php
+                                                if (strlen($comment->comment_content) > MODERATE_COMMENTS_TEXT_LIMIT) {
+                                                    echo substr($comment->comment_content, 0, MODERATE_COMMENTS_TEXT_LIMIT - 3) . '...';
+                                                }
+                                            ?>
+                                        </span>
                                     </div>
                                 </div>
                             </div>

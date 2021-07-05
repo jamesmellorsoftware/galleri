@@ -65,7 +65,9 @@ $bulk_options = Photo::get_bulk_options();
                                 </div>
                             </div>
                             <div class="col-md-4 col-xs-12">
-                                <span class="photo_text"><?php echo $photo->photo_text; ?></span>
+                                <span class="photo_text">
+                                    <?php if (strlen($photo->photo_text) > MODERATE_PHOTOS_TEXT_LIMIT) echo substr($photo->photo_text, 0, MODERATE_PHOTOS_TEXT_LIMIT - 3) . '...'; ?>
+                                </span>
                             </div>
                             <div class="col-md-4 col-xs-12 text-right">
                                 <div class="row">

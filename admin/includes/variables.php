@@ -65,6 +65,7 @@ define("MODERATE_COMMENTS_HEADER", "Moderate: Comments");
 define("MODERATE_COMMENTS_NO_RESULTS", "No comments. Clear search.");
 define("MODERATE_COMMENTS_ON", "on");
 define("MODERATE_COMMENTS_ON_PHOTO", "on photo");
+define("MODERATE_COMMENTS_TEXT_LIMIT", 500);
 define("MODERATE_COMMENTS_UNAPPROVED", "Unapproved");
 
 // Moderate photos
@@ -77,6 +78,7 @@ define("MODERATE_PHOTOS_HEADER", "Moderate: Photos");
 define("MODERATE_PHOTOS_NO_RESULTS", "No comments. Clear search.");
 define("MODERATE_PHOTOS_ON", "on");
 define("MODERATE_PHOTOS_PHOTO", "Photo");
+define("MODERATE_PHOTOS_TEXT_LIMIT", 500);
 define("MODERATE_PHOTOS_VIEW", "View");
 
 // Moderate users
