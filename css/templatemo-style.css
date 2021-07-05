@@ -608,3 +608,17 @@ footer a:hover {
 		margin-bottom: 80px;
     }
 }
+
+/* ===== CUSTOM ADDED ===== */
+.noHeaderVideo {
+    padding-top: 100px;
+}
+
+.is-invalid {
+    border: 2px solid #d9534f ;
+}
+
+.like_thumb,
+.comment_like_thumb {
+    cursor: pointer;
+}
