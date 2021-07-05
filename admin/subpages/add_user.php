@@ -99,8 +99,8 @@ if (isset($_POST['add_user'])) {
                         </select>
                     </div>
                 </div>
-                <div class="form-group">
-                    <input type="submit" class="btn btn-primary" name="add_user" value="<?php echo ADD_USER_BUTTON; ?>">
+                <div class="form-group col-sm-12">
+                    <input type="submit" class="btn btn-primary btn-fullwidth" name="add_user" value="<?php echo ADD_USER_BUTTON; ?>">
                 </div>
             </form>
         <?php } ?>

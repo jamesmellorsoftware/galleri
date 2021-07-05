@@ -19,7 +19,7 @@ $bulk_options = Comment::get_bulk_options();
 <h1 class="page-title">
     <?php echo MODERATE_COMMENTS_HEADER; ?>
     <i aria-hidden="true" id="" data-toggle="modal" data-target="#searchModal"
-    class="fa fa-search pull-right <?php if (isset($_GET['search'])) echo "text-info"; ?>"></i>
+    class="fa fa-search pull-right <?php if (isset($_POST['search'])) echo "text-success"; ?>"></i>
 </h1>
 
 <?php if (count($comments) == 0 || empty($comments)) { ?>
@@ -34,31 +34,33 @@ $bulk_options = Comment::get_bulk_options();
                 <?php foreach ($comments as $comment) { ?>
                     <tr class="pagination-block" href="../photo.php?id=<?php echo $comment->comment_photo_id; ?>">
                         <td class="clickable_td">
-                            <div class="col-md-1">
+                            <div class="col-md-1 col-xs-12">
                                 <input class='selectCheckbox align-middle' type='checkbox'
                                 name='bulk_option_checkboxes[]' value='<?php echo $comment->comment_id; ?>'>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-4 col-xs-12">
                                 <div class="row">
+                                    <div class="col-xs-12">
                                     <?php echo MODERATE_COMMENTS_COMMENT; ?> <span class="comment_id"><?php echo $comment->comment_id; ?></span>
                                     <?php echo MODERATE_COMMENTS_ON_PHOTO; ?> <span class="comment_photo_id"><?php echo $comment->comment_photo_id; ?></span>
-                                </div>
-                                <div class="row">
+                                    </div>
+                                    <div class="col-xs-12">
                                     <?php echo MODERATE_COMMENTS_BY; ?> <span class="comment_author_id"><?php echo User::get_name_from_id($comment->comment_author_id); ?></span>
                                     <?php echo MODERATE_COMMENTS_ON; ?> <span class="comment_date"><?php echo date('jS M Y', strtotime($comment->comment_date)); ?></span>
-                                </div>
-                                <div class="row">
+                                    </div>
+                                    <div class="col-xs-12">
                                     <span class="comment_approved">
                                         <?php echo ($comment->comment_approved) ? MODERATE_COMMENTS_APPROVED : MODERATE_COMMENTS_UNAPPROVED; ?>
                                     </span>
-                                </div>
-                                <div class="row">
+                                    </div>
+                                    <div class="col-xs-12">
                                     <span class="glyphicon glyphicon-thumbs-up"></span>
                                     <span class="comment_like_count"><?php echo Comment_Like::count($comment->comment_id); ?></span>
+                                    </div>
+                                    <div class="col-md-7 col-xs-12">
+                                        <span class="comment_content"><?php echo $comment->comment_content; ?></span>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-7">
-                                <span class="comment_content"><?php echo $comment->comment_content; ?></span>
                             </div>
                         </td>
                     </tr>

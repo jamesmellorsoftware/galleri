@@ -18,7 +18,7 @@ $bulk_options = User::get_bulk_options();
 <h1 class="page-title">
     <?php echo MODERATE_USERS_HEADER; ?>
     <i aria-hidden="true" id="" data-toggle="modal" data-target="#searchModal"
-    class="fa fa-search pull-right <?php if (isset($_GET['search'])) echo "text-info"; ?>"></i>
+    class="fa fa-search pull-right <?php if (isset($_POST['search'])) echo "text-success"; ?>"></i>
 </h1>
 
 <?php if (count($users) == 0 || empty($users)) { ?>
@@ -33,31 +33,33 @@ $bulk_options = User::get_bulk_options();
                 <?php foreach ($users as $user) { ?>
                     <tr class="pagination-block">
                         <td class="clickable_td">
-                            <div class="col-md-1">
+                            <div class="col-md-1 col-xs-12">
                                 <input class='selectCheckbox align-middle' type='checkbox'
                                 name='bulk_option_checkboxes[]' value='<?php echo $user->user_id; ?>'>
                             </div>
-                            <div class="col-md-5">
+                            <div class="col-md-5 col-xs-12">
                                 <div class="row">
-                                    <span class="user_id"><?php echo $user->user_id; ?></span>
-                                    -
-                                    <span class="user_username"><?php echo $user->user_username; ?></span>
-                                </div>
-                                <div class="row">
-                                    <span class="user_firstname"><?php echo $user->user_firstname; ?></span>
-                                    <span class="user_lastname"><?php echo $user->user_lastname; ?></span>
-                                </div>
-                                <div class="row">
-                                    <span class="user_email"><?php echo $user->user_email; ?></span>
-                                </div>
-                                <div class="row">
-                                    <span class="user_role"><?php echo $user->user_role; ?></span>
-                                </div>
-                                <div class="row">
-                                    <span class="user_banned"><?php if ($user->user_banned) echo MODERATE_USERS_BANNED; ?></span>
+                                    <div class="col-xs-12">
+                                        <span class="user_id"><?php echo $user->user_id; ?></span>
+                                        -
+                                        <span class="user_username"><?php echo $user->user_username; ?></span>
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <span class="user_firstname"><?php echo $user->user_firstname; ?></span>
+                                        <span class="user_lastname"><?php echo $user->user_lastname; ?></span>
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <span class="user_email"><?php echo $user->user_email; ?></span>
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <span class="user_role"><?php echo $user->user_role; ?></span>
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <span class="user_banned"><?php if ($user->user_banned) echo MODERATE_USERS_BANNED; ?></span>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-md-5 pull-right">
+                            <div class="col-md-5 col-xs-12 text-right pull-right">
                                 <img class="user_image" width="200" height="auto"
                                 src="<?php echo "../" . $user->get_user_image(); ?>">
                                 <p>

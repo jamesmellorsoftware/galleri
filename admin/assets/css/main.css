@@ -742,6 +742,25 @@ ul.activity-list > li {
 #moderate_photos_table tr.pagination-block,
 #moderate_comments_table tr.pagination-block,
 #moderate_users_table tr.pagination-block,
-.select_all_checkboxes {
+.select_all_checkboxes,
+.fa-search {
   cursor: pointer;
+}
+
+.fa-search:hover {
+  font-size: 42px;
+}
+
+.select_all_checkboxes {
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.btn-fullwidth {
+  text-transform: uppercase;
+  width: 100%;
+}
+
+.load-more-button a {
+  color: #fff !important;
 }

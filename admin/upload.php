@@ -42,26 +42,26 @@ if (isset($_POST['submit'])) {
             <?php } ?>
 
             <form method="post" action="upload.php" enctype="multipart/form-data">
-                <div class="form-group">
+                <div class="form-group col-xs-12">
                     <label for="file_upload"><?php echo UPLOAD_FILE_LABEL; ?></label>
                     <input class="" type="file" name="file_upload">
                 </div>
-                <div class="form-group">
+                <div class="form-group col-xs-12">
                     <input type="text" class="form-control"
                     name="photo_title" placeholder="<?php echo UPLOAD_PLACEHOLDER_TITLE; ?>"
                     value="<?php if (!empty($photo->photo_title)) echo $photo->photo_title; ?>">
                 </div>
-                <div class="form-group">
+                <div class="form-group col-xs-12">
                     <input type="text" class="form-control"
                     name="photo_subtitle" placeholder="<?php echo UPLOAD_PLACEHOLDER_SUBTITLE; ?>"
                     value="<?php if (!empty($photo->photo_subtitle)) echo $photo->photo_subtitle; ?>">
                 </div>
-                <div class="form-group">
+                <div class="form-group col-xs-12">
                     <textarea class="form-control"
                     name="photo_text" placeholder="<?php echo UPLOAD_PLACEHOLDER_POST; ?>"><?php if (!empty($photo->photo_text)) echo $photo->photo_text; ?></textarea>
                 </div>
-                <div class="form-group">
-                    <input type="submit" class="btn btn-primary" name="submit" value="<?php echo UPLOAD_UPLOAD; ?>">
+                <div class="form-group col-xs-12">
+                    <input type="submit" class="btn btn-primary btn-fullwidth" name="submit" value="<?php echo UPLOAD_UPLOAD; ?>">
                 </div>
             </form>
 
