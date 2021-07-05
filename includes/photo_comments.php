@@ -9,10 +9,13 @@
                     <br />
                     <?php echo $comment->comment_content; ?>
                     <br />
-                    <span style="width: 15px;"
+                    <i style="width: 15px;"
                     rel="<?php echo $comment->comment_id; ?>"
-                    class="comment_like_thumb glyphicon glyphicon-thumbs-up <?php if ($user_liked) echo "liked"; ?>"></span>
-                    <span class="comment_likes"><?php echo Comment_Like::count($comment->comment_id); ?></span>
+                    class="comment_like_thumb glyphicon glyphicon-thumbs-up
+                    <?php if ($user_liked) echo "liked text-success"; ?>"></i>
+                    <i class="comment_likes <?php if ($user_liked) echo "text-success"; ?>">
+                        <?php echo Comment_Like::count($comment->comment_id); ?>
+                    </i>
                 </p>
             <?php } ?>
         <?php } ?>

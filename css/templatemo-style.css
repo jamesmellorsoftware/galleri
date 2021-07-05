@@ -559,6 +559,11 @@ footer a:hover {
     top: 8px;
 }
 
+.single-blog-post .headercontainer .like_thumb:hover {
+    font-size: 40px;
+
+}
+
 .single-blog-post .headercontainer #photo_likes {
     font-size: 36px;
     font-style: normal;
