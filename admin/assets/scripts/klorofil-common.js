@@ -1,9 +1,5 @@
 $(document).ready(function() {
-
-	/*-----------------------------------/
-	/*	TOP NAVIGATION AND LAYOUT
-	/*----------------------------------*/
-
+	// TOP NAVIGATION AND LAYOUT
 	$('.btn-toggle-fullwidth').on('click', function() {
 		if(!$('body').hasClass('layout-fullwidth')) {
 			$('body').addClass('layout-fullwidth');
@@ -45,11 +41,7 @@ $(document).ready(function() {
 		}
 	});
 
-
-	/*-----------------------------------/
-	/*	SIDEBAR NAVIGATION
-	/*----------------------------------*/
-
+	// SIDEBAR NAVIGATION
 	$('.sidebar a[data-toggle="collapse"]').on('click', function() {
 		if($(this).hasClass('collapsed')) {
 			$(this).addClass('active');
@@ -64,148 +56,9 @@ $(document).ready(function() {
 			wheelStep: 2,
 		});
 	}
-
-
-	/*-----------------------------------/
-	/*	PANEL FUNCTIONS
-	/*----------------------------------*/
-
-	// panel remove
-	$('.panel .btn-remove').click(function(e){
-
-		e.preventDefault();
-		$(this).parents('.panel').fadeOut(300, function(){
-			$(this).remove();
-		});
-	});
-
-	// panel collapse/expand
-	var affectedElement = $('.panel-body');
-
-	$('.panel .btn-toggle-collapse').clickToggle(
-		function(e) {
-			e.preventDefault();
-
-			// if has scroll
-			if( $(this).parents('.panel').find('.slimScrollDiv').length > 0 ) {
-				affectedElement = $('.slimScrollDiv');
-			}
-
-			$(this).parents('.panel').find(affectedElement).slideUp(300);
-			$(this).find('i.lnr-chevron-up').toggleClass('lnr-chevron-down');
-		},
-		function(e) {
-			e.preventDefault();
-
-			// if has scroll
-			if( $(this).parents('.panel').find('.slimScrollDiv').length > 0 ) {
-				affectedElement = $('.slimScrollDiv');
-			}
-
-			$(this).parents('.panel').find(affectedElement).slideDown(300);
-			$(this).find('i.lnr-chevron-up').toggleClass('lnr-chevron-down');
-		}
-	);
-
-
-	/*-----------------------------------/
-	/*	PANEL SCROLLING
-	/*----------------------------------*/
-
-	if( $('.panel-scrolling').length > 0) {
-		$('.panel-scrolling .panel-body').slimScroll({
-			height: '430px',
-			wheelStep: 2,
-		});
-	}
-
-	if( $('#panel-scrolling-demo').length > 0) {
-		$('#panel-scrolling-demo .panel-body').slimScroll({
-			height: '175px',
-			wheelStep: 2,
-		});
-	}
-
-	/*-----------------------------------/
-	/*	TODO LIST
-	/*----------------------------------*/
-
-	$('.todo-list input').change( function() {
-		if( $(this).prop('checked') ) {
-			$(this).parents('li').addClass('completed');
-		}else {
-			$(this).parents('li').removeClass('completed');
-		}
-	});
-
-
-	/*-----------------------------------/
-	/* TOASTR NOTIFICATION
-	/*----------------------------------*/
-
-	if($('#toastr-demo').length > 0) {
-		toastr.options.timeOut = "false";
-		toastr.options.closeButton = true;
-		toastr['info']('Hi there, this is notification demo with HTML support. So, you can add HTML elements like <a href="#">this link</a>');
-
-		$('.btn-toastr').on('click', function() {
-			$context = $(this).data('context');
-			$message = $(this).data('message');
-			$position = $(this).data('position');
-
-			if($context == '') {
-				$context = 'info';
-			}
-
-			if($position == '') {
-				$positionClass = 'toast-left-top';
-			} else {
-				$positionClass = 'toast-' + $position;
-			}
-
-			toastr.remove();
-			toastr[$context]($message, '' , { positionClass: $positionClass });
-		});
-
-		$('#toastr-callback1').on('click', function() {
-			$message = $(this).data('message');
-
-			toastr.options = {
-				"timeOut": "300",
-				"onShown": function() { alert('onShown callback'); },
-				"onHidden": function() { alert('onHidden callback'); }
-			}
-
-			toastr['info']($message);
-		});
-
-		$('#toastr-callback2').on('click', function() {
-			$message = $(this).data('message');
-
-			toastr.options = {
-				"timeOut": "10000",
-				"onclick": function() { alert('onclick callback'); },
-			}
-
-			toastr['info']($message);
-
-		});
-
-		$('#toastr-callback3').on('click', function() {
-			$message = $(this).data('message');
-
-			toastr.options = {
-				"timeOut": "10000",
-				"closeButton": true,
-				"onCloseClick": function() { alert('onCloseClick callback'); }
-			}
-
-			toastr['info']($message);
-		});
-	}
 });
 
-// toggle function
+// TOGGLE FUNCTION
 $.fn.clickToggle = function( f1, f2 ) {
 	return this.each( function() {
 		var clicked = false;
@@ -219,7 +72,31 @@ $.fn.clickToggle = function( f1, f2 ) {
 			return f1.apply(this, arguments);
 		});
 	});
-
 }
 
+// USER ADDED SCRIPTS
+function check_all_selectCheckbox(select_all) {
+    $('.selectCheckbox').each(function(){ this.checked = (select_all.hasClass("select")); });
+}
 
+// Bulk options select all checkboxes
+$('.select_all_checkboxes').on("click", function(){
+    check_all_selectCheckbox($(this));
+    $(".select_all_checkboxes").toggleClass("select");
+    $(".select_all_checkboxes").toggleClass("deselect");
+});
+
+// Stop double-firing checkbox click when a .selectCheckbox is clicked directly instead
+// of surrounding .clickable_td
+$(document).on("click", ".selectCheckbox", function(event){
+    event.stopPropagation();
+});
+
+// When clicking td with a bulk options select checkbox in it, toggle the checkbox
+$(document).on("click", ".clickable_td", function(){
+    let nearest_checkbox = $(this).find(".selectCheckbox");
+    if (nearest_checkbox.length > 0) {
+        let nearest_checkbox_checked = nearest_checkbox.is(":checked");
+        (nearest_checkbox_checked) ? nearest_checkbox.prop("checked", false) : nearest_checkbox.prop("checked", true)
+    }
+});
