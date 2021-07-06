@@ -10,7 +10,7 @@
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <span><?php echo "username"; ?></span>
+                        <span><?php echo $session->user_username; ?></span>
                         <i class="icon-submenu lnr lnr-chevron-down"></i></a>
                     <ul class="dropdown-menu">
                         <li><a href="../index.php"><i class="lnr lnr-home"></i> <span>Back to Blog</span></a></li>
