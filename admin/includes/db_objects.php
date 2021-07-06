@@ -236,7 +236,7 @@ class db_objects {
 
         foreach ($expected_inputs as $expected_input => $value) {
             $expected_property = static::$db_prefix . $expected_input;
-            if (empty($object_to_check->$expected_property)) $errors[$expected_input] = "Please fill in all fields marked with *.";
+            if (empty($object_to_check->$expected_property)) $errors[$expected_input] = ERROR_EMPTY_FIELD;
         }
 
         return $errors;

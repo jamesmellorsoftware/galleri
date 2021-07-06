@@ -202,12 +202,6 @@ class User extends db_objects {
     }
 
     public function verify_registration($user_image) {
-        // Checks if registration data user values are valid
-        // Checks:
-        // - Email in use?
-        // - Username in use?
-        // - Mandatory field left empty?
-        // - No image uploaded?
 
         $registration_errors = [
             "username"   => "",
@@ -219,12 +213,30 @@ class User extends db_objects {
         ];
 
         $registration_errors = User::check_empty_inputs($this, $registration_errors);
-        if (User::exists($this->user_username))    $registration_errors['username'] = "Username already in use.";
-        if (User::email_in_use($this->user_email)) $registration_errors['email']    = "Email already in use.";
+
+        if (!empty($registration_errors)) return $registration_errors;
+
+        if (strlen($this->user_username)  > LIMIT_USERNAME)  $registration_errors['username']  = REGISTRATION_ERROR_USERNAME_TOO_LONG;
+        if (strlen($this->user_password)  > LIMIT_PASSWORD)  $registration_errors['password']  = REGISTRATION_ERROR_PASSWORD_TOO_LONG;
+        if (strlen($this->user_firstname) > LIMIT_FIRSTNAME) $registration_errors['firstname'] = REGISTRATION_ERROR_FIRSTNAME_TOO_LONG;
+        if (strlen($this->user_lastname)  > LIMIT_LASTNAME)  $registration_errors['lastname']  = REGISTRATION_ERROR_LASTNAME_TOO_LONG;
+        if (strlen($this->user_email)     > LIMIT_EMAIL)     $registration_errors['email']     = REGISTRATION_ERROR_EMAIL_TOO_LONG;
+
+        if (!filter_var($this->user_email, FILTER_VALIDATE_EMAIL)) $registration_errors['email']  = REGISTRATION_ERROR_EMAIL_INVALID;
+        if (!preg_match(REGEX_EMAIL,     $this->user_username)) $registration_errors['firstname'] = REGISTRATION_ERROR_SYMBOLS_EMAIL;
+        if (!preg_match(REGEX_FIRSTNAME, $this->user_username)) $registration_errors['firstname'] = REGISTRATION_ERROR_SYMBOLS_FIRSTNAME;
+        if (!preg_match(REGEX_LASTNAME,  $this->user_username)) $registration_errors['lastname']  = REGISTRATION_ERROR_SYMBOLS_LASTNAME;
+        if (!preg_match(REGEX_USERNAME,  $this->user_username)) $registration_errors['username']  = REGISTRATION_ERROR_SYMBOLS_USERNAME;
+        if (!preg_match(REGEX_PASSWORD,  $this->user_password)) $registration_errors['password']  = REGISTRATION_ERROR_SYMBOLS_PASSWORD;
+
+        if (!empty($registration_errors)) return $registration_errors;
+
+        if (User::exists($this->user_username))    $registration_errors['username'] = REGISTRATION_ERROR_USERNAME_TAKEN;
+        if (User::email_in_use($this->user_email)) $registration_errors['email']    = REGISTRATION_ERROR_EMAIL_TAKEN;
 
         $registration_errors["user_image"] = "";
         if (!$user_image || !is_array($user_image) || empty($user_image) || !is_uploaded_file($user_image['tmp_name'])) {
-            $registration_errors['user_image'] = "Please select an image.";
+            $registration_errors['user_image'] = ERROR_EMPTY_IMAGE;
         }
 
         return $registration_errors;
@@ -263,11 +275,6 @@ class User extends db_objects {
     }
 
     public function verify_login() {
-        // Checks if login data user values are valid
-        // Checks:
-        // - Username exists?
-        // - Mandatory field left empty?
-        // - Password correct?
 
         $login_errors = ["username"  => "", "password"  => ""];
 
@@ -275,13 +282,27 @@ class User extends db_objects {
         
         if (!empty($login_errors)) return $login_errors;
 
-        $user_retrieved = User::retrieve($this->user_username);
+        if (strlen($this->user_username) > LIMIT_USERNAME) $login_errors['username'] = LOGIN_ERROR_USERNAME_TOO_LONG;
 
-        if (!$user_retrieved || empty($user_retrieved)) $login_errors['username'] = "Username does not exist.";
+        if (strlen($this->user_password) > LIMIT_PASSWORD) $login_errors['password'] = LOGIN_ERROR_PASSWORD_TOO_LONG;
+
+        if (!preg_match(REGEX_USERNAME, $this->user_username)) $login_errors['username'] = LOGIN_ERROR_SYMBOLS_USERNAME;
+
+        if (!preg_match(REGEX_PASSWORD, $this->user_password)) $login_errors['password'] = LOGIN_ERROR_SYMBOLS_PASSWORD;
 
         if (!empty($login_errors)) return $login_errors;
 
-        if (!password_verify($this->user_password, $user_retrieved->user_password)) $login_errors['password'] = "Incorrect password.";
+        $user_retrieved = User::retrieve($this->user_username);
+
+        if (!$user_retrieved || empty($user_retrieved)) {
+            $login_errors['username'] = LOGIN_ERROR_USERNAME_NOT_FOUND;
+            return $login_errors;
+        }
+
+        if (!password_verify($this->user_password, $user_retrieved->user_password)) {
+            $login_errors['password'] = LOGIN_ERROR_PASSWORD_INCORRECT;
+            return $login_errors;
+        }
 
         return $login_errors;
 

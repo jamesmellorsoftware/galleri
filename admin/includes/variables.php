@@ -1,11 +1,15 @@
 <?php
 
+require_once("config.php");
+
 // ===== ADMIN ===== //
 // GENERAL ADMIN
 define("ADMIN_PAGINATION_LOAD_MORE", "Load More");
 define("BULK_OPTIONS_SELECT_OPTION", "Select Option");
 define("SELECT_DESELECT_ALL", "Select / Deselect All");
 define("SITE_TITLE", "Galleri | Admin Dashboard");
+define("ERROR_EMPTY_FIELD", "Please fill in all fields marked with *.");
+define("ERROR_EMPTY_IMAGE", "Please select an image.");
 
 // Add user
 define("ADD_USER_BUTTON", "Add User");
@@ -161,6 +165,12 @@ define("LIKED_NO_PHOTOS", "No photos yet. Like some!");
 
 // Login
 define("LOGIN_ALREADY_HAVE_ACCOUNT", "Don't have an account? Register here.");
+define("LOGIN_ERROR_PASSWORD_INCORRECT", "Incorrect password");
+define("LOGIN_ERROR_SYMBOLS_PASSWORD", "Password can only contain numbers, letters, and symbols . _ - &");
+define("LOGIN_ERROR_SYMBOLS_USERNAME", "Username can only contain numbers, letters, and symbols . _ -");
+define("LOGIN_ERROR_USERNAME_NOT_FOUND", "That username doesn't exist.");
+define("LOGIN_ERROR_PASSWORD_TOO_LONG", "Password must not exceed " . LIMIT_PASSWORD . " characters.");
+define("LOGIN_ERROR_USERNAME_TOO_LONG", "Username must not exceed " . LIMIT_USERNAME . " characters.");
 define("LOGIN_PLACEHOLDER_PASSWORD", "Password");
 define("LOGIN_PLACEHOLDER_USERNAME", "Username");
 define("LOGIN_SUBMIT_BUTTON", "Log in");
@@ -198,6 +208,20 @@ define("PHOTOGRAPHERS_TITLE", "Photographers");
 // Register
 define("REGISTRATION_ALREADY_HAVE_ACCOUNT", "Already have an account? Log in here.");
 define("REGISTRATION_BACK_TO_INDEX", "Back to Galleri");
+define("REGISTRATION_ERROR_EMAIL_INVALID", "Please enter a valid email address");
+define("REGISTRATION_ERROR_EMAIL_TAKEN", "Email address already in use");
+define("REGISTRATION_ERROR_EMAIL_TOO_LONG", "Email address must not exceed " . LIMIT_EMAIL . " characters.");
+define("REGISTRATION_ERROR_FIRSTNAME_TOO_LONG", "First name must not exceed " . LIMIT_FIRSTNAME . " characters.");
+define("REGISTRATION_ERROR_LASTNAME_TOO_LONG", "Last name must not exceed " . LIMIT_LASTNAME . " characters.");
+define("REGISTRATION_ERROR_PASSWORD_TOO_LONG", "Password must not exceed " . LIMIT_PASSWORD . " characters.");
+define("REGISTRATION_ERROR_ROLE_INVALID", "User role invalid");
+define("REGISTRATION_ERROR_SYMBOLS_EMAIL", "Please enter a valid email address");
+define("REGISTRATION_ERROR_SYMBOLS_FIRSTNAME", "First name can only contain numbers and letters");
+define("REGISTRATION_ERROR_SYMBOLS_LASTNAME", "Last name can only contain numbers and letters");
+define("REGISTRATION_ERROR_SYMBOLS_PASSWORD", "Password can only contain numbers, letters, and symbols . _ - &");
+define("REGISTRATION_ERROR_SYMBOLS_USERNAME", "Username can only contain numbers, letters, and symbols . _ -");
+define("REGISTRATION_ERROR_USERNAME_TAKEN", "Username already in use");
+define("REGISTRATION_ERROR_USERNAME_TOO_LONG", "Username must not exceed " . LIMIT_USERNAME . " characters.");
 define("REGISTRATION_LABEL_USERIMAGE", "Upload your profile picture");
 define("REGISTRATION_PLACEHOLDER_EMAIL", "youremail@emailprovider.com");
 define("REGISTRATION_PLACEHOLDER_FIRSTNAME", "First Name");

@@ -30,4 +30,18 @@ define("PAGINATION_LIMIT_MODERATE_USERS", 5);
 define("PAGINATION_LIMIT_PHOTOGRAPHER_GALLERY", 5);
 define("PAGINATION_LIMIT_PHOTOGRAPHERS", 5);
 
+// Define user character limits
+define("LIMIT_EMAIL", 30);
+define("LIMIT_FIRSTNAME", 30);
+define("LIMIT_LASTNAME", 30);
+define("LIMIT_PASSWORD", 30);
+define("LIMIT_USERNAME", 30);
+
+// Define user accepted patterns
+define("REGEX_EMAIL", "/^[a-zA-Z0-9\.\@\_\-]/");
+define("REGEX_FIRSTNAME", "/^[a-zA-Z0-9]/");
+define("REGEX_LASTNAME", "/^[a-zA-Z0-9]/");
+define("REGEX_PASSWORD", "/^[a-zA-Z0-9\.\_\-\&]/");
+define("REGEX_USERNAME", "/^[a-zA-Z0-9\.\_\-]/");
+
 ?>

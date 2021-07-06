@@ -9,12 +9,11 @@ $login_errors = [];
 if (isset($_POST['login'])) {
     // Sanitise inputs and assign POST values to login_values array
     $user = new User;
-    $user->user_username = trim($_POST['user_username']);
-    $user->user_password = trim($_POST['user_password']);
+    $user->user_username = $_POST['user_username'];
+    $user->user_password = $_POST['user_password'];
 
-
-    $login_values['user_username'] = trim($_POST['user_username']);
-    $login_values['user_password'] = trim($_POST['user_password']);
+    $login_values['user_username'] = $_POST['user_username'];
+    $login_values['user_password'] = $_POST['user_password'];
 
     // Check if form inputs are empty, if user exists
     $login_errors = $user->verify_login();
