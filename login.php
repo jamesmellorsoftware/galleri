@@ -37,19 +37,19 @@ if (isset($_POST['login'])) {
                 </h4>
             <?php } else { ?>
                 <?php foreach ($login_errors as $login_error) { ?>
-                    <h4 class="bg-danger"><?php echo $login_error; ?></h4>
+                    <h4 class="text-danger"><?php echo $login_error; ?></h4>
                 <?php } ?>
                 <form method="post" action="login.php">
                     <div class="form-group">
                         <input type="text"
                         class="form-control <?php if (!empty($login_errors['username'])) echo "is-invalid "; ?>"
-                        name="user_username" placeholder="<?php echo LOGIN_PLACEHOLDER_USERNAME; ?>"
+                        name="user_username" placeholder="<?php echo LOGIN_PLACEHOLDER_USERNAME . "*"; ?>"
                         value="<?php if (isset($user->user_username)) echo $user->user_username; ?>">
                     </div>
                     <div class="form-group">
                         <input type="password"
                         class="form-control <?php if (!empty($login_errors['username'])) echo "is-invalid "; ?>"
-                        name="user_password" placeholder="<?php echo LOGIN_PLACEHOLDER_PASSWORD; ?>"
+                        name="user_password" placeholder="<?php echo LOGIN_PLACEHOLDER_PASSWORD . "*"; ?>"
                         value="<?php if (isset($user->user_password)) echo $user->user_password; ?>">
                     </div>
                     <div class="form-group">

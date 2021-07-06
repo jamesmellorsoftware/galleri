@@ -44,37 +44,46 @@ if (isset($_POST['register'])) {
                 <a href="index.php"><?php echo REGISTRATION_BACK_TO_INDEX; ?></a>
             <?php } else { ?>
                 <?php foreach ($registration_errors as $registration_error) { ?>
-                    <h4 class="bg-danger"><?php echo $registration_error; ?></h4>
+                    <h4 class="text-danger"><?php echo $registration_error; ?></h4>
                 <?php } ?>
                 <form method="post" action="register.php"  enctype="multipart/form-data">
                     <div class="form-group">
-                        <input type="text" class="form-control"
-                        name="user_username" placeholder="<?php echo REGISTRATION_PLACEHOLDER_USERNAME; ?>"
+                        <input type="text"
+                        class="form-control <?php if (isset($registration_errors['username'])) echo "is-invalid"; ?>"
+                        name="user_username" placeholder="<?php echo REGISTRATION_PLACEHOLDER_USERNAME . "*"; ?>"
                         value="<?php if (isset($new_user->user_username)) echo htmlentities($new_user->user_username); ?>">
                     </div>
                     <div class="form-group">
-                        <input type="password" class="form-control"
-                        name="user_password" placeholder="<?php echo REGISTRATION_PLACEHOLDER_PASSWORD; ?>"
+                        <input type="password"
+                        class="form-control <?php if (isset($registration_errors['password'])) echo "is-invalid"; ?>"
+                        name="user_password" placeholder="<?php echo REGISTRATION_PLACEHOLDER_PASSWORD . "*"; ?>"
                         value="<?php if (isset($new_user->user_password)) echo htmlentities($new_user->user_password); ?>">
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control"
-                        name="user_firstname" placeholder="<?php echo REGISTRATION_PLACEHOLDER_FIRSTNAME; ?>"
+                        <input type="text"
+                        class="form-control <?php if (isset($registration_errors['firstname'])) echo "is-invalid"; ?>"
+                        name="user_firstname" placeholder="<?php echo REGISTRATION_PLACEHOLDER_FIRSTNAME . "*"; ?>"
                         value="<?php if (isset($new_user->user_firstname)) echo htmlentities($new_user->user_firstname); ?>">
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control"
-                        name="user_lastname" placeholder="<?php echo REGISTRATION_PLACEHOLDER_LASTNAME; ?>"
+                        <input type="text"
+                        class="form-control <?php if (isset($registration_errors['lastname'])) echo "is-invalid"; ?>"
+                        name="user_lastname" placeholder="<?php echo REGISTRATION_PLACEHOLDER_LASTNAME . "*"; ?>"
                         value="<?php if (isset($new_user->user_lastname)) echo htmlentities($new_user->user_lastname); ?>">
                     </div>
                     <div class="form-group">
-                        <input type="email" class="form-control"
-                        name="user_email" placeholder="<?php echo REGISTRATION_PLACEHOLDER_EMAIL; ?>"
+                        <input type="email"
+                        class="form-control <?php if (isset($registration_errors['email'])) echo "is-invalid"; ?>"
+                        name="user_email" placeholder="<?php echo REGISTRATION_PLACEHOLDER_EMAIL . "*"; ?>"
                         value="<?php if (isset($new_user->user_email)) echo htmlentities($new_user->user_email); ?>">
                     </div>
                     <div class="form-group">
-                        <label for="user_image"><?php echo REGISTRATION_LABEL_USERIMAGE; ?></label>
-                        <input type="file" class="form-control" name="user_image">
+                        <label for="user_image"
+                        class="<?php if (isset($registration_errors['file_upload'])) echo "text-danger"; ?>">
+                            <?php echo REGISTRATION_LABEL_USERIMAGE . "*"; ?>
+                        </label>
+                        <input type="file" name="user_image"
+                        class="form-control <?php if (isset($registration_errors['file_upload'])) echo "is-invalid"; ?>">
                     </div>
                     <div class="form-group">
                         <input type="submit" name="register" class="btn btn-primary" value="<?php echo REGISTRATION_REGISTER; ?>">
