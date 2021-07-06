@@ -2,6 +2,8 @@
 
 if (!isset($_GET['id'])) header("Location: index.php");
 
+if (!$session->user_is_admin() && $_GET['id'] != $session->user_id) header("Location: index.php");
+
 $user = User::find_by_id($_GET['id']);
 
 if (!$user) header("Location: index.php");

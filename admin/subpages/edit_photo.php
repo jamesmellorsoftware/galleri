@@ -6,6 +6,8 @@ $photo = Photo::find_by_id($_GET['id']);
 
 if (!$photo) header("Location: index.php");
 
+if (!$session->user_is_admin() && $session->user_id != $photo->photo_author_id) header("Location: index.php");
+
 $edit_photo_successful = false;
 
 $edit_photo_errors = [];
