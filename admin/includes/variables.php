@@ -195,6 +195,8 @@ define("PAGINATION_LOAD_MORE", "Load More");
 define("PHOTO_BY", "by");
 define("PHOTO_COMMENT_BUTTON", "Create Comment");
 define("PHOTO_COMMENT_LOGIN", "Log in to comment.");
+define("PHOTO_COMMENT_ERROR_GENERAL", "Problem saving comment.");
+define("PHOTO_COMMENT_ERROR_LOGIN", "Log in to comment.");
 define("PHOTO_COMMENT_PLACEHOLDER", "Leave a comment on this post");
 define("PHOTO_COMMENT_SUCCESS", "Comment added.");
 

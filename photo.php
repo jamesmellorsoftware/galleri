@@ -26,7 +26,7 @@ if (isset($_POST['submit'])) {
         $new_comment->comment_author_id = $session->user_id;
         $new_comment->comment_date      = date("Y-m-d");
         $new_comment->comment_approved  = 0;
-        $new_comment->comment_content   = trim($_POST['comment_content']);
+        $new_comment->comment_content   = $_POST['comment_content'];
 
         $comment_errors = $new_comment->verify();
 
@@ -34,11 +34,11 @@ if (isset($_POST['submit'])) {
             if ($new_comment && $new_comment->create()) {
                 header("Location: photo.php?id={$photo_id}");
             } else {
-                $comment_errors['content'] = "Problem saving comment.";
+                $comment_errors['content'] = PHOTO_COMMENT_ERROR_GENERAL;
             }
         }
     } else {
-        $comment_errors['content'] = "You must be signed in to comment!";
+        $comment_errors['content'] = PHOTO_COMMENT_ERROR_LOGIN;
     }
 }
 // --------------------------------------------------
