@@ -1,5 +1,6 @@
 <?php
 require_once("config.php");
+require_once("variables.php");
 
 // Ajax pagination request, load next X photos
 if (isset($_POST['load_more'])) {
