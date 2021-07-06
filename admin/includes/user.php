@@ -213,7 +213,9 @@ class User extends db_objects {
             "username"   => "",
             "password"   => "",
             "firstname"  => "",
-            "email"      => ""
+            "lastname"   => "",
+            "email"      => "",
+            "role"       => ""
         ];
 
         $registration_errors = User::check_empty_inputs($this, $registration_errors);
