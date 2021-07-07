@@ -213,7 +213,9 @@ class Photo extends db_objects {
             $conditions[Photo::get_table_prefix()."author_id"] = $search_filters['photo_author_id'];
         }
 
-        if (isset($search_filters['results_per_page'])) $limit = $search_filters['results_per_page'] + 1;
+        if (isset($search_filters['results_per_page']) && is_int($search_filters['results_per_page'])) {
+            $limit = $search_filters['results_per_page'] + 1;
+        }
 
         if (isset($search_filters['photo_id']) && !empty($search_filters['photo_id'])) {
             $conditions[Photo::get_table_prefix()."id"] = $search_filters['photo_id'];
