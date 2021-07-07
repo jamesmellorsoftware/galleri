@@ -87,8 +87,8 @@ if (isset($_POST['edit_user'])) {
                     <div class="form-group">
                         <input type="password"
                         class="form-control <?php if (isset($edit_user_errors['password'])) echo "is-invalid"; ?>"
-                        name="user_password" placeholder="<?php echo EDIT_USER_PLACEHOLDER_PASSWORD . "*"; ?>">
                         maxlength="<?php echo LIMIT_PASSWORD; ?>"
+                        name="user_password" placeholder="<?php echo EDIT_USER_PLACEHOLDER_PASSWORD . "*"; ?>">
                     </div>
                 </div>
                 <div class="col-md-4 col-sm-12">

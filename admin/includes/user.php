@@ -266,6 +266,27 @@ class User extends db_objects {
 
         $edit_user_errors = User::check_empty_inputs($this, $edit_user_errors);
 
+        if (!empty($edit_user_errors)) return $edit_user_errors;
+
+        if (strlen($this->user_username)  > LIMIT_USERNAME)  $registration_errors['username']  = REGISTRATION_ERROR_USERNAME_TOO_LONG;
+        if (strlen($this->user_password)  > LIMIT_PASSWORD)  $registration_errors['password']  = REGISTRATION_ERROR_PASSWORD_TOO_LONG;
+        if (strlen($this->user_firstname) > LIMIT_FIRSTNAME) $registration_errors['firstname'] = REGISTRATION_ERROR_FIRSTNAME_TOO_LONG;
+        if (strlen($this->user_lastname)  > LIMIT_LASTNAME)  $registration_errors['lastname']  = REGISTRATION_ERROR_LASTNAME_TOO_LONG;
+        if (strlen($this->user_email)     > LIMIT_EMAIL)     $registration_errors['email']     = REGISTRATION_ERROR_EMAIL_TOO_LONG;
+
+        if (!filter_var($this->user_email, FILTER_VALIDATE_EMAIL)) $registration_errors['email']  = REGISTRATION_ERROR_EMAIL_INVALID;
+        if (!preg_match(REGEX_EMAIL,     $this->user_username)) $registration_errors['firstname'] = REGISTRATION_ERROR_SYMBOLS_EMAIL;
+        if (!preg_match(REGEX_FIRSTNAME, $this->user_username)) $registration_errors['firstname'] = REGISTRATION_ERROR_SYMBOLS_FIRSTNAME;
+        if (!preg_match(REGEX_LASTNAME,  $this->user_username)) $registration_errors['lastname']  = REGISTRATION_ERROR_SYMBOLS_LASTNAME;
+        if (!preg_match(REGEX_USERNAME,  $this->user_username)) $registration_errors['username']  = REGISTRATION_ERROR_SYMBOLS_USERNAME;
+        if (!preg_match(REGEX_PASSWORD,  $this->user_password)) $registration_errors['password']  = REGISTRATION_ERROR_SYMBOLS_PASSWORD;
+
+        if (!($this->user_role == "User" || $this->user_role == "Photographer" || $this->user_role == "Admin")) {
+            $registration_errors['role'] = REGISTRATION_ERROR_ROLE_INVALID;
+        }
+
+        if (!empty($edit_user_errors)) return $edit_user_errors;
+
         if ($old_user_values->user_username != $this->user_username && User::exists($this->user_username)) {
             $edit_user_errors['username'] = "This username is already in use.";
         }
