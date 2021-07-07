@@ -6,7 +6,7 @@ require_once("includes/nav_top.php");
 if (!isset($_GET['id']) || empty($_GET['id'])) header("Location: index.php");
 
 // Retrieve photo
-$photo_id = $_GET['id'];
+$photo_id = $db->connection->real_escape_string($_GET['id']);
 $photo = Photo::find_by_id($photo_id);
 if (!$photo || empty($photo)) header("Location: index.php");
 
@@ -26,7 +26,7 @@ if (isset($_POST['submit'])) {
         $new_comment->comment_author_id = $session->user_id;
         $new_comment->comment_date      = date("Y-m-d");
         $new_comment->comment_approved  = 0;
-        $new_comment->comment_content   = $_POST['comment_content'];
+        $new_comment->comment_content   = $db->connection->real_escape_string($_POST['comment_content']);
 
         $comment_errors = $new_comment->verify();
 
@@ -70,7 +70,9 @@ if ($session->is_signed_in() && isset($_POST['action']) && isset($_POST['liked_c
     switch ($_POST['action']) {
         case "liked":
             // if ($user_liked) break; // check if user has already liked comment
-            if ($new_like = Comment_Like::create_like($_POST['liked_comment_id'], $session->user_id)) $new_like->create();
+            if ($new_like = Comment_Like::create_like($_POST['liked_comment_id'], $session->user_id)) {
+                $new_like->create();
+            }
             break;
         case "unliked":
             // if (!$user_liked) break; // check if user hasn't already liked comment

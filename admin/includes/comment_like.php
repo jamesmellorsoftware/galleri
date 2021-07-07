@@ -15,10 +15,12 @@ class Comment_Like extends db_objects {
     public static function create_like($comment_id = "", $user_id = "") {
         // Instantiates a comment like object with all properties
 
-        if (!empty($comment_id) && !empty($user_id)) {
+        global $db;
+
+        if (!empty($comment_id) && !empty($user_id) && is_int($comment_id) && is_int($user_id)) {
             $comment_like = new Comment_Like;
-            $comment_like->comment_like_comment_id = (int)$comment_id;
-            $comment_like->comment_like_user_id = $user_id;
+            $comment_like->comment_like_comment_id = $db->connection->real_escape_string((int)$comment_id);
+            $comment_like->comment_like_user_id = $db->connection->real_escape_string($user_id);
 
             return $comment_like;
         }
@@ -27,12 +29,13 @@ class Comment_Like extends db_objects {
     }
 
     public static function delete_like($comment_id = "", $user_id = "") {
-        if (!empty($comment_id) && !empty($user_id)) {
+        if (!empty($comment_id) && !empty($user_id) && is_int($comment_id) && is_int($user_id)) {
             global $db;
 
             $sql = $db->build_delete(
                 Comment_Like::$db_table,
-                [Comment_Like::$db_prefix."comment_id" => $comment_id, Comment_Like::$db_prefix."user_id" => $user_id],
+                [Comment_Like::$db_prefix."comment_id" => $db->connection->real_escape_string($comment_id),
+                 Comment_Like::$db_prefix."user_id"    => $db->connection->real_escape_string($user_id)],
                 1);
 
             $db->query($sql);

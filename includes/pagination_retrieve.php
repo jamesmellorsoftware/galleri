@@ -8,10 +8,10 @@ if (isset($_POST['load_more'])) {
     // Offset comes from JS AJAX POST request and updates every time user loads more posts
     // Returns next photo set (in JSON?) to AJAX call to load them
 
-    $offset = $_POST['offset'];
-    $pagination_limit = $_POST['pagination_limit'];
-    $source_page = $_POST['source_page'];
-    $id = $_POST['id'];
+    $offset = $db->connection->real_escape_string($_POST['offset']);
+    $pagination_limit = $db->connection->real_escape_string($_POST['pagination_limit']);
+    $source_page = $db->connection->real_escape_string($_POST['source_page']);
+    $id = $db->connection->real_escape_string($_POST['id']);
 
     $new_set = [];
 

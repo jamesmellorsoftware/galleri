@@ -6,7 +6,7 @@ require_once("includes/nav_top.php");
 if (!isset($_GET['id']) || empty($_GET['id'])) header("Location: index.php");
 
 // Retrieve photographer's details
-$photographer_user_id = $_GET['id'];
+$photographer_user_id = $db->connection->real_escape_string($_GET['id']);
 $photographer_details = User::find_by_id($photographer_user_id);
 if (!$photographer_details || empty($photographer_details)) header("Location: index.php");
 
