@@ -200,33 +200,35 @@ class Comment extends db_objects {
     public static function search($search_filters, $limit = "", $offset = "") {
         // Accepts $_POST from search.php form and converts into conditions
 
+        global $db;
+
         $conditions = [];
         $order_by = "";
         $joins = "";
 
-        if (isset($search_filters['results_per_page']) && is_int($search_filters['results_per_page'])) {
-            $limit = $search_filters['results_per_page'] + 1;
+        if (isset($search_filters['results_per_page'])) {
+            $limit = $db->connection->real_escape_string($search_filters['results_per_page']) + 1;
         }
 
         if (isset($search_filters['comment_approved'][1])) $conditions[Comment::get_table_prefix()."approved"]  = 1;
         if (isset($search_filters['comment_approved'][0])) $conditions[Comment::get_table_prefix()."approved"]  = 0;
         if (isset($search_filters['comment_content']) && !empty($search_filters['comment_content'])) {
-            $conditions[Comment::get_table_prefix()."content"] = ['like' => [$search_filters['comment_content']]];
+            $conditions[Comment::get_table_prefix()."content"] = ['like' => [$db->connection->real_escape_string($search_filters['comment_content'])]];
         }
-        if (isset($search_filters['comment_id']) && !empty($search_filters['comment_id']) && is_int($search_filters['comment_id'])) {
-            $conditions[Comment::get_table_prefix()."id"] = $search_filters['comment_id'];
+        if (isset($search_filters['comment_id']) && !empty($search_filters['comment_id'])) {
+            $conditions[Comment::get_table_prefix()."id"] = $db->connection->real_escape_string($search_filters['comment_id']);
         }
-        if (isset($search_filters['comment_photo_id']) && !empty($search_filters['comment_photo_id']) && is_int($search_filters['comment_photo_id'])) {
-            $conditions[Comment::get_table_prefix()."photo_id"]  = $search_filters['comment_photo_id'];
+        if (isset($search_filters['comment_photo_id']) && !empty($search_filters['comment_photo_id'])) {
+            $conditions[Comment::get_table_prefix()."photo_id"] = $db->connection->real_escape_string($search_filters['comment_photo_id']);
         }
         if (!empty($search_filters['comment_date_from']) && empty($search_filters['comment_date_to'])) {
-            $conditions[Comment::get_table_prefix()."date"] = ['>=' => [$search_filters['comment_date_from']]];
+            $conditions[Comment::get_table_prefix()."date"] = ['>=' => [$db->connection->real_escape_string($search_filters['comment_date_from'])]];
         }
         if (empty($search_filters['comment_date_from']) && !empty($search_filters['comment_date_to'])) {
-            $conditions[Comment::get_table_prefix()."date"] = ['<=' => [$search_filters['comment_date_to']]];
+            $conditions[Comment::get_table_prefix()."date"] = ['<=' => [$db->connection->real_escape_string($search_filters['comment_date_to'])]];
         }
         if (!empty($search_filters['comment_date_from']) && !empty($search_filters['comment_date_to'])) {
-            $conditions[Comment::get_table_prefix()."date"] = ['between' => [$search_filters['comment_date_from'], $search_filters['comment_date_to']]];
+            $conditions[Comment::get_table_prefix()."date"] = ['between' => [$db->connection->real_escape_string($search_filters['comment_date_from']), $db->connection->real_escape_string($search_filters['comment_date_to'])]];
         }
         if (isset($search_filters['comment_author']) && !empty($search_filters['comment_author'])) {
             $joins = [
@@ -234,7 +236,7 @@ class Comment extends db_objects {
                  'join_table' => 'users',
                  'on'         => [Comment::get_table_prefix()."author_id" => User::get_table_prefix()."id"]]
             ];
-            $conditions[User::get_table_prefix()."username"] = ['like' => [$search_filters['comment_author']]];
+            $conditions[User::get_table_prefix()."username"] = ['like' => [$db->connection->real_escape_string($search_filters['comment_author'])]];
         }
 
         return Comment::find("*", $conditions, $order_by, $limit, $offset, $joins);

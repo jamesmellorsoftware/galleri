@@ -4,7 +4,6 @@ class Comment_Like extends db_objects {
     
     protected static $db_table = "comment_likes";
     protected static $db_prefix = "comment_like_";
-    // change the below to use the $db_prefix
     protected static $db_table_fields = array("comment_like_id", "comment_like_comment_id", "comment_like_user_id");
 
     // Initialise user properties

@@ -9,12 +9,12 @@ $add_user_errors = [];
 if (isset($_POST['add_user'])) {
     $new_user = new User;
 
-    $new_user->user_username  = trim($_POST['user_username']);
-    $new_user->user_password  = trim($_POST['user_password']);
-    $new_user->user_firstname = trim($_POST['user_firstname']);
-    $new_user->user_lastname  = trim($_POST['user_lastname']);
-    $new_user->user_email     = trim($_POST['user_email']);
-    $new_user->user_role      = trim($_POST['user_role']);
+    $new_user->user_username  = $db->connection->real_escape_string($_POST['user_username']);
+    $new_user->user_password  = $db->connection->real_escape_string($_POST['user_password']);
+    $new_user->user_firstname = $db->connection->real_escape_string($_POST['user_firstname']);
+    $new_user->user_lastname  = $db->connection->real_escape_string($_POST['user_lastname']);
+    $new_user->user_email     = $db->connection->real_escape_string($_POST['user_email']);
+    $new_user->user_role      = $db->connection->real_escape_string($_POST['user_role']);
     $new_user_image           = $_FILES['user_image'];
 
     $add_user_errors = $new_user->verify_registration($new_user_image);
@@ -22,7 +22,7 @@ if (isset($_POST['add_user'])) {
     if (!$new_user->set_file($new_user_image)) $add_user_errors["file_upload"] = join("<br>", $new_user->errors);
 
     if (!User::errors_in_form($add_user_errors)) {
-        $new_user->user_password = password_hash($_POST['user_password'], PASSWORD_BCRYPT, array('cost' => 12) );
+        $new_user->user_password = password_hash($new_user->user_password, PASSWORD_BCRYPT, array('cost' => 12) );
         if ($new_user->save()) {
             $add_user_successful = true;
         } else {

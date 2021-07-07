@@ -4,7 +4,7 @@ if (!isset($_GET['id'])) header("Location: index.php");
 
 if (!$session->user_is_admin() && $_GET['id'] != $session->user_id) header("Location: index.php");
 
-$user = User::find_by_id($_GET['id']);
+$user = User::find_by_id($db->connection->real_escape_string($_GET['id']));
 
 if (!$user) header("Location: index.php");
 
@@ -17,12 +17,12 @@ if (isset($_POST['edit_user'])) {
 
     $user = new User;
     $user->user_id        = $old_user_values->user_id;
-    $user->user_username  = $_POST['user_username'];
-    $user->user_firstname = $_POST['user_firstname'];
-    $user->user_lastname  = $_POST['user_lastname'];
-    $user->user_email     = $_POST['user_email'];
-    $user->user_role      = $_POST['user_role'];
-    $user->user_password  = empty($_POST['user_password']) ? "" : password_hash($_POST['user_password'], PASSWORD_BCRYPT, array('cost' => 12) );
+    $user->user_username  = $db->connection->real_escape_string($_POST['user_username']);
+    $user->user_firstname = $db->connection->real_escape_string($_POST['user_firstname']);
+    $user->user_lastname  = $db->connection->real_escape_string($_POST['user_lastname']);
+    $user->user_email     = $db->connection->real_escape_string($_POST['user_email']);
+    $user->user_role      = $db->connection->real_escape_string($_POST['user_role']);
+    $user->user_password  = empty($_POST['user_password']) ? "" : password_hash($db->connection->real_escape_string($_POST['user_password']), PASSWORD_BCRYPT, array('cost' => 12) );
     $user->user_image = $old_user_values->user_image;
     $uploaded_image = $_FILES['user_image'];
     

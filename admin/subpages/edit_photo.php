@@ -2,7 +2,7 @@
 
 if (!isset($_GET['id'])) header("Location: index.php");
 
-$photo = Photo::find_by_id($_GET['id']);
+$photo = Photo::find_by_id($db->connection->real_escape_string($_GET['id']));
 
 if (!$photo) header("Location: index.php");
 
@@ -18,11 +18,11 @@ if (isset($_POST['submit'])) {
     $photo_filename = $photo->photo_filename;
 
     $photo = new Photo;
-    $photo->photo_id = $photo_id;
-    $photo->photo_filename = $photo_filename;
-    $photo->photo_title     = $_POST['photo_title'];
-    $photo->photo_subtitle  = $_POST['photo_subtitle'];
-    $photo->photo_text      = $_POST['photo_text'];
+    $photo->photo_id        = $photo_id;
+    $photo->photo_filename  = $photo_filename;
+    $photo->photo_title     = $db->connection->real_escape_string($_POST['photo_title']);
+    $photo->photo_subtitle  = $db->connection->real_escape_string($_POST['photo_subtitle']);
+    $photo->photo_text      = $db->connection->real_escape_string($_POST['photo_text']);
 
     $edit_photo_errors = $photo->verify();
 

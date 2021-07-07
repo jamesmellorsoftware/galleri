@@ -205,30 +205,32 @@ class Photo extends db_objects {
     public static function search($search_filters, $limit = "", $offset = "") {
         // Accepts $_POST from search.php form and converts into conditions
 
+        global $db;
+
         $conditions = [];
         $order_by = "";
         $joins = "";
 
         if (isset($search_filters['photo_author_id']) && !empty($search_filters['photo_author_id'])) {
-            $conditions[Photo::get_table_prefix()."author_id"] = $search_filters['photo_author_id'];
+            $conditions[Photo::get_table_prefix()."author_id"] = $db->connection->real_escape_string($search_filters['photo_author_id']);
         }
 
-        if (isset($search_filters['results_per_page']) && is_int($search_filters['results_per_page'])) {
-            $limit = $search_filters['results_per_page'] + 1;
+        if (isset($search_filters['results_per_page'])) {
+            $limit = $db->connection->real_escape_string($search_filters['results_per_page'] + 1);
         }
 
-        if (isset($search_filters['photo_id']) && !empty($search_filters['photo_id']) && is_int($search_filters['photo_id'])) {
-            $conditions[Photo::get_table_prefix()."id"] = $search_filters['photo_id'];
+        if (isset($search_filters['photo_id']) && !empty($search_filters['photo_id'])) {
+            $conditions[Photo::get_table_prefix()."id"] = $db->connection->real_escape_string($search_filters['photo_id']);
             $limit = 1;
         }
         if (isset($search_filters['photo_title']) && !empty($search_filters['photo_title'])) {
-            $conditions[Photo::get_table_prefix()."title"] = ['like' => [$search_filters['photo_title']]];
+            $conditions[Photo::get_table_prefix()."title"] = ['like' => [$db->connection->real_escape_string($search_filters['photo_title'])]];
         }
         if (isset($search_filters['photo_subtitle']) && !empty($search_filters['photo_subtitle'])) {
-            $conditions[Photo::get_table_prefix()."subtitle"] = ['like' => [$search_filters['photo_subtitle']]];
+            $conditions[Photo::get_table_prefix()."subtitle"] = ['like' => [$db->connection->real_escape_string($search_filters['photo_subtitle'])]];
         }
         if (isset($search_filters['photo_text']) && !empty($search_filters['photo_text'])) {
-            $conditions[Photo::get_table_prefix()."text"] = ['like' => [$search_filters['photo_text']]];
+            $conditions[Photo::get_table_prefix()."text"] = ['like' => [$db->connection->real_escape_string($search_filters['photo_text'])]];
         }
         if (isset($search_filters['photo_author']) && !empty($search_filters['photo_author'])) {
             $joins = [
@@ -236,16 +238,16 @@ class Photo extends db_objects {
                  'join_table' => 'users',
                  'on'         => [Photo::get_table_prefix()."author_id" => User::get_table_prefix()."id"]]
             ];
-            $conditions[User::get_table_prefix()."username"] = ['like' => [$search_filters['photo_author']]];
+            $conditions[User::get_table_prefix()."username"] = ['like' => [$db->connection->real_escape_string($search_filters['photo_author'])]];
         }
         if (!empty($search_filters['photo_date_from']) && empty($search_filters['photo_date_to'])) {
-            $conditions[Photo::get_table_prefix()."date"] = ['>=' => [$search_filters['photo_date_from']]];
+            $conditions[Photo::get_table_prefix()."date"] = ['>=' => [$db->connection->real_escape_string($search_filters['photo_date_from'])]];
         }
         if (empty($search_filters['photo_date_from']) && !empty($search_filters['photo_date_to'])) {
-            $conditions[Photo::get_table_prefix()."date"] = ['<=' => [$search_filters['photo_date_to']]];
+            $conditions[Photo::get_table_prefix()."date"] = ['<=' => [$db->connection->real_escape_string($search_filters['photo_date_to'])]];
         }
         if (!empty($search_filters['photo_date_from']) && !empty($search_filters['photo_date_to'])) {
-            $conditions[Photo::get_table_prefix()."date"] = ['between' => [$search_filters['photo_date_from'], $search_filters['photo_date_to']]];
+            $conditions[Photo::get_table_prefix()."date"] = ['between' => [$db->connection->real_escape_string($search_filters['photo_date_from']), $db->connection->real_escape_string($search_filters['photo_date_to'])]];
         }
 
         return Photo::find("*", $conditions, $order_by, $limit, $offset, $joins);

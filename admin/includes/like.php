@@ -29,12 +29,6 @@ class Like extends db_objects {
         if (!empty($photo_id) && !empty($user_id)) {
             global $db;
 
-            // $sql = "DELETE FROM " . Like::$db_table . " ";
-            // $sql.= "WHERE ";
-            // $sql.= Like::$db_prefix . "photo_id = " . $photo_id . " ";
-            // $sql.= "AND ";
-            // $sql.= Like::$db_prefix . "user_id = " . $user_id . " ";
-
             $conditions = [Like::$db_prefix."photo_id" => $photo_id, Like::$db_prefix . "user_id" => $user_id ];
 
             $sql = $db->build_delete(Like::$db_table, $conditions, 1);

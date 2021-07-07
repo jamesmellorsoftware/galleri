@@ -61,16 +61,18 @@ $bulk_options = Comment::get_bulk_options();
                                         <span class="glyphicon glyphicon-thumbs-up"></span>
                                         <span class="comment_like_count"><?php echo Comment_Like::count($comment->comment_id); ?></span>
                                     </div>
-                                    <div class="col-md-7 col-xs-12">
-                                        <span class="comment_content">
-                                            <?php
-                                                if (strlen($comment->comment_content) > MODERATE_COMMENTS_TEXT_LIMIT) {
-                                                    echo substr($comment->comment_content, 0, MODERATE_COMMENTS_TEXT_LIMIT - 3) . '...';
-                                                }
-                                            ?>
-                                        </span>
-                                    </div>
                                 </div>
+                            </div>
+                            <div class="col-md-7 col-xs-12">
+                                <span class="comment_content">
+                                    <?php
+                                        if (strlen($comment->comment_content) > MODERATE_COMMENTS_TEXT_LIMIT) {
+                                            echo substr($comment->comment_content, 0, MODERATE_COMMENTS_TEXT_LIMIT - 3) . '...';
+                                        } else {
+                                            echo $comment->comment_content;
+                                        }
+                                    ?>
+                                </span>
                             </div>
                         </td>
                     </tr>

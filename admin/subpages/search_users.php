@@ -18,7 +18,7 @@
         value="<?php if (isset($_POST['user_lastname'])) echo $_POST['user_lastname']; ?>">
     </div>
     <div class="form-group col-md-9 col-xs-12">
-        <input type="email" class="form-control"
+        <input type="text" class="form-control"
         name="user_email" placeholder="<?php echo SEARCH_USERS_PLACEHOLDER_EMAIL; ?>"
         maxlength="<?php echo LIMIT_EMAIL; ?>"
         value="<?php if (isset($_POST['user_email'])) echo $_POST['user_email']; ?>">

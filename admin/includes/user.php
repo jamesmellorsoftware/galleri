@@ -442,12 +442,14 @@ class User extends db_objects {
     public static function search($search_filters, $limit = "", $offset = "") {
         // Accepts $_POST from search.php form and converts into conditions
 
+        global $db;
+
         $conditions = [];
         $order_by = "";
         $joins = "";
 
-        if (isset($search_filters['results_per_page']) && is_int($search_filters['results_per_page'])) {
-            $limit = $search_filters['results_per_page'] + 1;
+        if (isset($search_filters['results_per_page'])) {
+            $limit = $db->connection->real_escape_string($search_filters['results_per_page'] + 1);
         }
 
         if (isset($search_filters['user_role'])) {
@@ -460,17 +462,20 @@ class User extends db_objects {
         if (isset($search_filters['user_banned']) && !empty($search_filters['user_banned'])) {
             $conditions[User::get_table_prefix()."banned"] = 1;
         }
-        if (isset($search_filters['user_id']) && !empty($search_filters['user_id']) && is_int($search_filters['user_id'])) {
-            $conditions[User::get_table_prefix()."id"] = $search_filters['user_id'];
+        if (isset($search_filters['user_id']) && !empty($search_filters['user_id'])) {
+            $conditions[User::get_table_prefix()."id"] = $db->connection->real_escape_string($search_filters['user_id']);
         }
         if (isset($search_filters['user_username']) && !empty($search_filters['user_username'])) {
-            $conditions[User::get_table_prefix()."username"] = ['like' => [$search_filters['user_username']]];
+            $conditions[User::get_table_prefix()."username"] = ['like' => [$db->connection->real_escape_string($search_filters['user_username'])]];
         }
         if (isset($search_filters['user_firstname']) && !empty($search_filters['user_firstname'])) {
-            $conditions[User::get_table_prefix()."firstname"] = ['like' => [$search_filters['user_firstname']]];
+            $conditions[User::get_table_prefix()."firstname"] = ['like' => [$db->connection->real_escape_string($search_filters['user_firstname'])]];
         }
         if (isset($search_filters['user_lastname']) && !empty($search_filters['user_lastname'])) {
-            $conditions[User::get_table_prefix()."lastname"] = ['like' => [$search_filters['user_lastname']]];
+            $conditions[User::get_table_prefix()."lastname"] = ['like' => [$db->connection->real_escape_string($search_filters['user_lastname'])]];
+        }
+        if (isset($search_filters['user_email']) && !empty($search_filters['user_email'])) {
+            $conditions[User::get_table_prefix()."email"] = ['like' => [$db->connection->real_escape_string($search_filters['user_email'])]];
         }
         if (isset($search_filters['user_hasphoto']) && !empty($search_filters['user_hasphoto'])) {
             $conditions[User::get_table_prefix()."image"] = ['empty' => 0];

@@ -9,9 +9,9 @@ if (isset($_POST['submit'])) {
     // Add upload image to correct folder and add entry to DB
 
     $photo = new Photo;
-    $photo->photo_title     = $_POST['photo_title'];
-    $photo->photo_subtitle  = $_POST['photo_subtitle'];
-    $photo->photo_text      = $_POST['photo_text'];
+    $photo->photo_title     = $db->connection->real_escape_string($_POST['photo_title']);
+    $photo->photo_subtitle  = $db->connection->real_escape_string($_POST['photo_subtitle']);
+    $photo->photo_text      = $db->connection->real_escape_string($_POST['photo_text']);
     $photo->photo_date      = date("Y-m-d");
     $photo->photo_author_id = $session->user_id;
 
