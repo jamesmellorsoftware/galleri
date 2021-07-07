@@ -197,6 +197,7 @@ define("PHOTO_COMMENT_BUTTON", "Create Comment");
 define("PHOTO_COMMENT_LOGIN", "Log in to comment.");
 define("PHOTO_COMMENT_ERROR_GENERAL", "Problem saving comment.");
 define("PHOTO_COMMENT_ERROR_LOGIN", "Log in to comment.");
+define("PHOTO_COMMENT_ERROR_TOO_LONG", "Comment must be less than " . LIMIT_PHOTO_COMMENT . " characters.");
 define("PHOTO_COMMENT_PLACEHOLDER", "Leave a comment on this post");
 define("PHOTO_COMMENT_SUCCESS", "Comment added.");
 

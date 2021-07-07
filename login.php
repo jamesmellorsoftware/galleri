@@ -43,12 +43,14 @@ if (isset($_POST['login'])) {
                             <input type="text"
                             class="form-control <?php if (!empty($login_errors['username'])) echo "is-invalid "; ?>"
                             name="user_username" placeholder="<?php echo LOGIN_PLACEHOLDER_USERNAME . "*"; ?>"
+                            maxlength="<?php echo LIMIT_USERNAME; ?>"
                             value="<?php if (isset($user->user_username)) echo $user->user_username; ?>">
                         </div>
                         <div class="form-group">
                             <input type="password"
                             class="form-control <?php if (!empty($login_errors['username'])) echo "is-invalid "; ?>"
                             name="user_password" placeholder="<?php echo LOGIN_PLACEHOLDER_PASSWORD . "*"; ?>"
+                            maxlength="<?php echo LIMIT_PASSWORD; ?>"
                             value="<?php if (isset($user->user_password)) echo $user->user_password; ?>">
                         </div>
                         <div class="form-group">

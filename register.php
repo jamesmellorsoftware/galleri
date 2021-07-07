@@ -51,30 +51,35 @@ if (isset($_POST['register'])) {
                             <input type="text"
                             class="form-control <?php if (isset($registration_errors['username'])) echo "is-invalid"; ?>"
                             name="user_username" placeholder="<?php echo REGISTRATION_PLACEHOLDER_USERNAME . "*"; ?>"
+                            maxlength="<?php echo LIMIT_USERNAME; ?>"
                             value="<?php if (isset($new_user->user_username)) echo htmlentities($new_user->user_username); ?>">
                         </div>
                         <div class="form-group">
                             <input type="password"
                             class="form-control <?php if (isset($registration_errors['password'])) echo "is-invalid"; ?>"
                             name="user_password" placeholder="<?php echo REGISTRATION_PLACEHOLDER_PASSWORD . "*"; ?>"
+                            maxlength="<?php echo LIMIT_PASSWORD; ?>"
                             value="<?php if (isset($new_user->user_password)) echo htmlentities($new_user->user_password); ?>">
                         </div>
                         <div class="form-group">
                             <input type="text"
                             class="form-control <?php if (isset($registration_errors['firstname'])) echo "is-invalid"; ?>"
                             name="user_firstname" placeholder="<?php echo REGISTRATION_PLACEHOLDER_FIRSTNAME . "*"; ?>"
+                            maxlength="<?php echo LIMIT_FIRSTNAME; ?>"
                             value="<?php if (isset($new_user->user_firstname)) echo htmlentities($new_user->user_firstname); ?>">
                         </div>
                         <div class="form-group">
                             <input type="text"
                             class="form-control <?php if (isset($registration_errors['lastname'])) echo "is-invalid"; ?>"
                             name="user_lastname" placeholder="<?php echo REGISTRATION_PLACEHOLDER_LASTNAME . "*"; ?>"
+                            maxlength="<?php echo LIMIT_LASTNAME; ?>"
                             value="<?php if (isset($new_user->user_lastname)) echo htmlentities($new_user->user_lastname); ?>">
                         </div>
                         <div class="form-group">
                             <input type="email"
                             class="form-control <?php if (isset($registration_errors['email'])) echo "is-invalid"; ?>"
                             name="user_email" placeholder="<?php echo REGISTRATION_PLACEHOLDER_EMAIL . "*"; ?>"
+                            maxlength="<?php echo LIMIT_EMAIL; ?>"
                             value="<?php if (isset($new_user->user_email)) echo htmlentities($new_user->user_email); ?>">
                         </div>
                         <div class="form-group">

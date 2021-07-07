@@ -71,6 +71,8 @@ class Comment extends db_objects {
 
         $comment_errors = Comment::check_empty_inputs($this, $comment_errors);
 
+        if (strlen($this->comment_content) > LIMIT_PHOTO_COMMENT) $comment_errors['content'] = PHOTO_COMMENT_ERROR_TOO_LONG;
+
         return $comment_errors;
 
     }

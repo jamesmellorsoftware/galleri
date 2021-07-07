@@ -30,6 +30,9 @@ define("PAGINATION_LIMIT_MODERATE_USERS", 5);
 define("PAGINATION_LIMIT_PHOTOGRAPHER_GALLERY", 5);
 define("PAGINATION_LIMIT_PHOTOGRAPHERS", 5);
 
+// Define comment limits
+define("LIMIT_PHOTO_COMMENT", 2000);
+
 // Define user character limits
 define("LIMIT_EMAIL", 30);
 define("LIMIT_FIRSTNAME", 30);
