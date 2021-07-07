@@ -229,6 +229,10 @@ class User extends db_objects {
         if (!preg_match(REGEX_USERNAME,  $this->user_username)) $registration_errors['username']  = REGISTRATION_ERROR_SYMBOLS_USERNAME;
         if (!preg_match(REGEX_PASSWORD,  $this->user_password)) $registration_errors['password']  = REGISTRATION_ERROR_SYMBOLS_PASSWORD;
 
+        if (!($this->user_role == "User" || $this->user_role == "Photographer" || $this->user_role == "Admin")) {
+            $registration_errors['role'] = REGISTRATION_ERROR_ROLE_INVALID;
+        }
+
         if (!empty($registration_errors)) return $registration_errors;
 
         if (User::exists($this->user_username))    $registration_errors['username'] = REGISTRATION_ERROR_USERNAME_TAKEN;

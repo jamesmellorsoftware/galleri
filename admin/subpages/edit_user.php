@@ -81,12 +81,14 @@ if (isset($_POST['edit_user'])) {
                         <input type="text"
                         class="form-control <?php if (isset($edit_user_errors['username'])) echo "is-invalid"; ?>"
                         name="user_username" placeholder="<?php echo EDIT_USER_PLACEHOLDER_USERNAME . "*"; ?>"
+                        maxlength="<?php echo LIMIT_USERNAME; ?>"
                         value="<?php echo !empty($user_values['user_username']) ? $user_values['user_username'] : $user->user_username; ?>">
                     </div>
                     <div class="form-group">
                         <input type="password"
                         class="form-control <?php if (isset($edit_user_errors['password'])) echo "is-invalid"; ?>"
                         name="user_password" placeholder="<?php echo EDIT_USER_PLACEHOLDER_PASSWORD . "*"; ?>">
+                        maxlength="<?php echo LIMIT_PASSWORD; ?>"
                     </div>
                 </div>
                 <div class="col-md-4 col-sm-12">
@@ -94,12 +96,14 @@ if (isset($_POST['edit_user'])) {
                         <input type="text"
                         class="form-control <?php if (isset($edit_user_errors['firstname'])) echo "is-invalid"; ?>"
                         name="user_firstname" placeholder="<?php echo EDIT_USER_PLACEHOLDER_FIRSTNAME . "*"; ?>"
+                        maxlength="<?php echo LIMIT_FIRSTNAME; ?>"
                         value="<?php echo !empty($user_values['user_firstname']) ? $user_values['user_firstname'] : $user->user_firstname; ?>">
                     </div>
                     <div class="form-group">
                         <input type="text"
                         class="form-control <?php if (isset($edit_user_errors['lastname'])) echo "is-invalid"; ?>"
                         name="user_lastname" placeholder="<?php echo EDIT_USER_PLACEHOLDER_LASTNAME . "*"; ?>"
+                        maxlength="<?php echo LIMIT_LASTNAME; ?>"
                         value="<?php echo !empty($user_values['user_lastname']) ? $user_values['user_lastname'] : $user->user_lastname; ?>">
                     </div>
                 </div>
@@ -108,6 +112,7 @@ if (isset($_POST['edit_user'])) {
                         <input type="text"
                         class="form-control <?php if (isset($edit_user_errors['email'])) echo "is-invalid"; ?>"
                         name="user_email" placeholder="<?php echo EDIT_USER_PLACEHOLDER_EMAIL . "*"; ?>"
+                        maxlength="<?php echo LIMIT_EMAIL; ?>"
                         value="<?php echo !empty($user_values['user_email']) ? $user_values['user_email'] : $user->user_email; ?>">
                     </div>
                     <div class="form-group">

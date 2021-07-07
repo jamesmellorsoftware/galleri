@@ -62,12 +62,14 @@ if (isset($_POST['add_user'])) {
                         <input type="text"
                         class="form-control <?php if (isset($add_user_errors['username'])) echo "is-invalid"; ?>"
                         name="user_username" placeholder="<?php echo ADD_USER_PLACEHOLDER_USERNAME . "*"; ?>"
+                        maxlength="<?php echo LIMIT_USERNAME; ?>"
                         value="<?php if (isset($new_user->user_username)) echo $new_user->user_username; ?>">
                     </div>
                     <div class="form-group">
                         <input type="password"
                         class="form-control <?php if (isset($add_user_errors['password'])) echo "is-invalid"; ?>"
                         name="user_password" placeholder="<?php echo ADD_USER_PLACEHOLDER_PASSWORD . "*"; ?>"
+                        maxlength="<?php echo LIMIT_PASSWORD; ?>"
                         value="<?php if (isset($new_user->user_password)) echo $new_user->user_password; ?>">
                     </div>
                 </div>
@@ -76,12 +78,14 @@ if (isset($_POST['add_user'])) {
                         <input type="text"
                         class="form-control <?php if (isset($add_user_errors['firstname'])) echo "is-invalid"; ?>"
                         name="user_firstname" placeholder="<?php echo ADD_USER_PLACEHOLDER_FIRSTNAME . "*"; ?>"
+                        maxlength="<?php echo LIMIT_FIRSTNAME; ?>"
                         value="<?php  if (isset($new_user->user_firstname)) echo $new_user->user_firstname; ?>">
                     </div>
                     <div class="form-group">
                         <input type="text"
                         class="form-control <?php if (isset($add_user_errors['lastname'])) echo "is-invalid"; ?>"
                         name="user_lastname" placeholder="<?php echo ADD_USER_PLACEHOLDER_LASTNAME . "*"; ?>"
+                        maxlength="<?php echo LIMIT_LASTNAME; ?>"
                         value="<?php if (isset($new_user->user_lastname)) echo $new_user->user_lastname; ?>">
                     </div>
                 </div>
@@ -90,6 +94,7 @@ if (isset($_POST['add_user'])) {
                         <input type="text"
                         class="form-control <?php if (isset($add_user_errors['email'])) echo "is-invalid"; ?>"
                         name="user_email" placeholder="<?php echo ADD_USER_PLACEHOLDER_EMAIL . "*"; ?>"
+                        maxlength="<?php echo LIMIT_EMAIL; ?>"
                         value="<?php if (isset($new_user->user_email)) echo $new_user->user_email; ?>">
                     </div>
                     <div class="form-group">

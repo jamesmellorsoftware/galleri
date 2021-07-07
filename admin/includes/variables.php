@@ -217,7 +217,7 @@ define("REGISTRATION_ERROR_EMAIL_TOO_LONG", "Email address must not exceed " . L
 define("REGISTRATION_ERROR_FIRSTNAME_TOO_LONG", "First name must not exceed " . LIMIT_FIRSTNAME . " characters.");
 define("REGISTRATION_ERROR_LASTNAME_TOO_LONG", "Last name must not exceed " . LIMIT_LASTNAME . " characters.");
 define("REGISTRATION_ERROR_PASSWORD_TOO_LONG", "Password must not exceed " . LIMIT_PASSWORD . " characters.");
-define("REGISTRATION_ERROR_ROLE_INVALID", "User role invalid");
+define("REGISTRATION_ERROR_ROLE_INVALID", "Select a valid user role.");
 define("REGISTRATION_ERROR_SYMBOLS_EMAIL", "Please enter a valid email address");
 define("REGISTRATION_ERROR_SYMBOLS_FIRSTNAME", "First name can only contain numbers and letters");
 define("REGISTRATION_ERROR_SYMBOLS_LASTNAME", "Last name can only contain numbers and letters");
