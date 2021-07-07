@@ -213,10 +213,10 @@ class Comment extends db_objects {
         if (isset($search_filters['comment_content']) && !empty($search_filters['comment_content'])) {
             $conditions[Comment::get_table_prefix()."content"] = ['like' => [$search_filters['comment_content']]];
         }
-        if (isset($search_filters['comment_id']) && !empty($search_filters['comment_id'])) {
+        if (isset($search_filters['comment_id']) && !empty($search_filters['comment_id']) && is_int($search_filters['comment_id'])) {
             $conditions[Comment::get_table_prefix()."id"] = $search_filters['comment_id'];
         }
-        if (isset($search_filters['comment_photo_id']) && !empty($search_filters['comment_photo_id'])) {
+        if (isset($search_filters['comment_photo_id']) && !empty($search_filters['comment_photo_id']) && is_int($search_filters['comment_photo_id'])) {
             $conditions[Comment::get_table_prefix()."photo_id"]  = $search_filters['comment_photo_id'];
         }
         if (!empty($search_filters['comment_date_from']) && empty($search_filters['comment_date_to'])) {

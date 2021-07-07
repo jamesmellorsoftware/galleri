@@ -460,7 +460,7 @@ class User extends db_objects {
         if (isset($search_filters['user_banned']) && !empty($search_filters['user_banned'])) {
             $conditions[User::get_table_prefix()."banned"] = 1;
         }
-        if (isset($search_filters['user_id']) && !empty($search_filters['user_id'])) {
+        if (isset($search_filters['user_id']) && !empty($search_filters['user_id']) && is_int($search_filters['user_id'])) {
             $conditions[User::get_table_prefix()."id"] = $search_filters['user_id'];
         }
         if (isset($search_filters['user_username']) && !empty($search_filters['user_username'])) {
