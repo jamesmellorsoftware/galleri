@@ -39,6 +39,7 @@ define("LIMIT_PHOTO_TITLE", 300);
 // Define user character limits
 define("LIMIT_EMAIL", 30);
 define("LIMIT_FIRSTNAME", 30);
+define("LIMIT_USER_ID", 11);
 define("LIMIT_LASTNAME", 30);
 define("LIMIT_PASSWORD", 30);
 define("LIMIT_USERNAME", 30);
