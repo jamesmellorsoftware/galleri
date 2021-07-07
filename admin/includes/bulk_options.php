@@ -7,7 +7,9 @@ if (isset($_POST['bulk_option_checkboxes']) && isset($_POST['apply_bulk_option']
     
     $bulk_option = $_POST['bulk_option'];
 
-    foreach($_POST['bulk_option_checkboxes'] as $id) $ids[] = $id;
+    foreach($_POST['bulk_option_checkboxes'] as $id) {
+        $ids[] = $db->connection->real_escape_string($id);
+    }
 
     switch ($bulk_option) {
         case "delete":
