@@ -188,6 +188,12 @@ class Photo extends db_objects {
 
         $upload_errors = Photo::check_empty_inputs($this, $upload_errors);
 
+        if (!empty($upload_errors)) return $upload_errors;
+
+        if (strlen($this->photo_title)    > LIMIT_PHOTO_TITLE)    $registration_errors['title']     = UPLOAD_ERROR_TITLE_TOO_LONG;
+        if (strlen($this->photo_subtitle) > LIMIT_PHOTO_SUBTITLE) $registration_errors['subtitle']  = UPLOAD_ERROR_SUBTITLE_TOO_LONG;
+        if (strlen($this->photo_post)     > LIMIT_PHOTO_POST)     $registration_errors['post']      = UPLOAD_ERROR_POST_TOO_LONG;
+
         return $upload_errors;
     }
 

@@ -135,6 +135,9 @@ define("SEARCH_USERS_USER", "User");
 
 // Upload
 define("UPLOAD_HEADER", "Upload to your Gallery");
+define("UPLOAD_ERROR_POST_TOO_LONG", "Post must be no more than " . LIMIT_PHOTO_POST . "characters.");
+define("UPLOAD_ERROR_SUBTITLE_TOO_LONG", "Subtitle must be no more than " . LIMIT_PHOTO_SUBTITLE . "characters.");
+define("UPLOAD_ERROR_TITLE_TOO_LONG", "Title must be no more than " . LIMIT_PHOTO_TITLE . "characters.");
 define("UPLOAD_FILE_LABEL", "Upload file");
 define("UPLOAD_PLACEHOLDER_POST", "Post");
 define("UPLOAD_PLACEHOLDER_SUBTITLE", "Subtitle");
